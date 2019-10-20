@@ -3,4 +3,11 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_home">Mafia</string>
+    <string name="create">Create</string>
+    <string name="join">Join</string>
+    <string name="start">Start</string>
+    <string name="room">Room</string>
+    <string name="game_host">Game Host</string>
+    <string name="finish_game">Finish game</string>
 </resources>
