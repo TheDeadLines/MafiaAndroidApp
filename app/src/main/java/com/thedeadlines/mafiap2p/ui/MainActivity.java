@@ -1,8 +1,10 @@
-package com.thedeadlines.mafiap2p;
+package com.thedeadlines.mafiap2p.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.thedeadlines.mafiap2p.R;
 
 public class MainActivity extends AppCompatActivity {
 
