@@ -6,15 +6,50 @@
     tools:context=".ui.fragments.host.GameHostFragment"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/button_container"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/game_host" />
+        android:layout_marginTop="15dp"
+        android:gravity="center">
 
-    <Button
-        android:id="@+id/finish_game_button"
+        <Button
+            android:id="@+id/show_list_button"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=">"
+            android:layout_weight="1"
+            android:layout_marginStart="10dp" />
+
+        <Button
+            android:id="@+id/finish_game_button"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/finish_game"
+            android:layout_weight="5"
+            android:layout_marginStart="60dp"
+            android:layout_marginEnd="10dp" />
+    </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/host_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/finish_game" />
+        android:contentDescription="card"
+        tools:src="@tools:sample/backgrounds/scenic" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+
+
 
 </LinearLayout>

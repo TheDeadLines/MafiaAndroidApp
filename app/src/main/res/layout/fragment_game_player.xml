@@ -1,14 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.player.GamePlayerFragment">
+    tools:context=".ui.fragments.player.GamePlayerFragment"
+    android:background=""
+    android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+    <Button
+        android:id="@+id/leave_game_button"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:padding="10dp"
+        android:background="@android:color/transparent"
+        android:text="leave"
+        android:layout_gravity="end"
+        android:layout_weight="1"/>
+
+
+    <ImageView
+        android:id="@+id/player_card"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="card"
+        tools:src="@tools:sample/backgrounds/scenic"
+        android:layout_weight="10"
+        />
+
+
+    <Button
+        android:id="@+id/hide_card_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:text="hide card"
+        android:layout_gravity="center"
+        android:paddingEnd="45dp"
+        android:paddingStart="45dp"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_weight="1"
+        android:layout_marginBottom="45dp"
+        android:textSize="20dp"/>
+
+</LinearLayout>
