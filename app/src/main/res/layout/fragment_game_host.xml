@@ -14,7 +14,7 @@
         android:gravity="center">
 
         <Button
-            android:id="@+id/show_list_button"
+            android:id="@+id/toggle_list_button"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -22,14 +22,16 @@
             android:layout_weight="1"
             android:layout_marginStart="10dp" />
 
+
+
         <Button
             android:id="@+id/finish_game_button"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/finish_game"
-            android:layout_weight="5"
-            android:layout_marginStart="70dp"
+            android:layout_weight="10"
+            android:layout_marginStart="100dp"
             android:layout_marginEnd="10dp" />
     </LinearLayout>
 
@@ -42,6 +44,7 @@
         tools:src="@tools:sample/backgrounds/scenic" />
 
 
+    <!--    todo?    -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list"
         android:orientation="horizontal"

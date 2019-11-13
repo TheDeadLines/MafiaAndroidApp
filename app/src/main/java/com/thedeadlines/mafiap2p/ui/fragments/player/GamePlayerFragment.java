@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,8 +50,6 @@ public class GamePlayerFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        currentState = HIDDEN_CARD_STATE;
-
         mLeaveGameButton = view.findViewById(R.id.leave_game_button);
         mLeaveGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,24 +63,16 @@ public class GamePlayerFragment extends Fragment {
         mToggleCardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                switch (currentState) {
-                    case HIDDEN_CARD_STATE:
-                        currentState = SHOWN_CARD_STATE;
-                        mToggleCardButton.setText(SHOWN_CARD_TEXT);
-                        break;
-                    case SHOWN_CARD_STATE:
-                        currentState = HIDDEN_CARD_STATE;
-                        mToggleCardButton.setText(HIDDEN_CARD_TEXT);
-                        break;
-                    default:
-                        break;
-                }
+                toggleCurrentState();
             }
         });
 
-        Bundle args = getArguments();
-        if (args != null) {
-            currentState = args.getInt(CURRENT_STATE);
+        if (savedInstanceState != null) {
+            currentState = savedInstanceState.getInt(CURRENT_STATE);
+            bindCurrentState();
+        } else {
+            currentState = HIDDEN_CARD_STATE;
+            bindCurrentState();
         }
 
 
@@ -91,5 +82,33 @@ public class GamePlayerFragment extends Fragment {
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(CURRENT_STATE, currentState);
+    }
+
+    private void toggleCurrentState() {
+        switch (currentState) {
+            case HIDDEN_CARD_STATE:
+                currentState = SHOWN_CARD_STATE;
+                mToggleCardButton.setText(SHOWN_CARD_TEXT);
+                break;
+            case SHOWN_CARD_STATE:
+                currentState = HIDDEN_CARD_STATE;
+                mToggleCardButton.setText(HIDDEN_CARD_TEXT);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void bindCurrentState() {
+        switch (currentState) {
+            case HIDDEN_CARD_STATE:
+                mToggleCardButton.setText(HIDDEN_CARD_TEXT);
+                break;
+            case SHOWN_CARD_STATE:
+                mToggleCardButton.setText(SHOWN_CARD_TEXT);
+                break;
+            default:
+                break;
+        }
     }
 }
