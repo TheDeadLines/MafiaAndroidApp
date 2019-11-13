@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.fragments.player.GamePlayerFragment"
-    android:background=""
     android:orientation="vertical">
 
 
@@ -33,7 +32,7 @@
 
 
     <Button
-        android:id="@+id/hide_card_button"
+        android:id="@+id/toggle_card_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"

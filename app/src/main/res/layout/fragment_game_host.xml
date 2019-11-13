@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:text="@string/finish_game"
             android:layout_weight="5"
-            android:layout_marginStart="60dp"
+            android:layout_marginStart="70dp"
             android:layout_marginEnd="10dp" />
     </LinearLayout>
 
