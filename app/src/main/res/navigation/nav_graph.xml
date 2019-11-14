@@ -118,5 +118,16 @@
         <action
             android:id="@+id/action_gameHostFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_gameHostFragment_to_gameHostChosenPlayerFragment"
+            app:destination="@id/gameHostChosenPlayerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameHostChosenPlayerFragment"
+        android:name="com.thedeadlines.mafiap2p.ui.fragments.host.GameHostChosenPlayerFragment"
+        android:label="GameHostChosenPlayerFragment" >
+        <action
+            android:id="@+id/action_gameHostChosenPlayerFragment_to_gameHostFragment"
+            app:destination="@id/gameHostFragment" />
     </fragment>
 </navigation>

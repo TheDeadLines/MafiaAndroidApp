@@ -36,21 +36,13 @@
     </LinearLayout>
 
 
-    <ImageView
-        android:id="@+id/host_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="card"
-        tools:src="@tools:sample/backgrounds/scenic" />
-
-
-    <!--    todo?    -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/list"
+        android:id="@+id/player_list"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone" />
+        android:layout_marginTop="10pt"
+        android:padding="10pt"/>
 
 
 

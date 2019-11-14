@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.fragments.player.GamePlayerFragment">
+
+
+    <Button
+        android:id="@+id/back_button"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        android:background="@android:color/transparent"
+        android:padding="10dp"
+        android:text="back"
+        android:layout_alignParentStart="true"/>
+
+
+    <ImageView
+        android:id="@+id/player_role"
+        android:layout_width="wrap_content"
+        android:layout_height="290dp"
+        android:layout_gravity="center"
+        android:contentDescription="player_card"
+        tools:src="@tools:sample/backgrounds/scenic"
+        android:layout_centerInParent="true"/>
+    <TextView
+        android:id="@+id/player_order_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="11pt"
+        tools:text="1"
+        android:padding="5pt"
+        android:layout_below="@id/player_role"/>
+    <TextView
+        android:padding="5pt"
+        android:id="@+id/player_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5pt"
+        android:layout_marginBottom="5pt"
+        android:textSize="11pt"
+        tools:text="Player Name"
+        android:layout_below="@id/player_role"
+        android:layout_toRightOf="@id/player_order_number"/>
+
+
+    <Button
+        android:id="@+id/kick_button"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+
+        android:background="@android:color/transparent"
+
+        android:text="Kick"
+        android:textSize="10pt"
+        android:layout_centerInParent="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="15pt"/>
+    <Button
+        android:id="@+id/start_timer_button"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@android:color/transparent"
+        android:text="Start timer"
+        android:textSize="10pt"
+        android:layout_marginBottom="30pt"
+        android:layout_centerInParent="true"
+        android:layout_alignParentBottom="true" />
+</RelativeLayout>
