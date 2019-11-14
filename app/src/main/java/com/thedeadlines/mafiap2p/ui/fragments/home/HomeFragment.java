@@ -2,6 +2,11 @@ package com.thedeadlines.mafiap2p.ui.fragments.home;
 
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -9,14 +14,10 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-
 import com.thedeadlines.mafiap2p.R;
 
 public class HomeFragment extends Fragment {
+    private ImageButton mSettingsButton;
     private Button mCreateRoomButton;
     private Button mJoinRoomButton;
 
@@ -37,6 +38,7 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         mCreateRoomButton = view.findViewById(R.id.create_room_button);
         mJoinRoomButton = view.findViewById(R.id.join_room_button);
+        mSettingsButton = view.findViewById(R.id.settings_button);
 
         mCreateRoomButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +53,14 @@ public class HomeFragment extends Fragment {
             public void onClick(View view) {
                 NavController controller = Navigation.findNavController(view);
                 controller.navigate(R.id.action_homeFragment_to_joinFragment);
+            }
+        });
+
+        mSettingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavController controller = Navigation.findNavController(view);
+                controller.navigate(R.id.action_homeFragment_to_settingsFragment);
             }
         });
     }
