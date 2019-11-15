@@ -13,9 +13,11 @@ import java.util.List;
 
 public class HostListAdapter extends RecyclerView.Adapter<HostListHolder> {
     private List<HostListElement> hostListPlayers;
+    private OnItemClickListener onItemClickListener;
 
-    public HostListAdapter(List<HostListElement> hostListPlayers) {
+    public HostListAdapter(List<HostListElement> hostListPlayers, OnItemClickListener onItemClickListener) {
         this.hostListPlayers = hostListPlayers;
+        this.onItemClickListener = onItemClickListener;
     }
 
     @NonNull
@@ -30,12 +32,14 @@ public class HostListAdapter extends RecyclerView.Adapter<HostListHolder> {
     public void onBindViewHolder(@NonNull HostListHolder holder, int position) {
         HostListElement current = hostListPlayers.get(position);
         if (current != null) {
-            holder.getPlayerName().setText(current.toString());
+            holder.getPlayerName().setText(current.getPlayerName());
+            holder.getPlayerOrderNumber().setText(current.getOrderNumString());
+//            holder.getPlayerRole().setImageResource(current.get());
             final HostListElement validCurrent = hostListPlayers.get(holder.getAdapterPosition());
             holder.getListRoot().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // onItemClickListener.onItemClick(validCurrent);
+                     onItemClickListener.onItemClick(validCurrent);
                 }
             });
         }

@@ -15,6 +15,10 @@ public class HostListElement {
         return orderNum;
     }
 
+    public String getOrderNumString() {
+        return Integer.toString(orderNum);
+    }
+
     public void setOrderNum(int orderNum) {
         this.orderNum = orderNum;
     }

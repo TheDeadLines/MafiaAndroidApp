@@ -3,38 +3,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/host_list_item_root">
+    android:layout_height="100pt"
+    android:id="@+id/host_list_item_root"
+    android:layout_marginBottom="5pt">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:minWidth="14pt"
-        android:minHeight="24pt"
         tools:text="1"
         android:textAlignment="center"
-        android:id="@+id/player_order_number"
-        android:layout_weight="1"
-        android:textSize="13pt" />
+        android:id="@+id/player_order_number_inner"
+        android:textSize="13pt"
+        android:layout_marginStart="5pt"
+        android:layout_marginTop="5pt"/>
 
     <ImageView
         tools:src="@tools:sample/backgrounds/scenic"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:contentDescription="player_card"
         android:layout_gravity="center"
-        android:id="@+id/player_role"
+        android:id="@+id/player_role_inner"
         android:layout_weight="1"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:minHeight="24pt"
-        android:id="@+id/player_name"
-        android:layout_weight="1"
+        android:id="@+id/player_name_inner"
         tools:text="Player Name"
         android:textSize="11pt"
-        android:layout_marginBottom="5pt"
-        android:layout_marginStart="5pt"/>
+        android:layout_gravity="center" />
 
 </LinearLayout>

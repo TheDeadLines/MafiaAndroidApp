@@ -1,6 +1,7 @@
 package com.thedeadlines.mafiap2p.ui.fragments.host.hostList;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -11,16 +12,16 @@ import com.thedeadlines.mafiap2p.R;
 
 public class HostListHolder extends RecyclerView.ViewHolder {
     private TextView playerOrderNumber;
-    private TextView playerRole;
+    private ImageView playerRole;
     private TextView playerName;
     private LinearLayout listRoot;
 
 
     HostListHolder(@NonNull View itemView) {
         super(itemView);
-        playerOrderNumber = itemView.findViewById(R.id.player_order_number);
-        playerRole = itemView.findViewById(R.id.player_role);
-        playerName = itemView.findViewById(R.id.player_name);
+        playerOrderNumber = itemView.findViewById(R.id.player_order_number_inner);
+        playerRole = itemView.findViewById(R.id.player_role_inner);
+        playerName = itemView.findViewById(R.id.player_name_inner);
         listRoot = itemView.findViewById(R.id.host_list_item_root);
     }
 
@@ -28,7 +29,7 @@ public class HostListHolder extends RecyclerView.ViewHolder {
         return playerOrderNumber;
     }
 
-    public TextView getPlayerRole() {
+    public ImageView getPlayerRole() {
         return playerRole;
     }
 

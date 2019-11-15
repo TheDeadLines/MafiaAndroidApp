@@ -6,56 +6,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.thedeadlines.mafiap2p.R;
-import com.thedeadlines.mafiap2p.ui.fragments.host.hostList.HostListAdapter;
 import com.thedeadlines.mafiap2p.ui.fragments.host.hostList.HostListElement;
-import com.thedeadlines.mafiap2p.ui.fragments.host.hostList.OnItemClickListener;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class GameHostChosenPlayerFragment extends Fragment {
-    // to delete
-    public static class DataGenerator {
-        List<HostListElement> list;
-
-        private static final DataGenerator sInstance = new DataGenerator();
-
-        static DataGenerator getInstance() {
-            return sInstance;
-        }
-
-        List<HostListElement> getList() {
-            return list;
-        }
-
-        DataGenerator() {
-            list = new ArrayList<>();
-            for (int i = 0; i < 6; i++) {
-                HostListElement e = new HostListElement(i, "simple name" + 1, "role" + 1);
-                list.add(e);
-            }
-        }
-    }
-
-
-
-    private final int COLUMN_NUMBER = 2;
-    private final String HOST_PLAYER_LIST_STATE = "hostPlayerListState";
-
-    private HostListAdapter mListViewAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
-    private Parcelable mListState;
-
+    private TextView mPlayerOrderNumber;
+    private ImageView mPlayerRole;
+    private TextView mPlayerName;
     private Button mStartTimerButton;
     private Button mKickButton;
     private Button mBackButton;
@@ -76,6 +42,10 @@ public class GameHostChosenPlayerFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        mPlayerName = view.findViewById(R.id.player_name);
+        mPlayerRole = view.findViewById(R.id.player_role);
+        mPlayerOrderNumber = view.findViewById(R.id.player_order_number);
 
         mBackButton = view.findViewById(R.id.back_button);
         mBackButton.setOnClickListener(new View.OnClickListener() {
@@ -103,24 +73,22 @@ public class GameHostChosenPlayerFragment extends Fragment {
         });
 
 
-        RecyclerView mRecyclerView = view.findViewById(R.id.host_list_item_root);
-
-        mLayoutManager = new GridLayoutManager(getContext(), COLUMN_NUMBER);
-
-        if (savedInstanceState != null) {
-            mListState = savedInstanceState.getParcelable(HOST_PLAYER_LIST_STATE);
-            mLayoutManager.onRestoreInstanceState(mListState);
+        Bundle args = getArguments();
+        if (args != null) {
+            int number = args.getInt(GameHostFragment.HOST_PLAYER_LIST_NUMBER);
+            String name = args.getString(GameHostFragment.HOST_PLAYER_LIST_NAME);
+            String role = args.getString(GameHostFragment.HOST_PLAYER_LIST_ROLE);
+            HostListElement el = new HostListElement(number, name, role);
+            mPlayerOrderNumber.setText(el.getOrderNumString());
+            mPlayerName.setText(el.getPlayerName());
+//            mPlayerRole.setImage?
         }
 
-        mListViewAdapter = new HostListAdapter(DataGenerator.getInstance().getList());
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(mListViewAdapter);
     }
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelable(HOST_PLAYER_LIST_STATE, mListState);
     }
 
 
