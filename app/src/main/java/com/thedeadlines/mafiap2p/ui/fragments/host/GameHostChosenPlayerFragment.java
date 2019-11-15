@@ -1,7 +1,6 @@
 package com.thedeadlines.mafiap2p.ui.fragments.host;
 
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,11 +25,9 @@ public class GameHostChosenPlayerFragment extends Fragment {
     private Button mKickButton;
     private Button mBackButton;
 
-
     public GameHostChosenPlayerFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -72,7 +69,6 @@ public class GameHostChosenPlayerFragment extends Fragment {
             }
         });
 
-
         Bundle args = getArguments();
         if (args != null) {
             int number = args.getInt(GameHostFragment.HOST_PLAYER_LIST_NUMBER);
@@ -83,13 +79,5 @@ public class GameHostChosenPlayerFragment extends Fragment {
             mPlayerName.setText(el.getPlayerName());
 //            mPlayerRole.setImage?
         }
-
     }
-
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-    }
-
-
 }

@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 // to delete
-public class DataGenerator {
-    List<HostListElement> list;
+class DataGenerator {
+    private List<HostListElement> list;
 
     private static final DataGenerator sInstance = new DataGenerator();
 
@@ -19,7 +19,7 @@ public class DataGenerator {
         return list;
     }
 
-    DataGenerator() {
+    private DataGenerator() {
         list = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
             HostListElement e = new HostListElement(i, "simple name" + 1, "role" + 1);

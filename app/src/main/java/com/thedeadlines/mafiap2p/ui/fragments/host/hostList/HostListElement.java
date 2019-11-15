@@ -19,23 +19,11 @@ public class HostListElement {
         return Integer.toString(orderNum);
     }
 
-    public void setOrderNum(int orderNum) {
-        this.orderNum = orderNum;
-    }
-
     public String getPlayerName() {
         return playerName;
     }
 
-    public void setPlayerName(String playerName) {
-        this.playerName = playerName;
-    }
-
     public String getPlayerRole() {
         return playerRole;
-    }
-
-    public void setPlayerRole(String playerRole) {
-        this.playerRole = playerRole;
     }
 }

@@ -10,4 +10,13 @@
     <string name="room">Room</string>
     <string name="game_host">Game Host</string>
     <string name="finish_game">Finish game</string>
+    <string name="player_role">Player role</string>
+    <string name="button_leave">Leave</string>
+    <string name="player_card_description">Player card</string>
+    <string name="button_hide_card">Hide card</string>
+    <string name="button_back">Back</string>
+    <string name="button_kick">Kick</string>
+    <string name="button_start_timer">Start timer</string>
+    <string name="button_host_open_list">></string>
+    <string name="host_image_description">Host image</string>
 </resources>

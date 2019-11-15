@@ -21,7 +21,6 @@ import com.thedeadlines.mafiap2p.R;
  * A simple {@link Fragment} subclass.
  */
 public class GamePlayerFragment extends Fragment {
-    // TODO: 14.11.19 put in constants
     private static final int SHOWN_CARD_STATE = 0;
     private static final int HIDDEN_CARD_STATE = 1;
 
@@ -37,7 +36,6 @@ public class GamePlayerFragment extends Fragment {
     public GamePlayerFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

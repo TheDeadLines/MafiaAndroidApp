@@ -15,7 +15,6 @@ import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -24,8 +23,6 @@ import com.thedeadlines.mafiap2p.ui.fragments.host.hostList.HostListAdapter;
 import com.thedeadlines.mafiap2p.ui.fragments.host.hostList.HostListElement;
 import com.thedeadlines.mafiap2p.ui.fragments.host.hostList.OnItemClickListener;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class GameHostFragment extends Fragment {
     public static final int COLUMN_NUMBER = 2;
@@ -94,7 +91,7 @@ public class GameHostFragment extends Fragment {
 
         OnItemClickListener clickListener = new OnItemClickListener() {
             @Override
-            public void onItemClick(HostListElement item) {
+            public void onItemClick(@NonNull HostListElement item) {
                 Bundle bundle = new Bundle();
                 bundle.putInt(HOST_PLAYER_LIST_NUMBER, item.getOrderNum());
                 bundle.putString(HOST_PLAYER_LIST_NAME, item.getPlayerName());
@@ -117,7 +114,6 @@ public class GameHostFragment extends Fragment {
         mRecyclerView.setAdapter(mListViewAdapter);
 
 
-
         if (savedInstanceState != null) {
             currentState = savedInstanceState.getInt(CURRENT_STATE);
             bindCurrentState();
@@ -125,7 +121,6 @@ public class GameHostFragment extends Fragment {
             currentState = HIDDEN_LIST_STATE;
             bindCurrentState();
         }
-
     }
 
     @Override
@@ -134,8 +129,6 @@ public class GameHostFragment extends Fragment {
         outState.putInt(CURRENT_STATE, currentState);
         outState.putParcelable(HOST_PLAYER_LIST_STATE, mListState);
     }
-
-    // TODO: 14.11.19 basic class or interface for gamehost and gameplayer? depends on future architecture and their methods
 
     private void toggleCurrentState() {
         switch (currentState) {

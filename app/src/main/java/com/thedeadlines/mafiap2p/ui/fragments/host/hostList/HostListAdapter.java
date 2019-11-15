@@ -39,7 +39,7 @@ public class HostListAdapter extends RecyclerView.Adapter<HostListHolder> {
             holder.getListRoot().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                     onItemClickListener.onItemClick(validCurrent);
+                    onItemClickListener.onItemClick(validCurrent);
                 }
             });
         }

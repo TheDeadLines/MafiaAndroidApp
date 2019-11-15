@@ -3,56 +3,52 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.host.GameHostFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".ui.fragments.host.GameHostFragment">
 
     <LinearLayout
         android:id="@+id/button_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="@dimen/margin15"
         android:gravity="center">
 
         <Button
             android:id="@+id/toggle_list_button"
-            android:layout_gravity="center"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=">"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/margin15"
             android:layout_weight="1"
-            android:layout_marginStart="10dp" />
-
-
+            android:text="@string/button_host_open_list" />
 
         <Button
             android:id="@+id/finish_game_button"
-            android:layout_gravity="center"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/finish_game"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/margin100"
+            android:layout_marginEnd="@dimen/margin15"
             android:layout_weight="10"
-            android:layout_marginStart="100dp"
-            android:layout_marginEnd="10dp" />
+            android:text="@string/finish_game" />
     </LinearLayout>
 
     <ImageView
         android:id="@+id/host_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="card"
+        android:contentDescription="@string/host_image_description"
         tools:src="@tools:sample/backgrounds/scenic" />
-
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/player_list"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10pt"
-        android:padding="10pt"
+        android:layout_marginTop="@dimen/margin15"
+        android:orientation="horizontal"
+        android:padding="@dimen/padding5"
         android:visibility="gone" />
-
-
-
 
 </LinearLayout>
