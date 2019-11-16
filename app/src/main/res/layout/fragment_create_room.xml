@@ -6,53 +6,36 @@
     android:orientation="vertical"
     tools:context=".ui.fragments.room.CreateRoomFragment">
 
-    <TextView
-        android:id="@+id/create_room_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/create" />
-
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/create_button_container"
-        android:orientation="vertical">
+        android:id="@+id/create_room_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <Switch
-            android:id="@+id/doctor_switch"
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/create_room_back_button"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="doctor" />
+            android:layout_weight="1"
+            android:background="@null"
+            android:text="@string/button_back" />
 
-
-        <Switch
-            android:id="@+id/sheriff_switch"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/create_room_title"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="sheriff" />
-
-
-        <Switch
-            android:id="@+id/maniac_switch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="maniac" />
-
-
-        <Switch
-            android:id="@+id/don_switch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="don" />
-
-        <Switch
-            android:id="@+id/slut_switch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="slut" />
-
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/create" />
 
     </LinearLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/roles_switches"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/create_room_header" />
 
     <LinearLayout
         android:id="@+id/create_button_container"
