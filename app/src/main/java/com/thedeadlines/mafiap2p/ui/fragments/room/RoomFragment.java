@@ -2,17 +2,16 @@ package com.thedeadlines.mafiap2p.ui.fragments.room;
 
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.thedeadlines.mafiap2p.R;
 
@@ -35,12 +34,9 @@ public class RoomFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mStartButton = view.findViewById(R.id.start_game_button);
-        mStartButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavController controller = Navigation.findNavController(view);
-                controller.navigate(R.id.action_roomFragment_to_gameHostFragment);
-            }
+        mStartButton.setOnClickListener(view1 -> {
+            NavController controller = Navigation.findNavController(view1);
+            controller.navigate(R.id.action_roomFragment_to_gameHostFragment);
         });
     }
 }

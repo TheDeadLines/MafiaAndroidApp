@@ -42,20 +42,14 @@ public class CreateRoomFragment extends Fragment {
         mBackButton = view.findViewById(R.id.create_room_back_button);
         mRolesListView = view.findViewById(R.id.roles_switches);
 
-        mCreateRoomButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavController controller = Navigation.findNavController(view);
-                controller.navigate(R.id.action_createRoomFragment_to_roomFragment);
-            }
+        mCreateRoomButton.setOnClickListener(view1 -> {
+            NavController controller = Navigation.findNavController(view1);
+            controller.navigate(R.id.action_createRoomFragment_to_roomFragment);
         });
 
-        mBackButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavController controller = Navigation.findNavController(view);
-                controller.navigate(R.id.action_createRoomFragment_to_homeFragment);
-            }
+        mBackButton.setOnClickListener(view12 -> {
+            NavController controller = Navigation.findNavController(view12);
+            controller.navigate(R.id.action_createRoomFragment_to_homeFragment);
         });
     }
 }

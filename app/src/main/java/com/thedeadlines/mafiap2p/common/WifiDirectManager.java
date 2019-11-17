@@ -1,5 +1,6 @@
 package com.thedeadlines.mafiap2p.common;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.IntentFilter;
 import android.content.pm.FeatureInfo;
@@ -8,18 +9,17 @@ import android.net.wifi.WifiManager;
 import android.net.wifi.WpsInfo;
 import android.net.wifi.p2p.WifiP2pConfig;
 import android.net.wifi.p2p.WifiP2pDevice;
-import android.net.wifi.p2p.WifiP2pInfo;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.net.wifi.p2p.nsd.WifiP2pDnsSdServiceInfo;
 import android.net.wifi.p2p.nsd.WifiP2pDnsSdServiceRequest;
 import android.os.Handler;
 import android.os.Message;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.util.Objects;
 
 import static com.thedeadlines.mafiap2p.common.Constants.CHAT_NEEDLE;
 import static com.thedeadlines.mafiap2p.common.Constants.PEER;
@@ -51,7 +51,6 @@ public final class WifiDirectManager {
     private final Runnable mServiceDiscoveringRunnable = this::startSearching;
     private final Handler mServiceBroadcastingHandler;
     private final Runnable mServiceBroadcastingRunnable = new Runnable() {
-
         @Override
         public void run() {
             mManager.discoverPeers(mChannel, null);
@@ -60,39 +59,37 @@ public final class WifiDirectManager {
         }
     };
 
+    @SuppressLint("HardwareIds")
     private WifiDirectManager(final Context context) {
         mIntentFilter = new IntentFilter();
         mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION);
         mIntentFilter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
         mManager = (WifiP2pManager) context.getSystemService(Context.WIFI_P2P_SERVICE);
-        MAC_ADDRESS = (((WifiManager) context.getSystemService(Context.WIFI_SERVICE)))
+        MAC_ADDRESS = (((WifiManager) Objects.requireNonNull(context.getApplicationContext().getSystemService(Context.WIFI_SERVICE))))
                 .getConnectionInfo()
                 .getMacAddress();
         mServiceDiscoveringHandler = new Handler();
         mServiceBroadcastingHandler = new Handler();
-        mChannel = mManager.initialize(context, context.getMainLooper(), null);
+        mChannel = mManager != null ? mManager.initialize(context, context.getMainLooper(), null) : null;
         gMemberList = MemberList.getInstance();
         mRealWifiDirectName = getDeviceName();
         mWifiDirectBroadcastReceiver = new WifiDirectBroadcastReceiver(
                 mManager,
                 mChannel,
-                new WifiP2pManager.ConnectionInfoListener() {
-                    @Override
-                    public void onConnectionInfoAvailable(WifiP2pInfo info) {
-                        final Handler handler = WifiDirectManager.this.getHandler();
-                        if (info.isGroupOwner) {
-                            try {
-                                new GroupOwnerSocketHandler(handler).start();
-                            } catch (final IOException e) {
-                                e.printStackTrace();
-                                sActivityActionListener.onFailure(e.hashCode());
-                                return;
-                            }
-                        } else {
-                            new ClientSocketHandler(handler, info.groupOwnerAddress).start();
+                info -> {
+                    final Handler handler = WifiDirectManager.this.getHandler();
+                    if (info.isGroupOwner) {
+                        try {
+                            new GroupOwnerSocketHandler(handler).start();
+                        } catch (final IOException e) {
+                            e.printStackTrace();
+                            sActivityActionListener.onFailure(e.hashCode());
+                            return;
                         }
-                        sActivityActionListener.onSuccess();
+                    } else {
+                        new ClientSocketHandler(handler, info.groupOwnerAddress).start();
                     }
+                    sActivityActionListener.onSuccess();
                 }
         );
     }
@@ -140,10 +137,7 @@ public final class WifiDirectManager {
 
     public static WifiP2pDeviceObservable getDeviceObservable(final WifiP2pDeviceObservable observable) {
         if (observable == null) {
-            return new WifiP2pDeviceObservable() {
-                @Override
-                public void notifyObserver(WifiP2pDevice wifiP2pDevice) {
-                }
+            return wifiP2pDevice -> {
             };
         } else {
             return observable;
@@ -171,7 +165,6 @@ public final class WifiDirectManager {
     }
 
     public void formGroup() {
-        // TODO: 5/28/17 notify others about that action
         setWifiDirectName(mRealWifiDirectName);
         mStatus = Status.GroupOwner;
         stopLocalService();
@@ -211,12 +204,9 @@ public final class WifiDirectManager {
     public void startDiscovery() {
         mManager.setDnsSdResponseListeners(
                 mChannel,
-                new WifiP2pManager.DnsSdServiceResponseListener() {
-                    @Override
-                    public void onDnsSdServiceAvailable(String instanceName, String registrationType, WifiP2pDevice srcDevice) {
-                        if (instanceName.equalsIgnoreCase(SERVICE_INSTANCE)) {
-                            sDeviceObservable.notifyObserver(srcDevice);
-                        }
+                (instanceName, registrationType, srcDevice) -> {
+                    if (instanceName.equalsIgnoreCase(SERVICE_INSTANCE)) {
+                        sDeviceObservable.notifyObserver(srcDevice);
                     }
                 },
                 null
@@ -312,12 +302,12 @@ public final class WifiDirectManager {
     }
 
     public static boolean setWifiEnabled(final Context context, final boolean state) {
-        return ((WifiManager) context.getSystemService(Context.WIFI_SERVICE)).setWifiEnabled(state);
+        return ((WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE)).setWifiEnabled(state);
     }
 
     public static boolean getWifiEnabled(final Context context) {
         try {
-            return ((WifiManager) context.getSystemService(Context.WIFI_SERVICE)).getWifiState()
+            return ((WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE)).getWifiState()
                     == WifiManager.WIFI_STATE_ENABLED;
         } catch (final Exception e) {
             return true;
@@ -383,39 +373,34 @@ public final class WifiDirectManager {
 
     private Handler getHandler() {
         return new Handler(
-                new Handler.Callback() {
-                    @Override
-                    public boolean handleMessage(@NonNull Message msg) {
-                        if (msg.what == CHAT_NEEDLE) {
-                            mChatNeedle = (ChatNeedle) msg.obj;
-                            if (mChatNeedle != null) {
-                                gMemberList.add(new Member(mCurrentConnectingDeviceAddress, mChatNeedle));
-                                mChatNeedle.write(MessageShaper.recycle(0, PEER, MAC_ADDRESS));
+                msg -> {
+                    if (msg.what == CHAT_NEEDLE) {
+                        mChatNeedle = (ChatNeedle) msg.obj;
+                        if (mChatNeedle != null) {
+                            gMemberList.add(new Member(mCurrentConnectingDeviceAddress, mChatNeedle));
+                            mChatNeedle.write(MessageShaper.recycle(0, PEER, MAC_ADDRESS));
+                        }
+                    } else {
+                        final byte[] obj = (byte[]) msg.obj;
+                        final Message formedMessage = MessageShaper.getMessage(obj);
+                        if (formedMessage.what == PEER) {
+                            final String address = (String) formedMessage.obj;
+                            gMemberList.add(new Member(address, mChatNeedle));
+                            if (mStatus == Status.GroupOwner) {
+                                final WifiP2pDevice p2pDevice = new WifiP2pDevice();
+                                p2pDevice.deviceAddress = address;
+                                p2pDevice.status = WifiP2pDevice.CONNECTED;
+                                p2pDevice.deviceName = String.valueOf(System.currentTimeMillis());
+                                sDeviceObservable.notifyObserver(p2pDevice);
                             }
                         } else {
-                            final byte[] obj = (byte[]) msg.obj;
-                            final Message formedMessage = MessageShaper.getMessage(obj);
-                            switch (formedMessage.what) {
-                                case PEER:
-                                    final String address = (String) formedMessage.obj;
-                                    gMemberList.add(new Member(address, mChatNeedle));
-                                    if (mStatus == Status.GroupOwner) {
-                                        final WifiP2pDevice p2pDevice = new WifiP2pDevice();
-                                        p2pDevice.deviceAddress = address;
-                                        p2pDevice.status = WifiP2pDevice.CONNECTED;
-                                        p2pDevice.deviceName = String.valueOf(System.currentTimeMillis());
-                                        sDeviceObservable.notifyObserver(p2pDevice);
-                                    }
-                                    break;
-                                default:
-                                    sHandler.sendMessage(formedMessage);
-                                    if (mStatus == Status.GroupOwner) {
-                                        WifiDirectManager.this.sendMessage(obj);
-                                    }
+                            sHandler.sendMessage(formedMessage);
+                            if (mStatus == Status.GroupOwner) {
+                                WifiDirectManager.this.sendMessage(obj);
                             }
                         }
-                        return false;
                     }
+                    return false;
                 }
         );
     }

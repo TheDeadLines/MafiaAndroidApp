@@ -29,21 +29,13 @@ class ChatNeedle implements Runnable {
             final InputStream iStream = socket.getInputStream();
             oStream = socket.getOutputStream();
             final byte[] buffer = new byte[CAPACITY];
-            int bytes;
             handler.obtainMessage(CHAT_NEEDLE, this)
                     .sendToTarget();
-            while (true) {
-                try {
-                    bytes = iStream.read(buffer);
-                    if (bytes == -1) {
-                        break;
-                    }
-                    final Message message = new Message();
-                    message.what = 0;
-                    message.obj = buffer;
-                    handler.obtainMessage(message.what, message.obj).sendToTarget();
-                } catch (final IOException ignored) {
-                }
+            while (iStream.read(buffer) != -1) {
+                final Message message = new Message();
+                message.what = 0;
+                message.obj = buffer;
+                handler.obtainMessage(message.what, message.obj).sendToTarget();
             }
         } catch (final IOException e) {
             e.printStackTrace();

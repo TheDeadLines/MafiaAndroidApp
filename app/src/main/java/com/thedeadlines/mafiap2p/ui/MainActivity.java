@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.thedeadlines.mafiap2p.R;
 
 public class MainActivity extends AppCompatActivity implements WifiP2pManager.ChannelListener {
-    public static final String TAG = "MainActivity";
+    public static final String TAG = MainActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

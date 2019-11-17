@@ -24,16 +24,15 @@ public abstract class MessageShaper {
 
     public static Message getMessage(final byte[] buffer) {
         try {
-            final byte[] responseBuffer = buffer;
-            final int classSize = ByteBuffer.wrap(Arrays.copyOfRange(responseBuffer, 8, 12)).getInt();
+            final int classSize = ByteBuffer.wrap(Arrays.copyOfRange(buffer, 8, 12)).getInt();
             final Class objClass = (Class) Serializer
-                    .deserialize(Arrays.copyOfRange(responseBuffer, 12, 12 + classSize));
+                    .deserialize(Arrays.copyOfRange(buffer, 12, 12 + classSize));
             final Message message = new Message();
             message.obj = Serializer
-                    .deserialize(Arrays.copyOfRange(responseBuffer, 12 + classSize, responseBuffer.length));
+                    .deserialize(Arrays.copyOfRange(buffer, 12 + classSize, buffer.length));
             objClass.cast(message.obj);
-            message.arg1 = ByteBuffer.wrap(Arrays.copyOfRange(responseBuffer, 0, 4)).getInt();
-            message.what = ByteBuffer.wrap(Arrays.copyOfRange(responseBuffer, 4, 8)).getInt();
+            message.arg1 = ByteBuffer.wrap(Arrays.copyOfRange(buffer, 0, 4)).getInt();
+            message.what = ByteBuffer.wrap(Arrays.copyOfRange(buffer, 4, 8)).getInt();
             return message;
         } catch (final ClassCastException e) {
             e.printStackTrace();

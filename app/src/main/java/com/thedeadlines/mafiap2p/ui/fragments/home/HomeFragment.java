@@ -17,6 +17,8 @@ import androidx.navigation.Navigation;
 import com.thedeadlines.mafiap2p.R;
 
 public class HomeFragment extends Fragment {
+    public static final String TAG = HomeFragment.class.getSimpleName();
+
     private ImageButton mSettingsButton;
     private Button mCreateRoomButton;
     private Button mJoinRoomButton;
@@ -40,28 +42,19 @@ public class HomeFragment extends Fragment {
         mJoinRoomButton = view.findViewById(R.id.join_room_button);
         mSettingsButton = view.findViewById(R.id.settings_button);
 
-        mCreateRoomButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavController controller = Navigation.findNavController(view);
-                controller.navigate(R.id.action_homeFragment_to_createRoomFragment);
-            }
+        mCreateRoomButton.setOnClickListener(view12 -> {
+            NavController controller = Navigation.findNavController(view12);
+            controller.navigate(R.id.action_homeFragment_to_createRoomFragment);
         });
 
-        mJoinRoomButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavController controller = Navigation.findNavController(view);
-                controller.navigate(R.id.action_homeFragment_to_joinFragment);
-            }
+        mJoinRoomButton.setOnClickListener(view1 -> {
+            NavController controller = Navigation.findNavController(view1);
+            controller.navigate(R.id.action_homeFragment_to_joinFragment);
         });
 
-        mSettingsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavController controller = Navigation.findNavController(view);
-                controller.navigate(R.id.action_homeFragment_to_settingsFragment);
-            }
+        mSettingsButton.setOnClickListener(view13 -> {
+            NavController controller = Navigation.findNavController(view13);
+            controller.navigate(R.id.action_homeFragment_to_settingsFragment);
         });
     }
 }
