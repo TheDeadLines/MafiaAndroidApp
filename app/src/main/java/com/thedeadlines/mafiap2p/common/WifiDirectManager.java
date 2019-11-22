@@ -24,7 +24,8 @@ import java.util.Objects;
 import static com.thedeadlines.mafiap2p.common.Constants.CHAT_NEEDLE;
 import static com.thedeadlines.mafiap2p.common.Constants.PEER;
 
-public final class WifiDirectManager {
+public final class
+WifiDirectManager {
 
     private static WifiP2pManager.ActionListener sActivityActionListener;
     private static WifiP2pDeviceObservable sDeviceObservable;
