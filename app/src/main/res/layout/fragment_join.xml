@@ -1,20 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".ui.fragments.room.JoinFragment">
 
-    <TextView
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/buttonBack"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/join_text"
-        android:text="@string/join" />
+        android:text="Back"
+        android:textSize="20sp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="32dp"
+        android:layout_toLeftOf="@id/textSelectRoom"
+        android:textColor="@color/cardview_dark_background"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"/>
+
+    <TextView
+        android:id="@+id/textSelectRoom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:padding="40dp"
+        android:textSize="20sp"
+        android:text="SELECT ROOM"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rooms_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        app:layoutManager="LinearLayoutManager"
+        android:layout_below="@id/textSelectRoom"
+        />
 
-</LinearLayout>
+</RelativeLayout>
