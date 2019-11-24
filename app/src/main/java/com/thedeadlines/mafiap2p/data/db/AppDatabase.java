@@ -19,8 +19,15 @@ import com.thedeadlines.mafiap2p.data.db.gameplayerjoin.GamePlayerJoinDao;
 import com.thedeadlines.mafiap2p.data.db.gameplayerjoin.GamePlayerJoinEntity;
 import com.thedeadlines.mafiap2p.data.db.player.PlayerDao;
 import com.thedeadlines.mafiap2p.data.db.player.PlayerEntity;
+import com.thedeadlines.mafiap2p.data.db.role.RoleDao;
+import com.thedeadlines.mafiap2p.data.db.role.RoleEntity;
+import com.thedeadlines.mafiap2p.data.db.role.RoleGenerator;
 
-@Database(entities = {GameEntity.class, PlayerEntity.class, GamePlayerJoinEntity.class}, version = 1)
+import java.util.List;
+import java.util.concurrent.Executors;
+
+@Database(entities = {GameEntity.class, PlayerEntity.class, GamePlayerJoinEntity.class,
+        RoleEntity.class}, version = 1)
 @TypeConverters({DateConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase sInstance;
@@ -30,6 +37,8 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract PlayerDao playerDao();
 
     public abstract GamePlayerJoinDao gamePlayerJoinDao();
+
+    public abstract RoleDao roleDao();
 
     private final MutableLiveData<Boolean> mIsDatabaseCreated = new MutableLiveData<>();
 
@@ -52,9 +61,10 @@ public abstract class AppDatabase extends RoomDatabase {
                     public void onCreate(@NonNull SupportSQLiteDatabase db) {
                         super.onCreate(db);
                         AppDatabase database = getInstance(appContext);
-//                        Executors.newSingleThreadScheduledExecutor().execute(() -> {
-
-//                        });
+                        Executors.newSingleThreadScheduledExecutor().execute(() -> {
+                            List<RoleEntity> roleEntityList = RoleGenerator.generateRoles(appContext);
+                            getInstance(appContext).populateRoles(roleEntityList);
+                        });
                         database.setDatabaseCreated();
                     }
                 })
@@ -73,6 +83,10 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public LiveData<Boolean> getDatabaseCreated() {
         return mIsDatabaseCreated;
+    }
+
+    private void populateRoles(final List<RoleEntity> roles) {
+        sInstance.runInTransaction(() -> sInstance.roleDao().insert(roles));
     }
 
 }

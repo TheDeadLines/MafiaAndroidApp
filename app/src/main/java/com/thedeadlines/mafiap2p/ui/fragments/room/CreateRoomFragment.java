@@ -15,12 +15,13 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.thedeadlines.mafiap2p.R;
+import com.thedeadlines.mafiap2p.viewmodel.RolesViewModel;
 
 public class CreateRoomFragment extends Fragment {
     private Button mCreateRoomButton;
     private Button mBackButton;
     private RecyclerView mRolesListView;
-
+    private RolesViewModel mRolesViewModel;
 
     public CreateRoomFragment() {
         // Required empty public constructor

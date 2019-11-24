@@ -17,4 +17,9 @@
     <string name="button_start_timer">Start timer</string>
     <string name="button_host_open_list">></string>
     <string name="host_image_description">Host image</string>
+    <string name="don">Don</string>
+    <string name="sheriff">Sheriff</string>
+    <string name="doctor">Doctor</string>
+    <string name="maniac">Maniac</string>
+    <string name="madam">Madam</string>
 </resources>
