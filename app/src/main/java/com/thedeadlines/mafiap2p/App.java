@@ -4,6 +4,11 @@ import android.app.Application;
 import android.content.IntentFilter;
 import android.net.wifi.p2p.WifiP2pManager;
 
+import com.thedeadlines.mafiap2p.data.GamePlayerJoinRepository;
+import com.thedeadlines.mafiap2p.data.GameRepository;
+import com.thedeadlines.mafiap2p.data.PlayerRepository;
+import com.thedeadlines.mafiap2p.data.db.AppDatabase;
+
 import static android.net.wifi.p2p.WifiP2pManager.Channel;
 import static android.net.wifi.p2p.WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION;
 import static android.net.wifi.p2p.WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION;
@@ -39,5 +44,19 @@ public class App extends Application {
         }
     }
 
+    public AppDatabase getAppDatabase() {
+        return AppDatabase.getInstance(this);
+    }
 
+    public GameRepository getGameRepository() {
+        return GameRepository.getInstance(getAppDatabase());
+    }
+
+    public PlayerRepository getPlayerRepository() {
+        return PlayerRepository.getInstance(getAppDatabase());
+    }
+
+    public GamePlayerJoinRepository getGamePlayerJoinRepository() {
+        return GamePlayerJoinRepository.getInstance(getAppDatabase());
+    }
 }
