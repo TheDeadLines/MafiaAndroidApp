@@ -77,7 +77,7 @@ public class JoinFragment extends Fragment implements JoinAdapter.OnRoomListener
             }
         });
 
-        buttonBack = view.findViewById(R.id.buttonBack);
+        buttonBack = view.findViewById(R.id.buttonBackJoin);
         buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

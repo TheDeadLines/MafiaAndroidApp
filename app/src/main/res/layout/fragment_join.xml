@@ -8,7 +8,7 @@
     tools:context=".ui.fragments.room.JoinFragment">
 
     <Button
-        android:id="@+id/buttonBack"
+        android:id="@+id/buttonBackJoin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Back"

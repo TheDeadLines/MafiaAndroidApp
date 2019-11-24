@@ -1,19 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.fragments.room.RoomFragment"
     android:orientation="vertical">
 
-    <TextView
+    <Button
+        android:id="@+id/buttonBackRoom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/room" />
+        android:text="Back"
+        android:textSize="20sp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="32dp"
+        android:layout_toLeftOf="@id/textSelectRoom"
+        android:textColor="@color/cardview_dark_background"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"/>
+
+    <TextView
+        android:id="@+id/textSelectRoom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:padding="40dp"
+        android:textSize="20sp"
+        android:text="ROOM"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/players_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical"
+        android:layout_below="@id/textSelectRoom"
+        />
 
     <Button
         android:id="@+id/start_game_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/start" />
-</LinearLayout>
+        android:textSize="24sp"
+        android:layout_below="@id/players_list"
+        android:layout_centerHorizontal="true"
+        android:text="@string/start"
+        android:textColor="@color/cardview_dark_background"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"/>
+
+</RelativeLayout>
