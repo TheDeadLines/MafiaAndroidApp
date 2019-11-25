@@ -6,13 +6,15 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Update;
 
+import java.util.List;
+
 @Dao
 public interface BaseDao<T> {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     long insert(T object);
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    long[] insert(T... collection);
+    long[] insert(List<T> collection);
 
     @Update
     void update(T object);

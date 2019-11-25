@@ -5,9 +5,10 @@ import com.thedeadlines.mafiap2p.common.Member;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.thedeadlines.mafiap2p.game.GameConstants.DEFAULT_PLAYERS_COUNT;
+
 public class Game {
     private static final String TAG = Game.class.getSimpleName();
-    private static final int DEFAULT_PLAYERS_COUNT = 7;
 
     private int mMembersLimit;
     private List<Member> mMembers;
