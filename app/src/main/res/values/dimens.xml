@@ -6,10 +6,11 @@
     <dimen name="margin100">100dp</dimen>
     <dimen name="padding5">5dp</dimen>
     <dimen name="padding35">35dp</dimen>
-    <dimen name="text_size_standard">11sp</dimen>
+    <dimen name="text_size_standard">12sp</dimen>
     <dimen name="text_size_middle">16sp</dimen>
-    <dimen name="text_size_higher">20sp</dimen>
+    <dimen name="text_size_higher">24sp</dimen>
     <dimen name="host_list_item_height">100dp</dimen>
     <dimen name="standard_margin">48dp</dimen>
     <dimen name="margin_small">8dp</dimen>
+    <dimen name="room_item_margin">120dp</dimen>
 </resources>

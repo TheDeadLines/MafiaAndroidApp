@@ -25,4 +25,8 @@
     <string name="stub">stub</string>
     <string name="mafia_counter">Mafia</string>
     <string name="player_counter">Player</string>
+    <string name="select_room">SELECT ROOM</string>
+    <string name="players_stub">players: 3</string>
+    <string name="room_stub">Room 1</string>
+    <string name="number_stub">01</string>
 </resources>

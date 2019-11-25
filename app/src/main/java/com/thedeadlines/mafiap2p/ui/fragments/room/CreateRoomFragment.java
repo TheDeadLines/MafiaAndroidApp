@@ -89,6 +89,7 @@ public class CreateRoomFragment extends Fragment {
         mRolesListView.setAdapter(mRolesAdapter);
 
         mCreateRoomButton.setOnClickListener(view1 -> {
+            //TODO: save game settings
             NavController controller = Navigation.findNavController(view1);
             controller.navigate(R.id.action_createRoomFragment_to_roomFragment);
         });
