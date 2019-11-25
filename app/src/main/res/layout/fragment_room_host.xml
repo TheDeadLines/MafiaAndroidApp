@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:id="@+id/button_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin15"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/room_host_back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/margin15"
+            android:layout_weight="1"
+            android:text="@string/button_back" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin100"
+            android:layout_marginEnd="@dimen/margin15"
+            android:layout_weight="10"
+            android:text="@string/room"
+            android:textAlignment="center" />
+
+        <Button
+            android:id="@+id/room_host_settings_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin15"
+            android:layout_weight="20"
+            android:text="@string/settings"
+            android:textAlignment="center" />
+    </LinearLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/room_host_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin15"
+        android:orientation="horizontal"
+        android:padding="@dimen/padding35" />
+
+    <Button
+        android:id="@+id/room_host_start_game_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin15"
+        android:text="@string/start"
+        android:textAlignment="center"
+        android:layout_gravity="center"/>
+
+</LinearLayout>

@@ -1,5 +1,6 @@
 package com.thedeadlines.mafiap2p.data.db.player;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -13,5 +14,10 @@ public class PlayerEntity {
     public PlayerEntity(int uid, String mName) {
         this.uid = uid;
         this.mName = mName;
+    }
+
+    @NonNull
+    public String uidToString() {
+        return String.valueOf(uid);
     }
 }

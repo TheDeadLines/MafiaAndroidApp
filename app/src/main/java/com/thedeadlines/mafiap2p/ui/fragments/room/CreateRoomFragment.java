@@ -44,7 +44,7 @@ public class CreateRoomFragment extends Fragment {
 
         mCreateRoomButton.setOnClickListener(view1 -> {
             NavController controller = Navigation.findNavController(view1);
-            controller.navigate(R.id.action_createRoomFragment_to_roomFragment);
+            controller.navigate(R.id.action_createRoomFragment_to_roomHostFragment);
         });
 
         mBackButton.setOnClickListener(view12 -> {

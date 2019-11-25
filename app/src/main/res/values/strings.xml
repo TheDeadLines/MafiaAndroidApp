@@ -17,4 +17,5 @@
     <string name="button_start_timer">Start timer</string>
     <string name="button_host_open_list">></string>
     <string name="host_image_description">Host image</string>
+    <string name="make_a_host">Make a host</string>
 </resources>

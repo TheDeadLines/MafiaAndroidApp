@@ -53,11 +53,11 @@
             android:id="@+id/action_createRoomFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
         <action
-            android:id="@+id/action_createRoomFragment_to_roomFragment"
-            app:destination="@id/roomFragment" />
-        <action
             android:id="@+id/action_createRoomFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_createRoomFragment_to_roomHostFragment"
+            app:destination="@id/roomHostFragment" />
     </fragment>
     <fragment
         android:id="@+id/joinFragment"
@@ -129,5 +129,20 @@
         <action
             android:id="@+id/action_gameHostChosenPlayerFragment_to_gameHostFragment"
             app:destination="@id/gameHostFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/roomHostFragment"
+        android:name="com.thedeadlines.mafiap2p.ui.fragments.room.RoomHostFragment"
+        android:label="fragment_room_host"
+        tools:layout="@layout/fragment_room_host" >
+        <action
+            android:id="@+id/action_roomHostFragment_to_gameHostFragment"
+            app:destination="@id/gameHostFragment" />
+        <action
+            android:id="@+id/action_roomHostFragment_to_createRoomFragment"
+            app:destination="@id/createRoomFragment" />
+        <action
+            android:id="@+id/action_roomHostFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
 </navigation>
