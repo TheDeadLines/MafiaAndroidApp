@@ -22,4 +22,7 @@
     <string name="doctor">Doctor</string>
     <string name="maniac">Maniac</string>
     <string name="madam">Madam</string>
+    <string name="stub">stub</string>
+    <string name="mafia_counter">Mafia</string>
+    <string name="player_counter">Player</string>
 </resources>

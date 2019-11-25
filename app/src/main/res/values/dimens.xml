@@ -10,4 +10,6 @@
     <dimen name="text_size_middle">16sp</dimen>
     <dimen name="text_size_higher">20sp</dimen>
     <dimen name="host_list_item_height">100dp</dimen>
+    <dimen name="standard_margin">48dp</dimen>
+    <dimen name="margin_small">8dp</dimen>
 </resources>
