@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin5">5dp</dimen>
+    <dimen name="margin15">15dp</dimen>
+    <dimen name="margin45">45dp</dimen>
+    <dimen name="margin100">100dp</dimen>
+    <dimen name="padding5">5dp</dimen>
+    <dimen name="padding35">35dp</dimen>
+    <dimen name="text_size_standard">11sp</dimen>
+    <dimen name="text_size_middle">16sp</dimen>
+    <dimen name="text_size_higher">20sp</dimen>
+    <dimen name="host_list_item_height">100dp</dimen>
+    <dimen name="standard_margin">48dp</dimen>
+    <dimen name="margin_small">8dp</dimen>
+</resources>

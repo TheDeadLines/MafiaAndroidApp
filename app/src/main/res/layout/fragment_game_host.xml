@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.fragments.host.GameHostFragment">
+
+    <LinearLayout
+        android:id="@+id/button_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin15"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/toggle_list_button"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/margin15"
+            android:layout_weight="1"
+            android:text="@string/button_host_open_list" />
+
+        <Button
+            android:id="@+id/finish_game_button"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/margin100"
+            android:layout_marginEnd="@dimen/margin15"
+            android:layout_weight="10"
+            android:text="@string/finish_game" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/host_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/host_image_description"
+        tools:src="@tools:sample/backgrounds/scenic" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/player_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/margin15"
+        android:orientation="horizontal"
+        android:padding="@dimen/padding5"
+        android:visibility="gone" />
+
+</LinearLayout>

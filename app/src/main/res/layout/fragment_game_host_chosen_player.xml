@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.fragments.player.GamePlayerFragment">
+
+    <Button
+        android:id="@+id/back_button"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="@dimen/margin15"
+        android:layout_marginTop="@dimen/margin15"
+        android:background="@android:color/transparent"
+        android:text="@string/button_back"
+        android:textSize="@dimen/text_size_middle"/>
+
+    <ImageView
+        android:id="@+id/player_role"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:contentDescription="@string/player_card_description"
+        tools:src="@tools:sample/backgrounds/scenic" />
+
+    <LinearLayout
+        android:id="@+id/linear_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin45"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/player_order_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:padding="@dimen/padding5"
+            android:textSize="@dimen/text_size_middle"
+            tools:text="1" />
+
+        <TextView
+            android:id="@+id/player_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding5"
+            android:textSize="@dimen/text_size_middle"
+            tools:text="Player Name" />
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/start_timer_button"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@android:color/transparent"
+        android:text="@string/button_start_timer"
+        android:textSize="@dimen/text_size_higher" />
+
+    <Button
+        android:id="@+id/kick_button"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/margin15"
+        android:background="@android:color/transparent"
+        android:text="@string/button_kick"
+        android:textSize="@dimen/text_size_higher" />
+</LinearLayout>
