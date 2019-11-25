@@ -35,7 +35,9 @@ public class RoomHostAdapter extends RecyclerView.Adapter<RoomHostAdapter.ViewHo
         private TextView deviceNumber;
         private LinearLayout listRoot;
 
-        private FrameLayout mInnerButtonsWrap;
+        private LinearLayout mInnerButtonsWrap;
+
+        private TextView mRotater;
 
         private final View itemView;
 
@@ -47,10 +49,13 @@ public class RoomHostAdapter extends RecyclerView.Adapter<RoomHostAdapter.ViewHo
             deviceNumber = itemView.findViewById(R.id.room_host_list_number_item);
             listRoot = itemView.findViewById(R.id.room_host_list_root);
             mInnerButtonsWrap = itemView.findViewById(R.id.inner_buttons_wrap);
+            mRotater = itemView.findViewById(R.id.room_host_list_rotater);
         }
 
         public void setInnerButtonsWrap(int isExpanded) {
+            int rot = isExpanded > 0 ? -1 : 1;
             this.mInnerButtonsWrap.setVisibility(isExpanded);
+            this.mRotater.setRotation(rot*90);
         }
 
         public void toggleInnerButtonsWrap() {
@@ -121,7 +126,7 @@ public class RoomHostAdapter extends RecyclerView.Adapter<RoomHostAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return mRoomHostList.size();
+        return (mRoomHostList == null) ? 0 : mRoomHostList.size() ;
     }
 
     public void setPlayers(List<PlayerEntity> mPlayers) {
@@ -129,5 +134,7 @@ public class RoomHostAdapter extends RecyclerView.Adapter<RoomHostAdapter.ViewHo
         notifyDataSetChanged();
     }
 
-
+    public boolean isEmpty() {
+        return mRoomHostList.isEmpty();
+    }
 }

@@ -6,7 +6,7 @@
 
 
     <LinearLayout
-        android:id="@+id/button_container"
+        android:id="@+id/button_container_room_host"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin15"
@@ -47,6 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin15"
         android:orientation="horizontal"
+        android:layout_weight="1"
         android:padding="@dimen/padding35" />
 
     <Button
