@@ -12,6 +12,7 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -48,7 +49,6 @@ public class RoomHostFragment extends Fragment {
 
         mPlayersViewModel = ViewModelProviders.of(this).get(PlayersViewModel.class);
         mPlayersViewModel.getPlayers().observe(this, playerEntities -> {
-            Log.d("observer", "gotcha" + mPlayersViewModel.getPlayers().getValue().get(0).mName);
             if (playerEntities != null) {
                 mAdapter.setPlayers(playerEntities);
             }
@@ -69,8 +69,6 @@ public class RoomHostFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-//        mWifiDirectManager = WifiDirectManager.getInstance(getContext());
 
         mStartButton = view.findViewById(R.id.room_host_start_game_button);
         mStartButton.setOnClickListener(view1 -> {
@@ -102,56 +100,55 @@ public class RoomHostFragment extends Fragment {
         mAdapter = new RoomHostAdapter(mPlayersViewModel.getPlayers().getValue());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
-
-
-        mPlayersViewModel.insert(new PlayerEntity(1, mWifiDirectManager.getDeviceName()));
-        Log.d("testNow", mWifiDirectManager.getDeviceName());
     }
-
-    public void add(final WifiP2pDevice device) {
-        if ((device.status == WifiP2pDevice.AVAILABLE || device.status == WifiP2pDevice.CONNECTED)
-            /*&& !contains(device) */) {
-            mPlayersViewModel.insert(new PlayerEntity(mPlayersViewModel.getPlayers().getValue().size() + 1, device.deviceName));
-        }
-    }
-
-//    public void onFailure() {
-//        remove(mConnectingViewHolder.getWifiP2pDevice());
-//        mConnectingViewHolder = null;
-//    }
-//
-//    private boolean contains(final WifiP2pDevice device) {
-//        for (final WifiP2pDevice p2pDevice :
-//                mDevices) {
-//            if (device.deviceAddress.equals(p2pDevice.deviceAddress)) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-//
-//    public void remove(final WifiP2pDevice device) {
-//        for (final WifiP2pDevice p2pDevice :
-//                mDevices) {
-//            if (p2pDevice.deviceAddress.equals(device.deviceAddress)) {
-//                mDevices.remove(p2pDevice);
-//                break;
-//            }
-//        }
-//        notifyDataSetChanged();
-//    }
-
 
     @Override
     public void onResume() {
         super.onResume();
-        getActivity().registerReceiver(mWifiDirectManager.getWifiDirectBroadcastReceiver(),
-                mWifiDirectManager.getIntentFilter());
+        getActivity().registerReceiver(mWifiDirectManager.getWifiDirectBroadcastReceiver(), mWifiDirectManager.getIntentFilter());
     }
 
     @Override
     public void onPause() {
         super.onPause();
         getActivity().unregisterReceiver(mWifiDirectManager.getWifiDirectBroadcastReceiver());
+    }
+
+
+    public void add(final WifiP2pDevice device) {
+        List<PlayerEntity> playerEntities = mPlayersViewModel.getPlayers().getValue();
+        int playersListSize = playerEntities.size();
+        int newId = playerEntities.get(playersListSize - 1).uid + 1;
+
+        if ((device.status == WifiP2pDevice.AVAILABLE || device.status == WifiP2pDevice.CONNECTED) && !contains(newId)) {
+            mPlayersViewModel.insert(new PlayerEntity(mPlayersViewModel.getPlayers().getValue().size() + 1, device.deviceName));
+        }
+    }
+
+    public void onFailure() {
+
+    }
+
+    private boolean contains(final int uid) {
+
+        List<PlayerEntity> playersList = mPlayersViewModel.getPlayers().getValue();
+
+        for (final PlayerEntity player : playersList) {
+            if (player.uid == uid) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void remove(final int uid) {
+        List<PlayerEntity> playersList = mPlayersViewModel.getPlayers().getValue();
+
+        for (final PlayerEntity player : playersList) {
+            if (player.uid == uid) {
+                mAdapter.getRoomHostList().remove(uid);
+            }
+        }
+        mAdapter.notifyDataSetChanged();
     }
 }

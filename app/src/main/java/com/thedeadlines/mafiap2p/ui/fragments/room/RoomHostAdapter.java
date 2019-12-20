@@ -16,12 +16,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.thedeadlines.mafiap2p.R;
 import com.thedeadlines.mafiap2p.data.db.player.PlayerEntity;
+import com.thedeadlines.mafiap2p.game.Player;
 
 import java.util.List;
 
 public class RoomHostAdapter extends RecyclerView.Adapter<RoomHostAdapter.ViewHolder> {
 
     private List<PlayerEntity> mRoomHostList;
+    private RoomHostAdapter.ViewHolder mConnectingViewHolder;
 
 
     public RoomHostAdapter(@Nullable List<PlayerEntity> RoomHostList) {
@@ -31,7 +33,7 @@ public class RoomHostAdapter extends RecyclerView.Adapter<RoomHostAdapter.ViewHo
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView deviceNameTextView;
-//        private final TextView deviceStatusTextView;
+        private final TextView deviceStatusTextView;
         private TextView deviceNumber;
         private LinearLayout listRoot;
 
@@ -45,7 +47,7 @@ public class RoomHostAdapter extends RecyclerView.Adapter<RoomHostAdapter.ViewHo
             super(itemView);
             this.itemView = itemView;
             deviceNameTextView = itemView.findViewById(R.id.room_host_list_name);
-//            deviceStatusTextView = itemView.findViewById(R.id.room_host_list_is_host);
+            deviceStatusTextView = itemView.findViewById(R.id.room_host_list_is_host);
             deviceNumber = itemView.findViewById(R.id.room_host_list_number_item);
             listRoot = itemView.findViewById(R.id.room_host_list_root);
             mInnerButtonsWrap = itemView.findViewById(R.id.inner_buttons_wrap);
@@ -71,7 +73,6 @@ public class RoomHostAdapter extends RecyclerView.Adapter<RoomHostAdapter.ViewHo
             }
         }
 
-
         public void setOnClickListener(final View.OnClickListener onClickListener) {
             itemView.setOnClickListener(onClickListener);
         }
@@ -84,10 +85,10 @@ public class RoomHostAdapter extends RecyclerView.Adapter<RoomHostAdapter.ViewHo
             this.deviceNumber.setText(deviceNumber);
         }
 
-//        public void setStatus(final boolean status) {
-//            int isOwner = status ? View.VISIBLE : View.GONE;
-//            this.deviceStatusTextView.setVisibility(isOwner);
-//        }
+        public void setStatus(final boolean status) {
+            int isOwner = status ? View.VISIBLE : View.GONE;
+            this.deviceStatusTextView.setVisibility(isOwner);
+        }
 
         public LinearLayout getListRoot() {
             return listRoot;
@@ -110,7 +111,10 @@ public class RoomHostAdapter extends RecyclerView.Adapter<RoomHostAdapter.ViewHo
         if (current != null) {
             viewHolder.setName(current.mName);
             viewHolder.setDeviceNumber(current.uidToString());
-//            viewHolder.setStatus(current.isHost());
+
+            // check if host
+//                viewHolder.setStatus(current.isHost());
+
 
             viewHolder.setInnerButtonsWrap(View.GONE);
 
@@ -136,5 +140,9 @@ public class RoomHostAdapter extends RecyclerView.Adapter<RoomHostAdapter.ViewHo
 
     public boolean isEmpty() {
         return mRoomHostList.isEmpty();
+    }
+
+    public List<PlayerEntity> getRoomHostList() {
+        return mRoomHostList;
     }
 }
