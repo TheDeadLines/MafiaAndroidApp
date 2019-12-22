@@ -4,18 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.fragments.player.GamePlayerFragment">
+    tools:context=".ui.fragments.player.GamePlayerFragment"
+    android:background="@color/BlackBackground">
 
     <Button
         android:id="@+id/leave_game_button"
-        style="?android:attr/borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:width="@dimen/width_button150"
         android:layout_gravity="end"
         android:layout_marginTop="@dimen/margin15"
         android:layout_marginEnd="@dimen/margin15"
         android:layout_weight="1"
-        android:background="@android:color/transparent"
+        android:drawableEnd="@drawable/ic_arrow_forward_black_24dp"
+        android:drawablePadding="@dimen/padding5"
+        android:paddingEnd="@dimen/padding5"
+        android:paddingStart="@dimen/padding35"
+        android:background="@drawable/custom_button_green"
         android:text="@string/button_leave" />
 
 
@@ -30,16 +35,14 @@
 
     <Button
         android:id="@+id/toggle_card_button"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="@dimen/margin45"
-        android:layout_weight="1"
-        android:background="@android:color/transparent"
+        android:background="@drawable/custom_button_red"
         android:paddingStart="@dimen/padding35"
         android:paddingEnd="@dimen/padding35"
         android:text="@string/button_hide_card"
-        android:textSize="@dimen/text_size_higher" />
+        android:textSize="@dimen/text_size_middle"/>
 
 </LinearLayout>

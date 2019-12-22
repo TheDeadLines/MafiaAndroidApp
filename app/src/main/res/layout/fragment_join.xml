@@ -5,29 +5,36 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".ui.fragments.room.JoinFragment">
+    tools:context=".ui.fragments.room.JoinFragment"
+    android:background="@color/BlackBackground">
+
 
     <Button
         android:id="@+id/buttonBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Back"
-        android:textSize="20sp"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="32dp"
-        android:layout_toLeftOf="@id/textSelectRoom"
-        android:textColor="@color/cardview_dark_background"
-        style="@style/Widget.AppCompat.Button.Borderless.Colored"/>
+        android:text="@string/button_back"
+        android:layout_alignParentStart="true"
+        android:textSize="@dimen/text_size_middle"
+        android:layout_marginStart="@dimen/margin15"
+        android:layout_marginTop="@dimen/margin15"
+        android:layout_marginBottom="@dimen/margin5"
+        android:drawableStart="@drawable/ic_arrow_back_black_24dp"
+        android:drawablePadding="@dimen/padding5"
+        android:paddingEnd="@dimen/padding35"
+        android:paddingStart="@dimen/padding5"
+        android:background="@drawable/custom_button_grey_red" />
 
     <TextView
         android:id="@+id/textSelectRoom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/margin15"
         android:gravity="center"
-        android:padding="40dp"
-        android:textSize="20sp"
-        android:text="SELECT ROOM"/>
+        android:textSize="@dimen/text_size_higher"
+        android:text="@string/select_room"
+        android:textColor="@color/colorLightYellowText"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rooms_list"
@@ -35,7 +42,7 @@
         android:layout_height="match_parent"
         android:scrollbars="vertical"
         app:layoutManager="LinearLayoutManager"
-        android:layout_below="@id/textSelectRoom"
+        android:layout_below="@id/buttonBack"
         />
 
 </RelativeLayout>

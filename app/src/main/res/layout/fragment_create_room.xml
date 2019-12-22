@@ -3,21 +3,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/BlackBackground"
     android:orientation="vertical"
     tools:context=".ui.fragments.room.CreateRoomFragment">
 
     <LinearLayout
         android:id="@+id/create_room_header"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <Button
             android:id="@+id/create_room_back_button"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin15"
+            android:layout_marginTop="@dimen/margin15"
+            android:layout_marginBottom="@dimen/margin5"
             android:layout_weight="1"
-            android:background="@null"
-            android:text="@string/button_back" />
+            android:drawableStart="@drawable/ic_arrow_back_black_24dp"
+            android:drawablePadding="@dimen/padding5"
+            android:paddingStart="@dimen/padding5"
+            android:paddingEnd="@dimen/padding35"
+            android:text="@string/button_back"
+            android:textSize="@dimen/text_size_middle"
+            android:background="@drawable/custom_button_grey_red"/>
 
         <TextView
             android:id="@+id/create_room_title"
@@ -26,7 +35,7 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@string/create" />
+            android:text="" />
 
     </LinearLayout>
 
@@ -38,7 +47,8 @@
         <LinearLayout
             android:id="@+id/container_number_pickers"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:baselineAligned="false">
 
             <LinearLayout
                 android:id="@+id/container_player_number"
@@ -52,12 +62,14 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:text="@string/player_counter" />
+                    android:text="@string/player_counter"
+                    android:textColor="@color/colorLightYellowText" />
 
                 <NumberPicker
                     android:id="@+id/player_number_picker"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:theme="@style/AppTheme.Picker" />
             </LinearLayout>
 
 
@@ -73,12 +85,14 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:text="@string/mafia_counter" />
+                    android:text="@string/mafia_counter"
+                    android:textColor="@color/colorLightYellowText" />
 
                 <NumberPicker
                     android:id="@+id/mafia_number_picker"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:theme="@style/AppTheme.Picker" />
             </LinearLayout>
 
 
@@ -106,7 +120,10 @@
             android:id="@+id/start_room_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/create" />
+            android:width="@dimen/width_button200"
+            android:text="@string/create"
+            android:textSize="@dimen/text_size_middle"
+            android:background="@drawable/custom_button_red"/>
     </LinearLayout>
 
 

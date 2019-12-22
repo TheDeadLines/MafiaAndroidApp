@@ -3,51 +3,86 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ui.fragments.home.HomeFragment">
+    android:orientation="horizontal"
+    tools:context=".ui.fragments.home.HomeFragment"
+    android:background="@color/BlackBackground">
 
     <ImageButton
         android:id="@+id/settings_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginTop="@dimen/margin25"
+        android:layout_marginEnd="@dimen/margin25"
         android:background="@null"
         android:contentDescription="@string/settings"
-        android:src="@drawable/ic_settings_black_24dp" />
+        android:src="@drawable/ic_settings_black_24dp"/>
 
-    <TextView
-        android:id="@+id/title_mafia"
+    <LinearLayout
+        android:id="@+id/title_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:gravity="center"
-        android:text="@string/title_home"
-        android:textSize="48sp" />
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/title_mafia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="@string/title_home"
+            android:textSize="48sp"
+            android:textColor="@color/colorLightYellowText"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="@drawable/ic_card_48dp"
+            android:contentDescription="@string/image_card" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="@drawable/ic_money_48dp"
+            android:contentDescription="@string/image_money" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:background="@drawable/ic_gun_48dp"
+            android:contentDescription="@string/image_gun" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="48dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/margin15"
         android:orientation="vertical">
 
         <Button
             android:id="@+id/create_room_button"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/create" />
+            android:width="@dimen/width_button200"
+            android:layout_marginBottom="@dimen/margin5"
+            android:text="@string/create"
+            android:textSize="@dimen/text_size_middle"
+            android:background="@drawable/custom_button_red"/>
 
         <Button
             android:id="@+id/join_room_button"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/join" />
+            android:width="@dimen/width_button200"
+            android:text="@string/join"
+            android:textSize="@dimen/text_size_middle"
+            android:background="@drawable/custom_button_red"/>
 
     </LinearLayout>
-
-
 </RelativeLayout>

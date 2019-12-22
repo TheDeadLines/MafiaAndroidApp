@@ -1,19 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.fragments.room.RoomFragment"
     android:orientation="vertical">
 
-    <TextView
+    <LinearLayout
+        android:id="@+id/create_button_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/room" />
-
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="48dp">
     <Button
         android:id="@+id/start_game_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/start" />
-</LinearLayout>
+        android:width="@dimen/width_button200"
+        android:text="@string/start"
+        android:textSize="@dimen/text_size_middle"
+        android:background="@drawable/custom_button_red"/>
+
+    </LinearLayout>
+</RelativeLayout>
