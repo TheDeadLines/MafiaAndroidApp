@@ -5,33 +5,36 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/host_list_item_height"
     android:id="@+id/host_list_item_root"
-    android:layout_marginBottom="@dimen/margin5">
+    android:layout_marginBottom="@dimen/margin5"
+    android:background="@color/BlackBackground">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="1"
+        tools:text="@string/number_player"
         android:textAlignment="center"
         android:id="@+id/player_order_number_inner"
         android:textSize="@dimen/text_size_standard"
         android:layout_marginStart="@dimen/margin5"
-        android:layout_marginTop="@dimen/margin5"/>
+        android:layout_marginTop="@dimen/margin5"
+        android:textColor="@color/colorLightYellowText"/>
 
     <ImageView
-        tools:src="@tools:sample/backgrounds/scenic"
+        android:id="@+id/player_role_inner"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:contentDescription="@string/player_role"
         android:layout_gravity="center"
-        android:id="@+id/player_role_inner"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        tools:src="@tools:sample/backgrounds/scenic"/>
 
     <TextView
+        android:id="@+id/player_name_inner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/player_name_inner"
-        tools:text="Player Name"
         android:textSize="@dimen/text_size_standard"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:textColor="@color/colorLightYellowText"
+        tools:text="Player Name"/>
 
 </LinearLayout>

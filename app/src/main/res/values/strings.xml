@@ -15,7 +15,7 @@
     <string name="button_back">Back</string>
     <string name="button_kick">Kick</string>
     <string name="button_start_timer">Start timer</string>
-    <string name="button_host_open_list">></string>
+    <string name="button_host_open_list">Open card</string>
     <string name="host_image_description">Host image</string>
     <string name="don">Don</string>
     <string name="sheriff">Sheriff</string>
@@ -25,4 +25,13 @@
     <string name="stub">stub</string>
     <string name="mafia_counter">Mafia</string>
     <string name="player_counter">Player</string>
+    <string name="number_room">01</string>
+    <string name="name_room">Room 1</string>
+    <string name="number_players_room">players: 3</string>
+    <string name="select_room">SELECT ROOM</string>
+    <string name="number_player">1</string>
+    <string name="player_name">Player Name</string>
+    <string name="image_gun">imageGun</string>
+    <string name="image_money">imageMoney</string>
+    <string name="image_card">imageCard</string>
 </resources>

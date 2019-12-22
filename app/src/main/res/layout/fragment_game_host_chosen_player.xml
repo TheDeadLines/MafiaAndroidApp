@@ -4,19 +4,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.fragments.player.GamePlayerFragment">
+    tools:context=".ui.fragments.player.GamePlayerFragment"
+    android:background="@color/BlackBackground">
 
     <Button
         android:id="@+id/back_button"
-        style="?android:attr/borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
+        android:text="@string/button_back"
+        android:textSize="@dimen/text_size_middle"
         android:layout_marginStart="@dimen/margin15"
         android:layout_marginTop="@dimen/margin15"
-        android:background="@android:color/transparent"
-        android:text="@string/button_back"
-        android:textSize="@dimen/text_size_middle"/>
+        android:layout_marginBottom="@dimen/margin5"
+        android:drawableStart="@drawable/ic_arrow_back_black_24dp"
+        android:drawablePadding="@dimen/padding5"
+        android:paddingEnd="@dimen/padding35"
+        android:paddingStart="@dimen/padding5"
+        android:background="@drawable/custom_button_grey_red"/>
 
     <ImageView
         android:id="@+id/player_role"
@@ -41,7 +46,8 @@
             android:textAlignment="center"
             android:padding="@dimen/padding5"
             android:textSize="@dimen/text_size_middle"
-            tools:text="1" />
+            tools:text="@string/number_player"
+            android:textColor="@color/colorLightYellowText"/>
 
         <TextView
             android:id="@+id/player_name"
@@ -49,28 +55,34 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/padding5"
             android:textSize="@dimen/text_size_middle"
-            tools:text="Player Name" />
+            tools:text="@string/player_name"
+            android:textColor="@color/colorLightYellowText"/>
     </LinearLayout>
 
-
-    <Button
-        android:id="@+id/start_timer_button"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@android:color/transparent"
-        android:text="@string/button_start_timer"
-        android:textSize="@dimen/text_size_higher" />
+        android:layout_marginBottom="@dimen/margin45"
+        android:orientation="vertical">
+        <Button
+            android:id="@+id/start_timer_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:width="@dimen/width_button200"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/margin5"
+            android:text="@string/button_start_timer"
+            android:textSize="@dimen/text_size_middle"
+            android:background="@drawable/custom_button_red"/>
 
-    <Button
-        android:id="@+id/kick_button"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="@dimen/margin15"
-        android:background="@android:color/transparent"
-        android:text="@string/button_kick"
-        android:textSize="@dimen/text_size_higher" />
+        <Button
+            android:id="@+id/kick_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:width="@dimen/width_button200"
+            android:layout_gravity="center"
+            android:text="@string/button_kick"
+            android:textSize="@dimen/text_size_middle"
+            android:background="@drawable/custom_button_red" />
+    </LinearLayout>
 </LinearLayout>

@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.fragments.host.GameHostFragment">
+    tools:context=".ui.fragments.host.GameHostFragment"
+    android:background="@color/BlackBackground">
 
     <LinearLayout
         android:id="@+id/button_container"
@@ -15,24 +16,29 @@
 
         <Button
             android:id="@+id/toggle_list_button"
-            style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:layout_marginStart="@dimen/margin15"
             android:layout_weight="1"
-            android:text="@string/button_host_open_list" />
+            android:text="@string/button_host_open_list"
+            tools:ignore="ButtonStyle"
+            android:background="@drawable/custom_button_green"/>
 
         <Button
             android:id="@+id/finish_game_button"
-            style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:width="@dimen/width_button150"
             android:layout_marginStart="@dimen/margin100"
             android:layout_marginEnd="@dimen/margin15"
-            android:layout_weight="10"
-            android:text="@string/finish_game" />
+            android:layout_weight="1"
+            android:text="@string/finish_game"
+            android:drawableEnd="@drawable/ic_arrow_forward_black_24dp"
+            android:drawablePadding="@dimen/padding5"
+            android:paddingEnd="@dimen/padding5"
+            android:paddingStart="@dimen/padding35"
+            android:background="@drawable/custom_button_green"
+            tools:ignore="ButtonStyle" />
     </LinearLayout>
 
     <ImageView
