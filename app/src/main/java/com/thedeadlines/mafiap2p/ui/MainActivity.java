@@ -2,6 +2,7 @@ package com.thedeadlines.mafiap2p.ui;
 
 import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Bundle;
+import android.os.StrictMode;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,6 +15,9 @@ public class MainActivity extends AppCompatActivity implements WifiP2pManager.Ch
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
     }
 
     @Override

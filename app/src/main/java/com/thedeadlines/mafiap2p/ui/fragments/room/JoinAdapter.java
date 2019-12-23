@@ -2,6 +2,7 @@ package com.thedeadlines.mafiap2p.ui.fragments.room;
 
 import android.content.Context;
 import android.net.wifi.p2p.WifiP2pDevice;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +46,7 @@ public class JoinAdapter extends RecyclerView.Adapter<JoinAdapter.ExampleViewHol
             mDevices.add(device);
 
 
+            Log.d("connect", device.deviceName);
             JoinItems element = new JoinItems("0", device.deviceName, "undefined_m", device);
             mExamplesList.add(element);
 

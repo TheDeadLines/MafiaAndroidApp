@@ -177,11 +177,10 @@ public class RoomHostFragment extends Fragment {
             }
 
             if ((device.status == WifiP2pDevice.AVAILABLE || device.status == WifiP2pDevice.CONNECTED) && !contains(newId)) {
-                mPlayersViewModel.insert(new PlayerEntity(newId + 1, device.deviceName));
+                Log.d("connectRoomHost", "name " + device.deviceName + "newId " + newId);
+                mPlayersViewModel.insert(new PlayerEntity(newId, device.deviceName));
             }
         }
-
-        mAdapter.notifyDataSetChanged();
     }
 
     public void initOwner() {
