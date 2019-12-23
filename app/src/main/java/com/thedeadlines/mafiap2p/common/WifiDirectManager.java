@@ -14,6 +14,7 @@ import android.net.wifi.p2p.nsd.WifiP2pDnsSdServiceInfo;
 import android.net.wifi.p2p.nsd.WifiP2pDnsSdServiceRequest;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -323,6 +324,7 @@ WifiDirectManager {
     public void join(final WifiP2pDevice groupOwnerDevice) {
         mStatus = Status.Client;
         connect(groupOwnerDevice.deviceAddress, mStatus);
+        Log.d("connect", "connecting");
     }
 
     private void connect(final String deviceAddress, final Status status) {

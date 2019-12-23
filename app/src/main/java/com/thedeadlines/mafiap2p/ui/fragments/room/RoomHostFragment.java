@@ -63,7 +63,7 @@ public class RoomHostFragment extends Fragment {
 
         mWifiDirectManager = WifiDirectManager.getInstance(getContext());
 
-        mWifiDirectManager.updateWifiP2pDeviceObservable(this::add);
+        mWifiDirectManager.updateWifiP2pDeviceObservable(wifiP2pDevice -> this.add(wifiP2pDevice));
 
         mWifiDirectManager.createGroup(mWifiDirectManager.getDeviceName());
     }
@@ -180,6 +180,8 @@ public class RoomHostFragment extends Fragment {
                 mPlayersViewModel.insert(new PlayerEntity(newId + 1, device.deviceName));
             }
         }
+
+        mAdapter.notifyDataSetChanged();
     }
 
     public void initOwner() {

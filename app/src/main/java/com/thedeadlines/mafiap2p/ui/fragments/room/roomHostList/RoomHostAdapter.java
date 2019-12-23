@@ -1,6 +1,7 @@
 package com.thedeadlines.mafiap2p.ui.fragments.room.roomHostList;
 
 import android.net.wifi.p2p.WifiP2pDevice;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,8 +70,10 @@ public class RoomHostAdapter extends RecyclerView.Adapter<RoomHostListHolder> {
             for (int i = 0; i < mPlayers.size(); i++) {
                 if (this.mRoomHostList != null) {
                     if (this.mRoomHostList.size() - 1 < i) {
+                        Log.d("connect", "size" + this.mRoomHostList.size() + " i: " + i);
                         this.mRoomHostList.add(i, new RoomHostListElement(mPlayers.get(i), false, View.GONE));
                     } else {
+                        Log.d("connect", "size" + this.mRoomHostList.size() + " i: " + i + "sec");
                         this.mRoomHostList.get(i).setPlayerEntity(mPlayers.get(i));
                     }
                 }
