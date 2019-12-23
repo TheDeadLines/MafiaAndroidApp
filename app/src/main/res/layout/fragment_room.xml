@@ -1,19 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.room.RoomFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".ui.fragments.home.HomeFragment">
 
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/host_players_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/standard_margin" />
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/room" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/standard_margin"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/start_game_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/start" />
-</LinearLayout>
+        <Button
+            android:id="@+id/start_game_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/start" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

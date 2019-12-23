@@ -25,11 +25,22 @@ public class GameEntity {
     /* total players count */
     public int playersCount;
 
+    @Ignore
     public GameEntity(int uid, int hostId, Date mDate, int mafiaCount, int playersCount) {
         this.uid = uid;
         this.hostId = hostId;
         this.mDate = mDate;
+        this.mafiaCount = mafiaCount;
+        this.playersCount = playersCount;
     }
+
+    public GameEntity(int hostId, Date mDate, int mafiaCount, int playersCount) {
+        this.hostId = hostId;
+        this.mDate = mDate;
+        this.mafiaCount = mafiaCount;
+        this.playersCount = playersCount;
+    }
+
 
     @Ignore
     public GameEntity(Date mDate) {

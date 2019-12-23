@@ -113,13 +113,9 @@ public class CreateRoomFragment extends Fragment {
 
         mCreateRoomButton.setOnClickListener(view1 -> {
             if (simpleValidation()) {
-                int mafiaCount = mMafiaNumberPicker.getValue();
-                int playerCount = mPlayersNumberPicker.getValue();
-                Bundle bundle = new Bundle();
-                bundle.putInt(MAFIA_COUNT_KEY, mafiaCount);
-                bundle.putInt(PLAYER_COUNT_KEY, playerCount);
+                mCreateRoomViewModel.createGame();
                 NavController controller = Navigation.findNavController(view1);
-                controller.navigate(R.id.action_createRoomFragment_to_roomFragment, bundle);
+                controller.navigate(R.id.action_createRoomFragment_to_roomFragment);
             } else {
                 Toast.makeText(getContext(), R.string.wrong_players, Toast.LENGTH_SHORT).show();
             }

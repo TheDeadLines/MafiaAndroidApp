@@ -8,23 +8,34 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
 
 import com.thedeadlines.mafiap2p.App;
+import com.thedeadlines.mafiap2p.AppConstants;
+import com.thedeadlines.mafiap2p.data.GameRepository;
 import com.thedeadlines.mafiap2p.data.RolesRepository;
+import com.thedeadlines.mafiap2p.data.db.game.GameEntity;
 import com.thedeadlines.mafiap2p.data.db.role.RoleEntity;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class CreateRoomViewModel extends AndroidViewModel {
-    private LiveData<Integer> mTotalPlayers;
-    private LiveData<Integer> mMafiaPlayers;
+    private MediatorLiveData<Integer> mTotalPlayers;
+    private MediatorLiveData<Integer> mMafiaPlayers;
     private MediatorLiveData<List<RoleEntity>> mObservableRoles;
     private RolesRepository mRepository;
+    private GameRepository mGameRepository;
 
     public CreateRoomViewModel(@NonNull Application application) {
         super(application);
         mObservableRoles = new MediatorLiveData<>();
+        mMafiaPlayers = new MediatorLiveData<>();
+        mTotalPlayers = new MediatorLiveData<>();
+
         mRepository = ((App) application).getRolesRepository();
+        mGameRepository = ((App) application).getGameRepository();
         LiveData<List<RoleEntity>> roles = mRepository.getRoles();
         mObservableRoles.addSource(roles, mObservableRoles::setValue);
+
     }
 
     public LiveData<Integer> getTotalPlayers() {
@@ -39,6 +50,17 @@ public class CreateRoomViewModel extends AndroidViewModel {
         return mObservableRoles;
     }
 
+    public List<RoleEntity> getCheckedRoles() {
+        List<RoleEntity> all = getRoles().getValue();
+        List<RoleEntity> checked = new ArrayList<>();
+        if (all != null)
+            for (RoleEntity entity : all) {
+                if (entity.checked)
+                    checked.add(entity);
+            }
+        return checked;
+    }
+
     public void insert(RoleEntity roleEntity) {
         mRepository.insert(roleEntity);
     }
@@ -46,5 +68,23 @@ public class CreateRoomViewModel extends AndroidViewModel {
 
     public void toggle(RoleEntity item) {
         mRepository.toggle(item);
+    }
+
+    public void update(List<RoleEntity> entities) {
+        mRepository.update(entities);
+    }
+
+    public int createGame() {
+        Integer totalPlayers = mTotalPlayers.getValue();
+        Integer mafiaPlayers = mMafiaPlayers.getValue();
+        if (totalPlayers != null && mafiaPlayers != null) {
+            List<RoleEntity> checkedRoles = getCheckedRoles();
+
+            GameEntity game = new GameEntity(AppConstants.MY_PLAYER_DATABASE_ID,
+                    new Date(), mafiaPlayers, totalPlayers);
+            mGameRepository.insert(game);
+            return game.uid;
+        }
+        return -1;
     }
 }

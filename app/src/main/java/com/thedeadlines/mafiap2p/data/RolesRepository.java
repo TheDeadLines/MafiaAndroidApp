@@ -54,6 +54,12 @@ public class RolesRepository {
 
     }
 
+    public void update(List<RoleEntity> entities) {
+        for (RoleEntity entity : entities) {
+            new UpdateAsyncTask(mDatabase.roleDao()).execute(entity);
+        }
+    }
+
     private boolean canUseMoreRoles(int gameId) {
         return unassignedAvailableCount(gameId) > 0;
     }
