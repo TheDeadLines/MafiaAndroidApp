@@ -6,6 +6,13 @@
     android:orientation="vertical"
     tools:context=".ui.fragments.home.HomeFragment">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/standard_margin"
+        android:text="@string/group_members"
+        android:textSize="@dimen/text_size_standard"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/host_players_list"
         android:layout_width="match_parent"

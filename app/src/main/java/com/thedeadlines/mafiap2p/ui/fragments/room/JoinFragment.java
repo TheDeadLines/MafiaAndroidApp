@@ -1,6 +1,7 @@
 package com.thedeadlines.mafiap2p.ui.fragments.room;
 
 
+import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,29 +14,42 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.thedeadlines.mafiap2p.R;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.thedeadlines.mafiap2p.common.WifiDirectManager;
 
 public class JoinFragment extends Fragment implements JoinAdapter.OnRoomListener {
 
-    private  static  final  String TAG = "JoinFragment";
+    private static final String TAG = JoinFragment.class.getSimpleName();
 
+    private PeersAdapter mPeersAdapter;
+    private WifiDirectManager mWifiDirectManager;
     private Button buttonBack;
     private RecyclerView mRoomList;
-    private  int maxPlayers = 7;
-    private  String mNumberRoom;
-    private  String mNameRoom;
-    private  int mNumberPlayer;
-
-    List<JoinItems> exampleList = new ArrayList<>();
+    private int maxPlayers = 7;
+    private String mNumberRoom;
+    private String mNameRoom;
+    private int mNumberPlayer;
 
 
     public JoinFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        mWifiDirectManager = WifiDirectManager.getInstance(getContext());
+        mWifiDirectManager.updateWifiP2pDeviceObservable(wifiP2pDevice -> mPeersAdapter.add(wifiP2pDevice));
+        mWifiDirectManager.createGroup(mWifiDirectManager.getDeviceName());
+        mPeersAdapter = getPeersAdapter(v -> {
+            final PeersAdapter.ViewHolder viewHolder =
+                    (PeersAdapter.ViewHolder) mRoomList.getChildViewHolder(v);
+            mWifiDirectManager.join(viewHolder.getWifiP2pDevice());
+        });
     }
 
     @Override
@@ -49,46 +63,33 @@ public class JoinFragment extends Fragment implements JoinAdapter.OnRoomListener
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-//        if (savedInstanceState != null) {
-//            mNumberRoom = savedInstanceState.getString("nuRoom");
-//            mNameRoom = savedInstanceState.getString("naRoom");
-//            mNumberPlayer = savedInstanceState.getInt("naRoom");
-//            setInitialRooms(mNumberRoom,mNameRoom,mNumberPlayer);
-//        }
-
-        setInitialRooms("01","Room1",7);
-        setInitialRooms("02","ANfrtid",2);
-        setInitialRooms("03","S1ft4",5);
-
 
         mRoomList = view.findViewById(R.id.rooms_list);
-        JoinAdapter adapter = new JoinAdapter(exampleList, this);
-        mRoomList.setAdapter(adapter);
-        mRoomList.setOnClickListener(new View.OnClickListener() {
+        mRoomList.setAdapter(mPeersAdapter);
+        mRoomList.setLayoutManager(new LinearLayoutManager(getContext()));
+        mWifiDirectManager.updateJoinListener(new WifiP2pManager.ActionListener() {
             @Override
-            public void onClick(View view) {
+            public void onSuccess() {
+                mWifiDirectManager.updateJoinListener(null);
+                mWifiDirectManager.stopDiscovery();
                 NavController controller = Navigation.findNavController(view);
                 controller.navigate(R.id.action_joinFragment_to_roomFragment);
             }
-        });
 
-        buttonBack = view.findViewById(R.id.buttonBack);
-        buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                NavController controller = Navigation.findNavController(view);
-                controller.navigate(R.id.action_joinFragment_to_homeFragment);
+            public void onFailure(int reason) {
+                mPeersAdapter.onFailure();
             }
         });
-    }
-
-    private  void setInitialRooms(String numberRoom, String nameRoom, int numberPlayer){
-
-        if (numberPlayer >= maxPlayers){
-            exampleList.add(new JoinItems(numberRoom,nameRoom,"players: " + numberPlayer + "(full)"));
-        } else{
-            exampleList.add(new JoinItems(numberRoom,nameRoom,"players: " + numberPlayer));
-        }
+        mWifiDirectManager.updateWifiP2pDeviceObservable(
+                wifiP2pDevice -> mPeersAdapter.add(wifiP2pDevice)
+        );
+        mWifiDirectManager.startDiscovery();
+        buttonBack = view.findViewById(R.id.buttonBack);
+        buttonBack.setOnClickListener(view12 -> {
+            NavController controller = Navigation.findNavController(view12);
+            controller.navigate(R.id.action_joinFragment_to_homeFragment);
+        });
     }
 
     @Override
@@ -102,5 +103,9 @@ public class JoinFragment extends Fragment implements JoinAdapter.OnRoomListener
         outState.putString("nuRoom", mNumberRoom);
         outState.putString("naRoom", mNameRoom);
         outState.putInt("nuPlayer", mNumberPlayer);
+    }
+
+    public PeersAdapter getPeersAdapter(@Nullable final View.OnClickListener listener) {
+        return new PeersAdapter(listener);
     }
 }

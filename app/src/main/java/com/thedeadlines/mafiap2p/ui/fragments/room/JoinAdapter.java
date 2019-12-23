@@ -58,13 +58,10 @@ public class JoinAdapter extends RecyclerView.Adapter<JoinAdapter.ExampleViewHol
             numberPlayersView = itemView.findViewById(R.id.number_players);
             this.onRoomListener = onRoomListener;
             itemView.setOnClickListener(this);
-            itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            itemView.setOnClickListener(view -> {
                 NavController controller = Navigation.findNavController(view);
                 controller.navigate(R.id.action_joinFragment_to_roomFragment);
-            }
-        });
+            });
         }
 
         @Override

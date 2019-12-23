@@ -19,7 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.thedeadlines.mafiap2p.R;
 import com.thedeadlines.mafiap2p.ui.fragments.host.hostList.HostListAdapter;
-import com.thedeadlines.mafiap2p.ui.fragments.host.hostList.HostListElement;
 import com.thedeadlines.mafiap2p.ui.fragments.host.hostList.OnItemClickListener;
 
 
@@ -70,33 +69,22 @@ public class GameHostFragment extends Fragment {
         mHostImage = view.findViewById(R.id.host_image);
 
         mFinishGameButton = view.findViewById(R.id.finish_game_button);
-        mFinishGameButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavController controller = Navigation.findNavController(view);
-                controller.navigate(R.id.action_gameHostFragment_to_homeFragment);
-            }
+        mFinishGameButton.setOnClickListener(view12 -> {
+            NavController controller = Navigation.findNavController(view12);
+            controller.navigate(R.id.action_gameHostFragment_to_homeFragment);
         });
 
         mToggleListButton = view.findViewById(R.id.toggle_list_button);
-        mToggleListButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                toggleCurrentState();
-            }
-        });
+        mToggleListButton.setOnClickListener(view1 -> toggleCurrentState());
 
 
-        OnItemClickListener clickListener = new OnItemClickListener() {
-            @Override
-            public void onItemClick(@NonNull HostListElement item) {
-                Bundle bundle = new Bundle();
-                bundle.putInt(HOST_PLAYER_LIST_NUMBER, item.getOrderNum());
-                bundle.putString(HOST_PLAYER_LIST_NAME, item.getPlayerName());
-                bundle.putString(HOST_PLAYER_LIST_ROLE, item.getPlayerRole());
+        OnItemClickListener clickListener = item -> {
+            Bundle bundle = new Bundle();
+            bundle.putInt(HOST_PLAYER_LIST_NUMBER, item.getOrderNum());
+            bundle.putString(HOST_PLAYER_LIST_NAME, item.getPlayerName());
+            bundle.putString(HOST_PLAYER_LIST_ROLE, item.getPlayerRole());
 
-                Navigation.findNavController(view).navigate(R.id.action_gameHostFragment_to_gameHostChosenPlayerFragment, bundle);
-            }
+            Navigation.findNavController(view).navigate(R.id.action_gameHostFragment_to_gameHostChosenPlayerFragment, bundle);
         };
 
         mRecyclerView = view.findViewById(R.id.player_list);
