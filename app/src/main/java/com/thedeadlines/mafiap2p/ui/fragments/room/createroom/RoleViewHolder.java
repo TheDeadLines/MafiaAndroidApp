@@ -22,6 +22,7 @@ public class RoleViewHolder extends RecyclerView.ViewHolder {
 
     public void bind(@NonNull final RoleEntity roleEntity, @NonNull final OnItemClickListener<RoleEntity> clickListener) {
         getSwitch().setText(roleEntity.name);
+        getSwitch().setChecked(roleEntity.checked);
         getSwitch().setOnClickListener(view -> clickListener.onItemClick(roleEntity));
     }
 

@@ -29,4 +29,5 @@
     <string name="players_stub">players: 3</string>
     <string name="room_stub">Room 1</string>
     <string name="number_stub">01</string>
+    <string name="wrong_players">Wrong players number!</string>
 </resources>

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.thedeadlines.mafiap2p.R;
 import com.thedeadlines.mafiap2p.data.db.role.RoleEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RolesAdapter extends RecyclerView.Adapter<RoleViewHolder> {
@@ -45,5 +46,25 @@ public class RolesAdapter extends RecyclerView.Adapter<RoleViewHolder> {
     public void setList(List<RoleEntity> mList) {
         this.mList = mList;
         notifyDataSetChanged();
+    }
+
+    public int getCheckedCount() {
+        int c = 0;
+        for (RoleEntity entity : mList) {
+            if (entity.checked) {
+                c++;
+            }
+        }
+        return c;
+    }
+
+    public List<RoleEntity> getCheckedList() {
+        List<RoleEntity> checked = new ArrayList<>();
+        for (RoleEntity entity : mList) {
+            if (entity.checked) {
+                checked.add(entity);
+            }
+        }
+        return checked;
     }
 }

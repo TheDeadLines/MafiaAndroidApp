@@ -12,13 +12,17 @@ public class RoleEntity {
 
     public String name;
 
+    public boolean checked;
+
     public RoleEntity(int uid, String name) {
         this.uid = uid;
         this.name = name;
+        this.checked = false;
     }
 
     @Ignore
     public RoleEntity(String name) {
         this.name = name;
+        this.checked = false;
     }
 }

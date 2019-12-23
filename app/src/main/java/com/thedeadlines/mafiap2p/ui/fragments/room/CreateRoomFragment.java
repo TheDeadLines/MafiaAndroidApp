@@ -8,9 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.NumberPicker;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
@@ -20,25 +22,32 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.thedeadlines.mafiap2p.R;
 import com.thedeadlines.mafiap2p.data.db.role.RoleEntity;
+import com.thedeadlines.mafiap2p.databinding.FragmentCreateRoomBinding;
 import com.thedeadlines.mafiap2p.game.GameConstants;
 import com.thedeadlines.mafiap2p.ui.fragments.room.createroom.OnItemClickListener;
 import com.thedeadlines.mafiap2p.ui.fragments.room.createroom.RolesAdapter;
-import com.thedeadlines.mafiap2p.viewmodel.RolesViewModel;
+import com.thedeadlines.mafiap2p.viewmodel.CreateRoomViewModel;
+
+import java.util.List;
 
 public class CreateRoomFragment extends Fragment {
     public static final String TAG = CreateRoomFragment.class.getSimpleName();
-    private static final String ROLES_LIST_STATE = "roles-list-state";
 
+    public static final String MAFIA_COUNT_KEY = "mafia-count";
+    public static final String PLAYER_COUNT_KEY = "player-count";
+
+    private static final String ROLES_LIST_STATE = "roles-list-state";
     private Button mCreateRoomButton;
     private Button mBackButton;
     private RecyclerView mRolesListView;
     private NumberPicker mPlayersNumberPicker;
     private NumberPicker mMafiaNumberPicker;
 
-    private RolesViewModel mRolesViewModel;
+    private CreateRoomViewModel mCreateRoomViewModel;
     private RolesAdapter mRolesAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private Parcelable mListState;
+
 
     public CreateRoomFragment() {
         // Required empty public constructor
@@ -47,20 +56,25 @@ public class CreateRoomFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mRolesViewModel = ViewModelProviders.of(this).get(RolesViewModel.class);
-        mRolesViewModel.getRoles().observe(this, roleEntities -> {
+        mCreateRoomViewModel = ViewModelProviders.of(this).get(CreateRoomViewModel.class);
+        mCreateRoomViewModel.getRoles().observe(this, roleEntities -> {
             if (roleEntities != null) {
                 mRolesAdapter.setList(roleEntities);
             }
         });
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        FragmentCreateRoomBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_create_room, container, false);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_create_room, container, false);
+        return binding.getRoot();
+    }
+
+
+    private int calculateMaxMafiaByPlayers(int playersCount) {
+        return playersCount / 3;
     }
 
     @Override
@@ -72,10 +86,19 @@ public class CreateRoomFragment extends Fragment {
         mRolesListView = view.findViewById(R.id.roles_switches);
         mPlayersNumberPicker = view.findViewById(R.id.player_number_picker);
         mMafiaNumberPicker = view.findViewById(R.id.mafia_number_picker);
+        List<RoleEntity> roleEntityList = mCreateRoomViewModel.getRoles().getValue();
+
+        mPlayersNumberPicker.setOnValueChangedListener((picker, oldVal, newVal) -> {
+            int mafiaMaxCount = calculateMaxMafiaByPlayers(newVal);
+            if (mafiaMaxCount < mMafiaNumberPicker.getValue()) {
+                mMafiaNumberPicker.setValue(mafiaMaxCount);
+            }
+            mMafiaNumberPicker.setMaxValue(mafiaMaxCount);
+        });
+
 
         OnItemClickListener<RoleEntity> clickListener = item -> {
-            // TODO: process click on switch toggle
-//            Toast.makeText(getContext(), "Clicked: " + item.name, Toast.LENGTH_SHORT).show();
+            mCreateRoomViewModel.toggle(item);
         };
         mLayoutManager = new LinearLayoutManager(getContext());
         if (savedInstanceState != null) {
@@ -83,15 +106,23 @@ public class CreateRoomFragment extends Fragment {
             mLayoutManager.onRestoreInstanceState(mListState);
         }
 
-        mRolesAdapter = new RolesAdapter(mRolesViewModel.getRoles().getValue(), clickListener);
+        mRolesAdapter = new RolesAdapter(roleEntityList, clickListener);
 
         mRolesListView.setLayoutManager(mLayoutManager);
         mRolesListView.setAdapter(mRolesAdapter);
 
         mCreateRoomButton.setOnClickListener(view1 -> {
-            //TODO: save game settings
-            NavController controller = Navigation.findNavController(view1);
-            controller.navigate(R.id.action_createRoomFragment_to_roomFragment);
+            if (simpleValidation()) {
+                int mafiaCount = mMafiaNumberPicker.getValue();
+                int playerCount = mPlayersNumberPicker.getValue();
+                Bundle bundle = new Bundle();
+                bundle.putInt(MAFIA_COUNT_KEY, mafiaCount);
+                bundle.putInt(PLAYER_COUNT_KEY, playerCount);
+                NavController controller = Navigation.findNavController(view1);
+                controller.navigate(R.id.action_createRoomFragment_to_roomFragment, bundle);
+            } else {
+                Toast.makeText(getContext(), R.string.wrong_players, Toast.LENGTH_SHORT).show();
+            }
         });
 
         mBackButton.setOnClickListener(view12 -> {
@@ -113,6 +144,14 @@ public class CreateRoomFragment extends Fragment {
         mMafiaNumberPicker.setMaxValue(GameConstants.MAFIA_MAX_SIZE);
         mMafiaNumberPicker.setMinValue(GameConstants.MAFIA_MIN_SIZE);
         mMafiaNumberPicker.setValue(GameConstants.DEFAULT_MAFIA_COUNT);
+    }
+
+
+    private boolean simpleValidation() {
+        int totalPlayers = mPlayersNumberPicker.getValue();
+        int mafiaPlayers = mMafiaNumberPicker.getValue();
+        int checked = mRolesAdapter.getCheckedCount();
+        return totalPlayers - mafiaPlayers - checked >= 0;
     }
 
     @Override

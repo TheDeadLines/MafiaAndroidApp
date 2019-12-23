@@ -13,17 +13,26 @@ import com.thedeadlines.mafiap2p.data.db.role.RoleEntity;
 
 import java.util.List;
 
-public class RolesViewModel extends AndroidViewModel {
-    private final MediatorLiveData<List<RoleEntity>> mObservableRoles;
-    private final RolesRepository mRepository;
+public class CreateRoomViewModel extends AndroidViewModel {
+    private LiveData<Integer> mTotalPlayers;
+    private LiveData<Integer> mMafiaPlayers;
+    private MediatorLiveData<List<RoleEntity>> mObservableRoles;
+    private RolesRepository mRepository;
 
-    public RolesViewModel(@NonNull Application application) {
+    public CreateRoomViewModel(@NonNull Application application) {
         super(application);
         mObservableRoles = new MediatorLiveData<>();
         mRepository = ((App) application).getRolesRepository();
         LiveData<List<RoleEntity>> roles = mRepository.getRoles();
         mObservableRoles.addSource(roles, mObservableRoles::setValue);
+    }
 
+    public LiveData<Integer> getTotalPlayers() {
+        return mTotalPlayers;
+    }
+
+    public LiveData<Integer> getMafiaPlayers() {
+        return mMafiaPlayers;
     }
 
     public LiveData<List<RoleEntity>> getRoles() {

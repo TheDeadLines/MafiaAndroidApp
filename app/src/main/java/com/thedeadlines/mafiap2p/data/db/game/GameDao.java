@@ -12,4 +12,7 @@ import java.util.List;
 public interface GameDao extends BaseDao<GameEntity> {
     @Query("SELECT * FROM games")
     LiveData<List<GameEntity>> getAll();
+
+    @Query("SELECT * FROM games WHERE uid=:id LIMIT 1")
+    LiveData<GameEntity> getById(int id);
 }

@@ -19,7 +19,13 @@ public class GameEntity {
     @ColumnInfo(name = "host_id")
     public int hostId;
 
-    public GameEntity(int uid, int hostId, Date mDate) {
+    /* total mafia count */
+    public int mafiaCount;
+
+    /* total players count */
+    public int playersCount;
+
+    public GameEntity(int uid, int hostId, Date mDate, int mafiaCount, int playersCount) {
         this.uid = uid;
         this.hostId = hostId;
         this.mDate = mDate;

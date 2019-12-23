@@ -31,7 +31,6 @@ public class GameHostFragment extends Fragment {
     public static final String HOST_PLAYER_LIST_ROLE = "hostPlayerListRole";
 
 
-    // TODO: 14.11.19 put in constants
     private static final int SHOWN_LIST_STATE = 0;
     private static final int HIDDEN_LIST_STATE = 1;
 

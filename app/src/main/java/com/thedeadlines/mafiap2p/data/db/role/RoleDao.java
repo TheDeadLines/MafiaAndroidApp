@@ -12,4 +12,7 @@ import java.util.List;
 public interface RoleDao extends BaseDao<RoleEntity> {
     @Query("SELECT * FROM roles")
     LiveData<List<RoleEntity>> getAll();
+
+    @Query("SELECT count(*) FROM roles WHERE checked=1")
+    LiveData<Integer> getCheckedRolesForGame();
 }

@@ -7,7 +7,7 @@ import com.thedeadlines.mafiap2p.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RoleGenerator {
+public class  RoleGenerator {
     public static List<RoleEntity> generateRoles(Context c) {
         List<RoleEntity> roleEntities = new ArrayList<>();
         roleEntities.add(new RoleEntity(c.getString(R.string.don)));

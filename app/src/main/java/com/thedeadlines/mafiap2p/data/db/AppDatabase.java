@@ -22,8 +22,11 @@ import com.thedeadlines.mafiap2p.data.db.player.PlayerEntity;
 import com.thedeadlines.mafiap2p.data.db.role.RoleDao;
 import com.thedeadlines.mafiap2p.data.db.role.RoleEntity;
 import com.thedeadlines.mafiap2p.data.db.role.RoleGenerator;
+import com.thedeadlines.mafiap2p.game.GameConstants;
 
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.Executors;
 
 @Database(entities = {GameEntity.class, PlayerEntity.class, GamePlayerJoinEntity.class,
@@ -63,7 +66,21 @@ public abstract class AppDatabase extends RoomDatabase {
                         AppDatabase database = getInstance(appContext);
                         Executors.newSingleThreadScheduledExecutor().execute(() -> {
                             List<RoleEntity> roleEntityList = RoleGenerator.generateRoles(appContext);
+                            UUID deviceUUID = UUID.randomUUID();
+                            appContext
+                                    .getSharedPreferences(AppConstants.APP_PREFERENCES, Context.MODE_PRIVATE)
+                                    .edit()
+                                    .putString(AppConstants.DEVICE_ID_PREFERENCE_KEY, deviceUUID.toString());
+                            PlayerEntity devicePlayer = new PlayerEntity(AppConstants.MY_PLAYER_DATABASE_ID, deviceUUID.toString());
+                            GameEntity defaultGame = new GameEntity(AppConstants.DEFAULT_GAME_ID,
+                                    AppConstants.MY_PLAYER_DATABASE_ID,
+                                    new Date(),
+                                    GameConstants.DEFAULT_MAFIA_COUNT,
+                                    GameConstants.DEFAULT_PLAYERS_COUNT);
+                            getInstance(appContext).putDefaultGame(defaultGame);
+                            getInstance(appContext).putSelfPlayer(devicePlayer);
                             getInstance(appContext).populateRoles(roleEntityList);
+
                         });
                         database.setDatabaseCreated();
                     }
@@ -89,4 +106,11 @@ public abstract class AppDatabase extends RoomDatabase {
         sInstance.runInTransaction(() -> sInstance.roleDao().insert(roles));
     }
 
+    private void putSelfPlayer(final PlayerEntity entity) {
+        sInstance.runInTransaction(() -> sInstance.playerDao().insert(entity));
+    }
+
+    private void putDefaultGame(final GameEntity entity) {
+        sInstance.runInTransaction(() -> sInstance.gameDao().insert(entity));
+    }
 }

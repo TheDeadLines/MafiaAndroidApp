@@ -1,113 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ui.fragments.room.CreateRoomFragment">
 
-    <LinearLayout
-        android:id="@+id/create_room_header"
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="createRoomViewModel"
+            type="com.thedeadlines.mafiap2p.viewmodel.CreateRoomViewModel" />
+    </data>
+
+    <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <Button
-            android:id="@+id/create_room_back_button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@null"
-            android:text="@string/button_back" />
-
-        <TextView
-            android:id="@+id/create_room_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/create" />
-
-    </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/create_room_header">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.fragments.room.CreateRoomFragment">
 
         <LinearLayout
-            android:id="@+id/container_number_pickers"
+            android:id="@+id/create_room_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <LinearLayout
-                android:id="@+id/container_player_number"
+            <Button
+                android:id="@+id/create_room_back_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:background="@null"
+                android:text="@string/button_back" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text="@string/player_counter" />
-
-                <NumberPicker
-                    android:id="@+id/player_number_picker"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:id="@+id/container_mafia_number"
+            <TextView
+                android:id="@+id/create_room_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text="@string/mafia_counter" />
-
-                <NumberPicker
-                    android:id="@+id/mafia_number_picker"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-
+                android:gravity="center"
+                android:text="@string/create" />
 
         </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/roles_switches"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/container_number_pickers" />
+            android:layout_height="wrap_content"
+            android:layout_below="@id/create_room_header">
 
-    </RelativeLayout>
+            <LinearLayout
+                android:id="@+id/container_number_pickers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/container_player_number"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="@string/player_counter" />
+
+                    <NumberPicker
+                        android:id="@+id/player_number_picker"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:value="@{createRoomViewModel.getTotalPlayers()}" />
+                </LinearLayout>
 
 
-    <LinearLayout
-        android:id="@+id/create_button_container"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="48dp"
-        android:gravity="center">
+                <LinearLayout
+                    android:id="@+id/container_mafia_number"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-        <Button
-            android:id="@+id/start_room_button"
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="@string/mafia_counter" />
+
+                    <NumberPicker
+                        android:id="@+id/mafia_number_picker"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:value="@{createRoomViewModel.getMafiaPlayers()}" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/roles_switches"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/container_number_pickers" />
+
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:id="@+id/create_button_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/create" />
-    </LinearLayout>
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="48dp"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/start_room_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/create" />
+        </LinearLayout>
 
 
-</RelativeLayout>
+    </RelativeLayout>
+</layout>
