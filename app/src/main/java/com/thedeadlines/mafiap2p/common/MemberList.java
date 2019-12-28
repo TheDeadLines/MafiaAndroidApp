@@ -3,7 +3,7 @@ package com.thedeadlines.mafiap2p.common;
 import java.util.ArrayList;
 import java.util.List;
 
-final class MemberList {
+public final class MemberList {
 
     private final List<Member> mMembers;
     private static MemberList ourInstance;
@@ -36,6 +36,10 @@ final class MemberList {
             }
         }
         return null;
+    }
+
+    public List<Member> getMembersList() {
+        return mMembers;
     }
 
     void add(final Member member) {

@@ -17,6 +17,7 @@ import com.thedeadlines.mafiap2p.data.db.game.GameDao;
 import com.thedeadlines.mafiap2p.data.db.game.GameEntity;
 import com.thedeadlines.mafiap2p.data.db.gameplayerjoin.GamePlayerJoinDao;
 import com.thedeadlines.mafiap2p.data.db.gameplayerjoin.GamePlayerJoinEntity;
+import com.thedeadlines.mafiap2p.data.db.gamerolejoin.GameRoleJoinDao;
 import com.thedeadlines.mafiap2p.data.db.player.PlayerDao;
 import com.thedeadlines.mafiap2p.data.db.player.PlayerEntity;
 import com.thedeadlines.mafiap2p.data.db.role.RoleDao;
@@ -40,6 +41,8 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract PlayerDao playerDao();
 
     public abstract GamePlayerJoinDao gamePlayerJoinDao();
+
+    public abstract GameRoleJoinDao gameRoleJoinDao();
 
     public abstract RoleDao roleDao();
 
