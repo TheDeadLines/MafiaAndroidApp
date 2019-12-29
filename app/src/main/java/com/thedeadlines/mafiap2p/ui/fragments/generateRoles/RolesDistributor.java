@@ -35,6 +35,7 @@ public class RolesDistributor {
     }
 
     public void setRolesList(List<RoleEntity> roles) {
+        this.rolesList.clear();
         this.rolesList.addAll(0, roles);
     }
 

@@ -18,6 +18,7 @@ import com.thedeadlines.mafiap2p.data.db.game.GameEntity;
 import com.thedeadlines.mafiap2p.data.db.gameplayerjoin.GamePlayerJoinDao;
 import com.thedeadlines.mafiap2p.data.db.gameplayerjoin.GamePlayerJoinEntity;
 import com.thedeadlines.mafiap2p.data.db.gamerolejoin.GameRoleJoinDao;
+import com.thedeadlines.mafiap2p.data.db.gamerolejoin.GameRoleJoinEntity;
 import com.thedeadlines.mafiap2p.data.db.player.PlayerDao;
 import com.thedeadlines.mafiap2p.data.db.player.PlayerEntity;
 import com.thedeadlines.mafiap2p.data.db.role.RoleDao;
@@ -31,7 +32,7 @@ import java.util.UUID;
 import java.util.concurrent.Executors;
 
 @Database(entities = {GameEntity.class, PlayerEntity.class, GamePlayerJoinEntity.class,
-        RoleEntity.class}, version = 1)
+        RoleEntity.class, GameRoleJoinEntity.class}, version = 1)
 @TypeConverters({DateConverter.class})
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase sInstance;
