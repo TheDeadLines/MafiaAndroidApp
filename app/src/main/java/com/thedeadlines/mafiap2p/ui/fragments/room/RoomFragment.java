@@ -10,19 +10,31 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.thedeadlines.mafiap2p.AppConstants;
 import com.thedeadlines.mafiap2p.R;
+import com.thedeadlines.mafiap2p.common.Member;
 import com.thedeadlines.mafiap2p.common.WifiDirectManager;
+import com.thedeadlines.mafiap2p.data.db.role.RoleEntity;
+import com.thedeadlines.mafiap2p.ui.fragments.generateRoles.RolesDistributor;
+import com.thedeadlines.mafiap2p.viewmodel.GameRoleJoinViewModel;
+
+import java.util.HashMap;
+import java.util.List;
 
 public class RoomFragment extends Fragment {
     private PeersAdapter mPeersAdapter;
     private Button mStartButton;
     private RecyclerView mConnectionList;
     private WifiDirectManager mWifiDirectManager;
+
+    private GameRoleJoinViewModel mGameRoleJoinViewModel;
+    private RolesDistributor mRolesDistributor;
 
     public RoomFragment() {
         // Required empty public constructor
@@ -32,8 +44,21 @@ public class RoomFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mGameRoleJoinViewModel = ViewModelProviders.of(this).get(GameRoleJoinViewModel.class);
+        mRolesDistributor = new RolesDistributor(mGameRoleJoinViewModel.getRolesByGameId(AppConstants.MY_PLAYER_DATABASE_ID));
+        mGameRoleJoinViewModel.getRoles().observe(this, roleEntities -> {
+            if (roleEntities != null) {
+                mRolesDistributor.setRolesList(roleEntities);
+            }
+        });
+
+
         mWifiDirectManager = WifiDirectManager.getInstance(getContext());
-        mWifiDirectManager.updateWifiP2pDeviceObservable(wifiP2pDevice -> mPeersAdapter.add(wifiP2pDevice));
+        mWifiDirectManager.updateWifiP2pDeviceObservable(wifiP2pDevice -> {
+            mPeersAdapter.add(wifiP2pDevice);
+
+            mRolesDistributor.setMembersList();
+        });
         mWifiDirectManager.createGroup(mWifiDirectManager.getDeviceName());
         mPeersAdapter = getPeersAdapter(null);
     }
@@ -56,6 +81,16 @@ public class RoomFragment extends Fragment {
         mStartButton.setOnClickListener(view1 -> {
             mWifiDirectManager.formGroup();
             mWifiDirectManager.updateJoinListener(null);
+
+
+            List<RoleEntity> checked = mGameRoleJoinViewModel.getCheckedRoles();
+            Integer mafias = mGameRoleJoinViewModel.getMafiaPlayers().getValue();
+            Integer players = mGameRoleJoinViewModel.getTotalPlayers().getValue();
+
+            mRolesDistributor.setAllRoles(checked, mafias, players);
+            HashMap<Member, RoleEntity> membersRoles = mRolesDistributor.getMembersRoles();
+
+
             NavController controller = Navigation.findNavController(view1);
             controller.navigate(R.id.action_roomFragment_to_gameHostFragment);
         });

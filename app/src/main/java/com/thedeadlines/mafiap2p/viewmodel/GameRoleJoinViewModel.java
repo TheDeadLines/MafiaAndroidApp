@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
 
 import com.thedeadlines.mafiap2p.App;
+import com.thedeadlines.mafiap2p.data.GameRepository;
 import com.thedeadlines.mafiap2p.data.RolesRepository;
 import com.thedeadlines.mafiap2p.data.db.role.RoleEntity;
 
@@ -19,6 +20,7 @@ public class GameRoleJoinViewModel extends AndroidViewModel {
     private MediatorLiveData<Integer> mMafiaPlayers;
     private MediatorLiveData<List<RoleEntity>> mObservableRoles;
     private RolesRepository mRepository;
+    private GameRepository mGameRepository;
 
     public GameRoleJoinViewModel(@NonNull Application application) {
         super(application);
@@ -27,16 +29,17 @@ public class GameRoleJoinViewModel extends AndroidViewModel {
         mTotalPlayers = new MediatorLiveData<>();
 
         mRepository = ((App) application).getRolesRepository();
+        mGameRepository = ((App) application).getGameRepository();
         LiveData<List<RoleEntity>> roles = mRepository.getRoles();
         mObservableRoles.addSource(roles, mObservableRoles::setValue);
 
     }
 
-    public LiveData<Integer> getPlayersCount() {
+    public LiveData<Integer> getTotalPlayers() {
         return mTotalPlayers;
     }
 
-    public LiveData<Integer> getMafiasCount() {
+    public LiveData<Integer> getMafiaPlayers() {
         return mMafiaPlayers;
     }
 
@@ -57,7 +60,7 @@ public class GameRoleJoinViewModel extends AndroidViewModel {
 
     public List<RoleEntity> getRolesByGameId(int gameId) {
 //        TODO
-//        getRolesForGame()
+//        getGameRoles()
 
         return new ArrayList<>();
     }

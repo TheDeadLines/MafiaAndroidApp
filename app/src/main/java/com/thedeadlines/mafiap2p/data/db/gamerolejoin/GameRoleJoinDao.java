@@ -12,7 +12,7 @@ import java.util.List;
 
 @Dao
 public interface GameRoleJoinDao extends BaseDao<GameRoleJoinEntity> {
-    @Query("SELECT * FROM roles INNER JOIN game_player_join ON" +
+    @Query("SELECT * FROM roles INNER JOIN game_role_join ON" +
             " roles.uid = game_role_join.roleId WHERE game_role_join.gameId = :gameId")
     LiveData<List<RoleEntity>> getRolesForGame(final int gameId);
 }

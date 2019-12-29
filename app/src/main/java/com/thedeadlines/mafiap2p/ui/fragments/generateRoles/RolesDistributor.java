@@ -10,38 +10,45 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-public class RolesGenerator {
-    private GameRoleJoinViewModel mGameRoleJoinViewModel;
-
-    private final MemberList gMemberList;
-    private int gameId;
-
+public class RolesDistributor {
     private List<RoleEntity> rolesList;
     private List<Member> membersList;
 
     private HashMap<Member, RoleEntity> membersRoles;
 
-    public RolesGenerator(GameRoleJoinViewModel mGameRoleJoinViewModel, int gameId) {
-        gMemberList = MemberList.getInstance();
+    public RolesDistributor(List<RoleEntity> roles) {
 
-        this.mGameRoleJoinViewModel = mGameRoleJoinViewModel;
-        this.gameId = gameId;
 
         this.rolesList = new ArrayList<>();
         this.membersList = new ArrayList<>();
 
-        List<RoleEntity> roles = mGameRoleJoinViewModel.getRolesByGameId(gameId);
         this.rolesList.addAll(roles);
 
-        List<Member> members = gMemberList.getMembersList();
+        List<Member> members = MemberList.getInstance().getMembersList();
         this.membersList.addAll(members);
 
         membersRoles = new HashMap<>();
     }
 
-    private void setCheckedRoles() {
-        List<RoleEntity> checked = mGameRoleJoinViewModel.getCheckedRoles();
+    public HashMap<Member, RoleEntity> getMembersRoles() {
+        return membersRoles;
+    }
 
+    public void setRolesList(List<RoleEntity> roles) {
+        this.rolesList.addAll(0, roles);
+    }
+
+    public void setMembersList() {
+        membersList = MemberList.getInstance().getMembersList();
+    }
+
+    public void setAllRoles(List<RoleEntity> checked, Integer mafias, Integer players) {
+        setCheckedRoles(checked);
+        setMafiaRoles(mafias);
+        setPlayerRoles(players);
+    }
+
+    private void setCheckedRoles(List<RoleEntity> checked) {
         for (RoleEntity checkedRole : checked) {
             int randomMemberIndex = getRandomInt(0, membersList.size());
 
@@ -53,9 +60,7 @@ public class RolesGenerator {
         }
     }
 
-    private void setMafiaRoles() {
-        Integer mafias = mGameRoleJoinViewModel.getMafiasCount().getValue();
-
+    private void setMafiaRoles(Integer mafias) {
         if (mafias != null) {
             RoleEntity mafiaRole = new RoleEntity(0, "mafia");
 
@@ -76,9 +81,7 @@ public class RolesGenerator {
         }
     }
 
-    private void setPlayerRoles() {
-        Integer players = mGameRoleJoinViewModel.getPlayersCount().getValue();
-
+    private void setPlayerRoles(Integer players) {
         if (players != null) {
             RoleEntity playerRole = new RoleEntity(1, "player");
 
