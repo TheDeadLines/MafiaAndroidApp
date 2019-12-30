@@ -3,11 +3,13 @@ package com.thedeadlines.mafiap2p.ui.fragments.room;
 
 import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Handler;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,11 +21,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.thedeadlines.mafiap2p.R;
 import com.thedeadlines.mafiap2p.common.WifiDirectManager;
+import com.thedeadlines.mafiap2p.game.protocol.AccessTypes;
 
-public class JoinFragment extends Fragment implements JoinAdapter.OnRoomListener {
+public class JoinFragment extends Fragment implements Handler.Callback {
 
     private static final String TAG = JoinFragment.class.getSimpleName();
-
+    private NavController mNavController;
     private PeersAdapter mPeersAdapter;
     private WifiDirectManager mWifiDirectManager;
     private Button buttonBack;
@@ -63,7 +66,7 @@ public class JoinFragment extends Fragment implements JoinAdapter.OnRoomListener
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
+        mNavController = Navigation.findNavController(view);
         mRoomList = view.findViewById(R.id.rooms_list);
         mRoomList.setAdapter(mPeersAdapter);
         mRoomList.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -72,8 +75,6 @@ public class JoinFragment extends Fragment implements JoinAdapter.OnRoomListener
             public void onSuccess() {
                 mWifiDirectManager.updateJoinListener(null);
                 mWifiDirectManager.stopDiscovery();
-                NavController controller = Navigation.findNavController(view);
-                controller.navigate(R.id.action_joinFragment_to_roomFragment);
             }
 
             @Override
@@ -87,14 +88,24 @@ public class JoinFragment extends Fragment implements JoinAdapter.OnRoomListener
         mWifiDirectManager.startDiscovery();
         buttonBack = view.findViewById(R.id.buttonBack);
         buttonBack.setOnClickListener(view12 -> {
+            mWifiDirectManager.stopDiscovery();
             NavController controller = Navigation.findNavController(view12);
             controller.navigate(R.id.action_joinFragment_to_homeFragment);
         });
+
     }
 
     @Override
-    public void onRoomClick(int position) {
-        Log.i(TAG, "clicked: " + position);
+    public void onResume() {
+        super.onResume();
+        getActivity().registerReceiver(mWifiDirectManager.getWifiDirectBroadcastReceiver(),
+                mWifiDirectManager.getIntentFilter());
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        getActivity().unregisterReceiver(mWifiDirectManager.getWifiDirectBroadcastReceiver());
     }
 
     @Override
@@ -107,5 +118,17 @@ public class JoinFragment extends Fragment implements JoinAdapter.OnRoomListener
 
     public PeersAdapter getPeersAdapter(@Nullable final View.OnClickListener listener) {
         return new PeersAdapter(listener);
+    }
+
+    @Override
+    public boolean handleMessage(@NonNull Message msg) {
+        switch (msg.what) {
+            case AccessTypes
+                    .START_GAME:
+                Toast.makeText(getContext(), "Received start game message", Toast.LENGTH_SHORT).show();
+                mNavController.navigate(R.id.action_joinFragment_to_gamePlayerFragment);
+                break;
+        }
+        return false;
     }
 }

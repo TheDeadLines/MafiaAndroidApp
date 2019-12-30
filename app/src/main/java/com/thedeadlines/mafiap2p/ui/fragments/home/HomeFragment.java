@@ -56,5 +56,6 @@ public class HomeFragment extends Fragment {
             NavController controller = Navigation.findNavController(view13);
             controller.navigate(R.id.action_homeFragment_to_settingsFragment);
         });
+
     }
 }

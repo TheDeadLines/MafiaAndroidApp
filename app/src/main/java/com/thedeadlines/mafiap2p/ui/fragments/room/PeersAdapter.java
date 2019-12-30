@@ -2,11 +2,13 @@ package com.thedeadlines.mafiap2p.ui.fragments.room;
 
 import android.content.Context;
 import android.net.wifi.p2p.WifiP2pDevice;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 public class PeersAdapter extends RecyclerView.Adapter<PeersAdapter.ViewHolder> {
+    private static final String TAG = PeersAdapter.class.getSimpleName();
     private PeersAdapter.ViewHolder mConnectingViewHolder;
     private final List<WifiP2pDevice> mDevices;
     private final View.OnClickListener mListener;
@@ -41,9 +44,11 @@ public class PeersAdapter extends RecyclerView.Adapter<PeersAdapter.ViewHolder> 
     }
 
     public void add(final WifiP2pDevice device) {
+        Log.i(TAG, "Trying to add device " + device);
         if ((device.status == WifiP2pDevice.AVAILABLE || device.status == WifiP2pDevice.CONNECTED)
                 && !contains(device)) {
             mDevices.add(device);
+            Log.i(TAG, "Can see new device " + device.deviceName + " addr " + device.deviceAddress);
             notifyDataSetChanged();
         }
     }
@@ -115,6 +120,7 @@ public class PeersAdapter extends RecyclerView.Adapter<PeersAdapter.ViewHolder> 
 
     }
 
+    @NonNull
     @Override
     public PeersAdapter.ViewHolder onCreateViewHolder(final ViewGroup parent,
                                                       final int viewType) {

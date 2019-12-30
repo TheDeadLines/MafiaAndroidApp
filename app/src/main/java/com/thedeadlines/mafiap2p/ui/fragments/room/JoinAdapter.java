@@ -6,8 +6,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.thedeadlines.mafiap2p.R;
@@ -58,10 +56,6 @@ public class JoinAdapter extends RecyclerView.Adapter<JoinAdapter.ExampleViewHol
             numberPlayersView = itemView.findViewById(R.id.number_players);
             this.onRoomListener = onRoomListener;
             itemView.setOnClickListener(this);
-            itemView.setOnClickListener(view -> {
-                NavController controller = Navigation.findNavController(view);
-                controller.navigate(R.id.action_joinFragment_to_roomFragment);
-            });
         }
 
         @Override

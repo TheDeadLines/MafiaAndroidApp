@@ -19,8 +19,10 @@ import com.thedeadlines.mafiap2p.R;
 import com.thedeadlines.mafiap2p.common.WifiDirectManager;
 
 public class RoomFragment extends Fragment {
+    private static final String TAG = RoomFragment.class.getSimpleName();
     private PeersAdapter mPeersAdapter;
     private Button mStartButton;
+    private Button mCancelButton;
     private RecyclerView mConnectionList;
     private WifiDirectManager mWifiDirectManager;
 
@@ -31,11 +33,14 @@ public class RoomFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         mWifiDirectManager = WifiDirectManager.getInstance(getContext());
+        mPeersAdapter = getPeersAdapter(v -> {
+            final PeersAdapter.ViewHolder viewHolder =
+                    (PeersAdapter.ViewHolder) mConnectionList.getChildViewHolder(v);
+            mWifiDirectManager.invite(viewHolder.getWifiP2pDevice());
+        });
         mWifiDirectManager.updateWifiP2pDeviceObservable(wifiP2pDevice -> mPeersAdapter.add(wifiP2pDevice));
         mWifiDirectManager.createGroup(mWifiDirectManager.getDeviceName());
-        mPeersAdapter = getPeersAdapter(null);
     }
 
     @Override
@@ -48,22 +53,42 @@ public class RoomFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         mConnectionList = view.findViewById(R.id.host_players_list);
-        mConnectionList.setLayoutManager(new LinearLayoutManager(getContext()));
         mConnectionList.setAdapter(mPeersAdapter);
+        mConnectionList.setLayoutManager(new LinearLayoutManager(getContext()));
         mStartButton = view.findViewById(R.id.start_game_button);
         mStartButton.setOnClickListener(view1 -> {
             mWifiDirectManager.formGroup();
             mWifiDirectManager.updateJoinListener(null);
             NavController controller = Navigation.findNavController(view1);
             controller.navigate(R.id.action_roomFragment_to_gameHostFragment);
+            mWifiDirectManager.stopDiscovery();
         });
-
+        mCancelButton = view.findViewById(R.id.cancel_game_button);
+        mCancelButton.setOnClickListener(v -> {
+            mWifiDirectManager.formGroup();
+            NavController controller = Navigation.findNavController(v);
+            controller.navigate(R.id.action_roomFragment_to_homeFragment);
+        });
+        mWifiDirectManager.startDiscovery();
     }
 
     public PeersAdapter getPeersAdapter(@Nullable final View.OnClickListener listener) {
         return new PeersAdapter(listener);
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getContext().registerReceiver(mWifiDirectManager.getWifiDirectBroadcastReceiver(),
+                mWifiDirectManager.getIntentFilter());
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        getContext().unregisterReceiver(mWifiDirectManager.getWifiDirectBroadcastReceiver());
+    }
+
 
 }

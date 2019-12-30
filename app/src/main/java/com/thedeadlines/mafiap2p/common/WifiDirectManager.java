@@ -14,13 +14,20 @@ import android.net.wifi.p2p.nsd.WifiP2pDnsSdServiceInfo;
 import android.net.wifi.p2p.nsd.WifiP2pDnsSdServiceRequest;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
+import static android.net.wifi.p2p.WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION;
+import static android.net.wifi.p2p.WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION;
+import static android.net.wifi.p2p.WifiP2pManager.WIFI_P2P_STATE_CHANGED_ACTION;
+import static android.net.wifi.p2p.WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION;
 import static com.thedeadlines.mafiap2p.common.Constants.CHAT_NEEDLE;
 import static com.thedeadlines.mafiap2p.common.Constants.PEER;
 
@@ -38,8 +45,9 @@ WifiDirectManager {
     private final WifiDirectBroadcastReceiver mWifiDirectBroadcastReceiver;
     private final WifiP2pManager mManager;
     private final int MAX_NET_ID = 32;
-    private final int PERIOD = 5000;
+    private final int PERIOD = 1000;
     private Status mStatus;
+    private List<WifiP2pDevice> prs = new ArrayList<>();
 
     private final String MAC_ADDRESS;
     private WifiP2pDnsSdServiceRequest mServiceRequest;
@@ -51,10 +59,32 @@ WifiDirectManager {
     private final Handler mServiceDiscoveringHandler;
     private final Runnable mServiceDiscoveringRunnable = this::startSearching;
     private final Handler mServiceBroadcastingHandler;
+    private WifiP2pManager.PeerListListener peerListListener = peers -> {
+        prs.clear();
+        prs.addAll(peers.getDeviceList());
+        if (prs.size() == 0) {
+            Log.d(SERVICE_INSTANCE, "NO DEVICES FOUND");
+        } else {
+            for (WifiP2pDevice device : prs) {
+                Log.i(SERVICE_INSTANCE, "Found device: " + device.deviceName);
+            }
+        }
+    };
     private final Runnable mServiceBroadcastingRunnable = new Runnable() {
         @Override
         public void run() {
-            mManager.discoverPeers(mChannel, null);
+            mManager.discoverPeers(mChannel, new WifiP2pManager.ActionListener() {
+                @Override
+                public void onSuccess() {
+                    Log.i(SERVICE_INSTANCE, "Discover peers instantiated");
+                }
+
+                @Override
+                public void onFailure(int reason) {
+
+                    Log.i(SERVICE_INSTANCE, "Discover peers failed with reason " + reason);
+                }
+            });
             mServiceBroadcastingHandler
                     .postDelayed(mServiceBroadcastingRunnable, PERIOD);
         }
@@ -63,8 +93,18 @@ WifiDirectManager {
     @SuppressLint("HardwareIds")
     private WifiDirectManager(final Context context) {
         mIntentFilter = new IntentFilter();
-        mIntentFilter.addAction(WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION);
-        mIntentFilter.addAction(WifiManager.WIFI_STATE_CHANGED_ACTION);
+        // Indicates a change in the Wi-Fi P2P status.
+        mIntentFilter.addAction(WIFI_P2P_STATE_CHANGED_ACTION);
+
+        // Indicates a change in the list of available peers.
+        mIntentFilter.addAction(WIFI_P2P_PEERS_CHANGED_ACTION);
+
+
+        // Indicates the state of connectivity has changed
+        mIntentFilter.addAction(WIFI_P2P_CONNECTION_CHANGED_ACTION);
+
+        // Indicates this device's details have changed.
+        mIntentFilter.addAction(WIFI_P2P_THIS_DEVICE_CHANGED_ACTION);
         mManager = (WifiP2pManager) context.getSystemService(Context.WIFI_P2P_SERVICE);
         MAC_ADDRESS = (((WifiManager) Objects.requireNonNull(context.getApplicationContext().getSystemService(Context.WIFI_SERVICE))))
                 .getConnectionInfo()
@@ -81,6 +121,7 @@ WifiDirectManager {
                     final Handler handler = WifiDirectManager.this.getHandler();
                     if (info.isGroupOwner) {
                         try {
+                            Log.i(SERVICE_INSTANCE, "I am group owner");
                             new GroupOwnerSocketHandler(handler).start();
                         } catch (final IOException e) {
                             e.printStackTrace();
@@ -91,7 +132,8 @@ WifiDirectManager {
                         new ClientSocketHandler(handler, info.groupOwnerAddress).start();
                     }
                     sActivityActionListener.onSuccess();
-                }
+                },
+                peerListListener
         );
     }
 
@@ -285,19 +327,20 @@ WifiDirectManager {
 
                     @Override
                     public void onSuccess() {
+                        Log.i(SERVICE_INSTANCE, "Adding local service while creating group " + name);
                         mServiceBroadcastingHandler.postDelayed(mServiceBroadcastingRunnable, PERIOD);
                     }
 
                     @Override
                     public void onFailure(final int reason) {
-
+                        Log.i(SERVICE_INSTANCE, "Adding local service while creating group failed " + name);
                     }
                 });
             }
 
             @Override
             public void onFailure(final int reason) {
-
+                Log.i(SERVICE_INSTANCE, "Can't clear local services");
             }
         });
     }
@@ -322,6 +365,7 @@ WifiDirectManager {
 
     public void join(final WifiP2pDevice groupOwnerDevice) {
         mStatus = Status.Client;
+        Log.i(SERVICE_INSTANCE, "Joining device... Owner: " + groupOwnerDevice.deviceName);
         connect(groupOwnerDevice.deviceAddress, mStatus);
     }
 

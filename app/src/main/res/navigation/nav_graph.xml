@@ -68,11 +68,11 @@
             android:id="@+id/action_joinFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
         <action
-            android:id="@+id/action_joinFragment_to_roomFragment"
-            app:destination="@id/roomFragment" />
-        <action
             android:id="@+id/action_joinFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_joinFragment_to_gamePlayerFragment"
+            app:destination="@id/gamePlayerFragment" />
     </fragment>
     <fragment
         android:id="@+id/roomFragment"
