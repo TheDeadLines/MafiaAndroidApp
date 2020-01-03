@@ -18,6 +18,10 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.thedeadlines.mafiap2p.R;
+import com.thedeadlines.mafiap2p.common.MessageShaper;
+import com.thedeadlines.mafiap2p.common.WifiDirectManager;
+import com.thedeadlines.mafiap2p.game.protocol.AccessTypes;
+import com.thedeadlines.mafiap2p.game.protocol.ContentTypes;
 import com.thedeadlines.mafiap2p.ui.fragments.host.hostList.HostListAdapter;
 import com.thedeadlines.mafiap2p.ui.fragments.host.hostList.OnItemClickListener;
 
@@ -48,12 +52,17 @@ public class GameHostFragment extends Fragment {
     private HostListAdapter mListViewAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private Parcelable mListState;
-
+    private WifiDirectManager mWifiDirectManager;
 
     public GameHostFragment() {
         // Required empty public constructor
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mWifiDirectManager = WifiDirectManager.getInstance(getContext());
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -70,6 +79,8 @@ public class GameHostFragment extends Fragment {
 
         mFinishGameButton = view.findViewById(R.id.finish_game_button);
         mFinishGameButton.setOnClickListener(view12 -> {
+            mWifiDirectManager.sendMessage(MessageShaper.recycle(AccessTypes.START_GAME, ContentTypes.DEFAULT, "start"));
+
             NavController controller = Navigation.findNavController(view12);
             controller.navigate(R.id.action_gameHostFragment_to_homeFragment);
         });

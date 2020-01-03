@@ -1,10 +1,12 @@
 package com.thedeadlines.mafiap2p.ui.fragments.room;
 
 
+import android.net.wifi.p2p.WifiP2pDevice;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,9 +21,13 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.thedeadlines.mafiap2p.AppConstants;
 import com.thedeadlines.mafiap2p.R;
 import com.thedeadlines.mafiap2p.common.WifiDirectManager;
 import com.thedeadlines.mafiap2p.game.protocol.AccessTypes;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class JoinFragment extends Fragment implements Handler.Callback {
 
@@ -47,12 +53,13 @@ public class JoinFragment extends Fragment implements Handler.Callback {
 
         mWifiDirectManager = WifiDirectManager.getInstance(getContext());
         mWifiDirectManager.updateWifiP2pDeviceObservable(wifiP2pDevice -> mPeersAdapter.add(wifiP2pDevice));
-        mWifiDirectManager.createGroup(mWifiDirectManager.getDeviceName());
+//        mWifiDirectManager.createGroup(mWifiDirectManager.getDeviceName());
         mPeersAdapter = getPeersAdapter(v -> {
             final PeersAdapter.ViewHolder viewHolder =
                     (PeersAdapter.ViewHolder) mRoomList.getChildViewHolder(v);
             mWifiDirectManager.join(viewHolder.getWifiP2pDevice());
         });
+        mWifiDirectManager.updateHandler(new Handler(this));
     }
 
     @Override
@@ -92,20 +99,31 @@ public class JoinFragment extends Fragment implements Handler.Callback {
             NavController controller = Navigation.findNavController(view12);
             controller.navigate(R.id.action_joinFragment_to_homeFragment);
         });
-
+        mWifiDirectManager.updatePeerListListener(peers -> {
+            List<WifiP2pDevice> prs = new ArrayList<>();
+            prs.addAll(peers.getDeviceList());
+            mPeersAdapter.set(prs);
+            if (prs.size() == 0) {
+                Log.d(TAG, "NO DEVICES FOUND");
+            } else {
+                for (WifiP2pDevice device : prs) {
+                    Log.i(TAG, "Found device: " + device.deviceName);
+                }
+            }
+        });
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        getActivity().registerReceiver(mWifiDirectManager.getWifiDirectBroadcastReceiver(),
+        getContext().registerReceiver(mWifiDirectManager.getWifiDirectBroadcastReceiver(),
                 mWifiDirectManager.getIntentFilter());
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        getActivity().unregisterReceiver(mWifiDirectManager.getWifiDirectBroadcastReceiver());
+        getContext().unregisterReceiver(mWifiDirectManager.getWifiDirectBroadcastReceiver());
     }
 
     @Override
@@ -122,11 +140,14 @@ public class JoinFragment extends Fragment implements Handler.Callback {
 
     @Override
     public boolean handleMessage(@NonNull Message msg) {
+        Log.d(TAG, "Message caught " + msg.what);
         switch (msg.what) {
             case AccessTypes
-                    .START_GAME:
+                    .BROADCAST:
                 Toast.makeText(getContext(), "Received start game message", Toast.LENGTH_SHORT).show();
-                mNavController.navigate(R.id.action_joinFragment_to_gamePlayerFragment);
+                Bundle bundle = new Bundle();
+                bundle.putString(AppConstants.CARD, "YOU ARE MAFIA");
+                mNavController.navigate(R.id.action_joinFragment_to_gamePlayerFragment, bundle);
                 break;
         }
         return false;

@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 import static com.thedeadlines.mafiap2p.common.Constants.SERVER_PORT;
 
-class GroupOwnerSocketHandler extends Thread {
+public class GroupOwnerSocketHandler extends Thread {
 
     private final ServerSocket serverSocket;
     private final int THREAD_COUNT = 10;

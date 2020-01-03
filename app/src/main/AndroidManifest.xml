@@ -16,10 +16,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <service
-            android:name=".background.BroadcastService"
-            android:enabled="true"
-            android:exported="false"></service>
 
         <activity android:name=".ui.MainActivity">
             <intent-filter>

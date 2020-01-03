@@ -37,9 +37,11 @@ public class WifiDirectBroadcastReceiver extends BroadcastReceiver {
                         .getParcelableExtra(WifiP2pManager.EXTRA_NETWORK_INFO);
 
                 if (networkInfo.isConnected()) {
+                    Log.d(TAG, "Is connected");
                     manager.requestConnectionInfo(channel, infoListener);
                 } else {
                     // It's a disconnect
+                    Log.d(TAG, "It's disconnect " + networkInfo.toString());
                 }
             }
         } else if (WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION.equals(action)) {

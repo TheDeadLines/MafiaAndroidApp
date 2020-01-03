@@ -2,6 +2,7 @@ package com.thedeadlines.mafiap2p.common;
 
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,7 +13,7 @@ import static com.thedeadlines.mafiap2p.common.Constants.CAPACITY;
 import static com.thedeadlines.mafiap2p.common.Constants.CHAT_NEEDLE;
 
 class ChatNeedle implements Runnable {
-
+    private static final String TAG = ChatNeedle.class.getSimpleName();
     private final Socket socket;
     private final Handler handler;
 
@@ -50,8 +51,11 @@ class ChatNeedle implements Runnable {
 
     public void write(final byte[] buffer) {
         try {
+            Log.d(TAG, "WRITING MESSAGE " + buffer.length);
             oStream.write(buffer);
         } catch (final IOException ignored) {
+            Log.d(TAG, "IGNORED MESSAGE");
+            ignored.printStackTrace();
         }
     }
 

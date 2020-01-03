@@ -43,6 +43,12 @@ public class PeersAdapter extends RecyclerView.Adapter<PeersAdapter.ViewHolder> 
         mListener = listener;
     }
 
+    public void set(final List<WifiP2pDevice> list) {
+        mDevices.clear();
+        mDevices.addAll(list);
+        notifyDataSetChanged();
+    }
+
     public void add(final WifiP2pDevice device) {
         Log.i(TAG, "Trying to add device " + device);
         if ((device.status == WifiP2pDevice.AVAILABLE || device.status == WifiP2pDevice.CONNECTED)

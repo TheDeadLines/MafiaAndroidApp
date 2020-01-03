@@ -46,28 +46,19 @@ public class GameHostChosenPlayerFragment extends Fragment {
         mPlayerOrderNumber = view.findViewById(R.id.player_order_number);
 
         mBackButton = view.findViewById(R.id.back_button);
-        mBackButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavController controller = Navigation.findNavController(view);
-                controller.navigate(R.id.action_gameHostChosenPlayerFragment_to_gameHostFragment);
-            }
+        mBackButton.setOnClickListener(view13 -> {
+            NavController controller = Navigation.findNavController(view13);
+            controller.navigate(R.id.action_gameHostChosenPlayerFragment_to_gameHostFragment);
         });
 
         mKickButton = view.findViewById(R.id.kick_button);
-        mKickButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //
-            }
+        mKickButton.setOnClickListener(view1 -> {
+            //
         });
 
         mStartTimerButton = view.findViewById(R.id.start_timer_button);
-        mStartTimerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //
-            }
+        mStartTimerButton.setOnClickListener(view12 -> {
+            //
         });
 
         Bundle args = getArguments();

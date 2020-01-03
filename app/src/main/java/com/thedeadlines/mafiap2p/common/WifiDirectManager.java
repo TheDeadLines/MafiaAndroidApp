@@ -45,7 +45,7 @@ WifiDirectManager {
     private final WifiDirectBroadcastReceiver mWifiDirectBroadcastReceiver;
     private final WifiP2pManager mManager;
     private final int MAX_NET_ID = 32;
-    private final int PERIOD = 1000;
+    private final int PERIOD = 5000;
     private Status mStatus;
     private List<WifiP2pDevice> prs = new ArrayList<>();
 
@@ -59,17 +59,7 @@ WifiDirectManager {
     private final Handler mServiceDiscoveringHandler;
     private final Runnable mServiceDiscoveringRunnable = this::startSearching;
     private final Handler mServiceBroadcastingHandler;
-    private WifiP2pManager.PeerListListener peerListListener = peers -> {
-        prs.clear();
-        prs.addAll(peers.getDeviceList());
-        if (prs.size() == 0) {
-            Log.d(SERVICE_INSTANCE, "NO DEVICES FOUND");
-        } else {
-            for (WifiP2pDevice device : prs) {
-                Log.i(SERVICE_INSTANCE, "Found device: " + device.deviceName);
-            }
-        }
-    };
+    private WifiP2pManager.PeerListListener peerListListener;
     private final Runnable mServiceBroadcastingRunnable = new Runnable() {
         @Override
         public void run() {
@@ -89,6 +79,11 @@ WifiDirectManager {
                     .postDelayed(mServiceBroadcastingRunnable, PERIOD);
         }
     };
+
+    public void updatePeerListListener(final WifiP2pManager.PeerListListener listListener) {
+        peerListListener = listListener;
+
+    }
 
     @SuppressLint("HardwareIds")
     private WifiDirectManager(final Context context) {
@@ -129,6 +124,7 @@ WifiDirectManager {
                             return;
                         }
                     } else {
+                        Log.i(SERVICE_INSTANCE, "I am client");
                         new ClientSocketHandler(handler, info.groupOwnerAddress).start();
                     }
                     sActivityActionListener.onSuccess();
@@ -391,8 +387,10 @@ WifiDirectManager {
     }
 
     public void sendMessage(final byte[] recycle) {
+        Log.d(SERVICE_INSTANCE, "SENDING MESSAGE TO CHAT NEEDLES " + gMemberList.getChatNeedles().size());
         for (final ChatNeedle chatNeedle :
                 gMemberList.getChatNeedles()) {
+//            Log.d("Sending to chat needle " + chatNeedle.);
             chatNeedle.write(recycle);
         }
     }
@@ -423,6 +421,7 @@ WifiDirectManager {
                         mChatNeedle = (ChatNeedle) msg.obj;
                         if (mChatNeedle != null) {
                             gMemberList.add(new Member(mCurrentConnectingDeviceAddress, mChatNeedle));
+                            Log.d(SERVICE_INSTANCE, "Writing to needle " + PEER + " " + MAC_ADDRESS);
                             mChatNeedle.write(MessageShaper.recycle(0, PEER, MAC_ADDRESS));
                         }
                     } else {

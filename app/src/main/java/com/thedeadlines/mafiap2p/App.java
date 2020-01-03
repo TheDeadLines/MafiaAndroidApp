@@ -3,6 +3,7 @@ package com.thedeadlines.mafiap2p;
 import android.app.Application;
 import android.content.IntentFilter;
 import android.net.wifi.p2p.WifiP2pManager;
+import android.os.StrictMode;
 
 import com.thedeadlines.mafiap2p.data.GamePlayerJoinRepository;
 import com.thedeadlines.mafiap2p.data.GameRepository;
@@ -23,6 +24,9 @@ public class App extends Application {
         super.onCreate();
 
 
+        StrictMode.ThreadPolicy policy =
+                new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
 
         manager = (WifiP2pManager) getSystemService(WIFI_P2P_SERVICE);
         if (manager != null) {
