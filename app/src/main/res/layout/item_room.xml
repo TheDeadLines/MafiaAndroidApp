@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/colorBlackBackground"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -15,11 +16,13 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="@dimen/standard_margin"
-            android:layout_marginTop="0dp"
+            android:layout_marginStart="@dimen/margin45"
+            android:layout_marginTop="@dimen/margin20"
+            android:fontFamily="@string/font_family_thin"
             android:gravity="top"
             android:text="@string/number_stub"
-            android:textSize="@dimen/text_size_higher" />
+            android:textColor="@color/colorWhiteText"
+            android:textSize="@dimen/text_size_middle" />
 
         <TextView
             android:id="@+id/name_room"
@@ -27,9 +30,11 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="@dimen/room_item_margin"
+            android:layout_marginStart="@dimen/margin120"
             android:layout_toEndOf="@id/number_room"
+            android:fontFamily="@string/font_family_thin"
             android:text="@string/room_stub"
+            android:textColor="@color/colorWhiteText"
             android:textSize="@dimen/text_size_higher"
             android:textStyle="bold" />
 
@@ -39,10 +44,12 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="@dimen/room_item_margin"
-            android:layout_marginTop="@dimen/standard_margin"
+            android:layout_marginStart="@dimen/margin120"
+            android:layout_marginTop="@dimen/margin35"
+            android:fontFamily="@string/font_family_thin"
             android:text="@string/players_stub"
-            android:textSize="@dimen/text_size_higher" />
+            android:textColor="@color/colorWhiteText"
+            android:textSize="@dimen/text_size_middle" />
     </RelativeLayout>
 
 </LinearLayout>
