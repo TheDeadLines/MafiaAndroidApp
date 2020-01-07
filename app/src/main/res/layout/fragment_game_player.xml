@@ -12,9 +12,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:layout_marginTop="@dimen/margin15"
-        android:layout_marginEnd="@dimen/margin15"
+        android:layout_marginTop="@dimen/margin16"
+        android:layout_marginEnd="@dimen/margin16"
         android:layout_weight="1"
+        android:textSize="@dimen/text_size_middle"
         android:background="@android:color/transparent"
         android:text="@string/button_leave" />
 
@@ -32,11 +33,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="@dimen/margin45"
+        android:layout_marginBottom="@dimen/margin48"
         android:layout_weight="1"
         android:background="@android:color/transparent"
-        android:paddingStart="@dimen/padding35"
-        android:paddingEnd="@dimen/padding35"
+        android:paddingStart="@dimen/padding32"
+        android:paddingEnd="@dimen/padding32"
         android:text="@string/button_hide_card"
         android:textSize="@dimen/text_size_higher" />
 

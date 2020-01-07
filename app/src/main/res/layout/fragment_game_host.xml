@@ -10,18 +10,21 @@
         android:id="@+id/button_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin15"
+        android:layout_marginTop="@dimen/margin16"
         android:gravity="center">
 
-        <Button
+        <ImageButton
             android:id="@+id/toggle_list_button"
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginStart="@dimen/margin15"
+            android:layout_marginStart="@dimen/margin16"
             android:layout_weight="1"
-            android:text="@string/button_host_open_list" />
+            android:text="@string/button_host_open_list"
+            android:background="@null"
+            android:contentDescription="@string/button_back"
+            android:src="@drawable/ic_keyboard_arrow_right_white_48dp" />
 
         <Button
             android:id="@+id/finish_game_button"
@@ -29,10 +32,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginStart="@dimen/margin100"
-            android:layout_marginEnd="@dimen/margin15"
+            android:layout_marginStart="@dimen/margin104"
+            android:layout_marginEnd="@dimen/margin16"
             android:layout_weight="10"
-            android:text="@string/finish_game" />
+            android:text="@string/finish_game"
+            android:textSize="@dimen/text_size_middle" />
     </LinearLayout>
 
     <ImageView
@@ -46,9 +50,9 @@
         android:id="@+id/player_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/margin15"
+        android:layout_marginTop="@dimen/margin16"
         android:orientation="horizontal"
-        android:padding="@dimen/padding5"
+        android:padding="@dimen/padding16"
         android:visibility="gone" />
 
 </LinearLayout>

@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/host_list_item_height"
     android:id="@+id/host_list_item_root"
-    android:layout_marginBottom="@dimen/margin5">
+    android:background="@drawable/background_border_white"
+    android:layout_margin="@dimen/margin8"
+    android:padding="@dimen/padding8">
 
     <TextView
         android:layout_width="wrap_content"
@@ -14,8 +16,8 @@
         android:textAlignment="center"
         android:id="@+id/player_order_number_inner"
         android:textSize="@dimen/text_size_standard"
-        android:layout_marginStart="@dimen/margin5"
-        android:layout_marginTop="@dimen/margin5"/>
+        android:layout_marginStart="@dimen/margin8"
+        android:layout_marginTop="@dimen/margin8" />
 
     <ImageView
         tools:src="@tools:sample/backgrounds/scenic"
