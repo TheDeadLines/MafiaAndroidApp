@@ -8,6 +8,14 @@
     android:orientation="vertical"
     tools:context=".ui.fragments.room.JoinFragment">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/margin5"
+        android:background="@drawable/background_stroke_and_black"
+        android:scaleType="center" />
+
     <Button
         android:id="@+id/buttonBack"
         android:layout_width="wrap_content"
