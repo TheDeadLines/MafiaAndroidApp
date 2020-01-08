@@ -14,4 +14,5 @@
     <dimen name="standard_margin">48dp</dimen>
     <dimen name="margin_small">8dp</dimen>
     <dimen name="room_item_margin">120dp</dimen>
+    <dimen name="player_card_width">300dp</dimen>
 </resources>

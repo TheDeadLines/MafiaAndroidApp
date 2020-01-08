@@ -69,7 +69,7 @@ public class GameHostChosenPlayerFragment extends Fragment {
             HostListElement el = new HostListElement(number, name, role);
             mPlayerOrderNumber.setText(el.getOrderNumString());
             mPlayerName.setText(el.getPlayerName());
-//            mPlayerRole.setImage?
+            mPlayerRole.setImageResource(el.getPlayerRoleResource());
         }
     }
 }

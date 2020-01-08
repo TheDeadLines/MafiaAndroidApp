@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/game_player_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_border_white"
     android:orientation="vertical"
-    tools:context=".ui.fragments.player.GamePlayerFragment"
-    android:background="@drawable/background_border_white">
+    tools:context=".ui.fragments.player.GamePlayerFragment">
 
     <Button
         android:id="@+id/leave_game_button"
@@ -15,18 +16,30 @@
         android:layout_gravity="end"
         android:layout_marginTop="@dimen/margin16"
         android:layout_marginEnd="@dimen/margin16"
-        android:layout_weight="1"
-        android:textSize="@dimen/text_size_middle"
+        android:layout_weight="0.1"
         android:background="@android:color/transparent"
-        android:text="@string/button_leave" />
+        android:text="@string/button_leave"
+        android:textSize="@dimen/text_size_middle" />
 
 
     <TextView
         android:id="@+id/player_card"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="10"/>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical|center"
+        android:layout_weight="10"
+        android:textAlignment="center"
+        android:textSize="@dimen/text_size_higher"
+        android:visibility="gone" />
 
+    <ImageView
+        android:id="@+id/image_card"
+        android:layout_width="@dimen/player_card_width"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="10"
+        android:src="@drawable/mafia_mafia"
+        android:visibility="visible" />
 
     <Button
         android:id="@+id/toggle_card_button"
@@ -35,11 +48,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="@dimen/margin48"
-        android:layout_weight="1"
-        android:background="@android:color/transparent"
-        android:paddingStart="@dimen/padding32"
-        android:paddingEnd="@dimen/padding32"
+        android:layout_weight="0.1"
+        android:background="@drawable/background_border_white_no_padding"
+        android:paddingLeft="@dimen/padding32"
+        android:paddingRight="@dimen/padding32"
         android:text="@string/button_hide_card"
         android:textSize="@dimen/text_size_higher" />
-
 </LinearLayout>
