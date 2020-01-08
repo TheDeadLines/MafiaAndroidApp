@@ -38,10 +38,12 @@ public class GamePlayerFragment extends Fragment implements Handler.Callback {
     private static final String SHOWN_CARD_TEXT = "Hide card";
     private static final String HIDDEN_CARD_TEXT = "Show card";
 
+    private static final String CARD_BACK = "Hidden";
+
     private String cardName;
-    private int cardImageRes;
+    //    private int cardImageRes;
     private TextView mCardName;
-    private ImageView mCardImage;
+    //    private ImageView mCardImage;
     private Button mLeaveGameButton;
     private Button mToggleCardButton;
     private int currentState;
@@ -59,12 +61,11 @@ public class GamePlayerFragment extends Fragment implements Handler.Callback {
         mWifiDirectManager.updateHandler(new Handler(this));
         if (getArguments() != null) {
             cardName = getArguments().getString(AppConstants.CARD);
-            cardImageRes = getArguments().getInt("playerRole");
+//            cardImageRes = getArguments().getInt("playerRole");
         }
 
-        //
-        if (cardImageRes == 0) {
-            cardImageRes = R.drawable.mafia_mafia;
+        if (cardName == null) {
+            cardName = "Unknown";
         }
 
 
@@ -90,7 +91,7 @@ public class GamePlayerFragment extends Fragment implements Handler.Callback {
         mToggleCardButton = view.findViewById(R.id.toggle_card_button);
         mToggleCardButton.setOnClickListener(view12 -> toggleCurrentState());
         mCardName = view.findViewById(R.id.player_card);
-        mCardImage = view.findViewById(R.id.image_card);
+//        mCardImage = view.findViewById(R.id.image_card);
         if (savedInstanceState != null) {
             currentState = savedInstanceState.getInt(CURRENT_STATE);
             bindCurrentState();
@@ -118,12 +119,14 @@ public class GamePlayerFragment extends Fragment implements Handler.Callback {
             case HIDDEN_CARD_STATE:
                 currentState = SHOWN_CARD_STATE;
                 mToggleCardButton.setText(SHOWN_CARD_TEXT);
-                mCardImage.setImageResource(cardImageRes);
+                mCardName.setText(cardName);
+//                mCardImage.setImageResource(cardImageRes);
                 break;
             case SHOWN_CARD_STATE:
                 currentState = HIDDEN_CARD_STATE;
                 mToggleCardButton.setText(HIDDEN_CARD_TEXT);
-                mCardImage.setImageResource(R.drawable.mafia_back);
+                mCardName.setText(CARD_BACK);
+//                mCardImage.setImageResource(R.drawable.mafia_back);
                 break;
             default:
                 break;
@@ -134,11 +137,13 @@ public class GamePlayerFragment extends Fragment implements Handler.Callback {
         switch (currentState) {
             case HIDDEN_CARD_STATE:
                 mToggleCardButton.setText(HIDDEN_CARD_TEXT);
-                mCardImage.setImageResource(R.drawable.mafia_back);
+                mCardName.setText(CARD_BACK);
+//                mCardImage.setImageResource(R.drawable.mafia_back);
                 break;
             case SHOWN_CARD_STATE:
                 mToggleCardButton.setText(SHOWN_CARD_TEXT);
-                mCardImage.setImageResource(cardImageRes);
+                mCardName.setText(cardName);
+//                mCardImage.setImageResource(cardImageRes);
                 break;
             default:
                 break;

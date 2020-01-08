@@ -29,22 +29,22 @@ public class HostListElement {
         return playerRole;
     }
 
-    public int getPlayerRoleResource() {
-        switch (playerRole) {
-            case ("mafia"):
-                return R.drawable.mafia_mafia;
-            case ("citizen"):
-                return R.drawable.mafia_citizen;
-            case ("comissar"):
-                return R.drawable.mafia_comissar;
-            case ("doctor"):
-                return R.drawable.mafia_doctor;
-            case ("kurt"):
-                return R.drawable.mafia_kurt;
-            case ("maniac"):
-                return R.drawable.mafia_maniac;
-        }
-
-        return -1;
-    }
+//    public int getPlayerRoleResource() {
+//        switch (playerRole) {
+//            case ("mafia"):
+//                return R.drawable.mafia_mafia;
+//            case ("citizen"):
+//                return R.drawable.mafia_citizen;
+//            case ("comissar"):
+//                return R.drawable.mafia_comissar;
+//            case ("doctor"):
+//                return R.drawable.mafia_doctor;
+//            case ("kurt"):
+//                return R.drawable.mafia_kurt;
+//            case ("maniac"):
+//                return R.drawable.mafia_maniac;
+//        }
+//
+//        return -1;
+//    }
 }

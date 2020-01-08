@@ -20,7 +20,7 @@ import com.thedeadlines.mafiap2p.ui.fragments.host.hostList.HostListElement;
 
 public class GameHostChosenPlayerFragment extends Fragment {
     private TextView mPlayerOrderNumber;
-    private ImageView mPlayerRole;
+    private TextView mPlayerRole;
     private TextView mPlayerName;
     private Button mStartTimerButton;
     private Button mKickButton;
@@ -69,7 +69,7 @@ public class GameHostChosenPlayerFragment extends Fragment {
             HostListElement el = new HostListElement(number, name, role);
             mPlayerOrderNumber.setText(el.getOrderNumString());
             mPlayerName.setText(el.getPlayerName());
-            mPlayerRole.setImageResource(el.getPlayerRoleResource());
+            mPlayerRole.setText(el.getPlayerRole());
         }
     }
 }

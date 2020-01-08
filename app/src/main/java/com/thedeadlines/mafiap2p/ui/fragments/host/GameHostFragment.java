@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -45,7 +46,7 @@ public class GameHostFragment extends Fragment {
 
     private Button mFinishGameButton;
     private ImageButton mToggleListButton;
-    private ImageView mHostImage;
+    private TextView mHostImage;
     private RecyclerView mRecyclerView;
     private int currentState;
 
