@@ -4,7 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.fragments.host.GameHostFragment">
+    tools:context=".ui.fragments.host.GameHostFragment"
+    android:background="@drawable/background_border_white"
+    android:padding="@dimen/padding8">
 
     <LinearLayout
         android:id="@+id/button_container"

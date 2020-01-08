@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.fragments.player.GamePlayerFragment">
+    tools:context=".ui.fragments.player.GamePlayerFragment"
+    android:background="@drawable/background_border_white">
 
     <Button
         android:id="@+id/leave_game_button"

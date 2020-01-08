@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/host_list_item_height"
     android:id="@+id/host_list_item_root"
-    android:background="@drawable/background_border_white"
+    android:background="@drawable/background_border_white_no_padding"
     android:layout_margin="@dimen/margin8"
     android:padding="@dimen/padding8">
 

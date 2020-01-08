@@ -59,8 +59,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@android:color/transparent"
+        android:background="@drawable/background_border_white_no_padding"
         android:text="@string/button_start_timer"
+        android:paddingRight="@dimen/padding32"
+        android:paddingLeft="@dimen/padding32"
+        android:layout_marginBottom="@dimen/margin8"
         android:textSize="@dimen/text_size_higher" />
 
     <Button
@@ -70,7 +73,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="@dimen/margin16"
-        android:background="@android:color/transparent"
+        android:paddingRight="@dimen/padding32"
+        android:paddingLeft="@dimen/padding32"
+        android:background="@drawable/background_border_white_no_padding"
         android:text="@string/button_kick"
         android:textSize="@dimen/text_size_higher" />
 </LinearLayout>
