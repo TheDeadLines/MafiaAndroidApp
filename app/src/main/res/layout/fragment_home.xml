@@ -3,17 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBlackBackground"
+    android:background="@drawable/background_border_white"
     android:orientation="vertical"
     tools:context=".ui.fragments.home.HomeFragment">
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/margin5"
-        android:background="@drawable/background_stroke_and_black"
-        android:scaleType="center" />
 
     <ImageButton
         android:id="@+id/settings_button"
@@ -25,7 +17,6 @@
         android:background="@null"
         android:contentDescription="@string/settings"
         android:src="@drawable/ic_settings_black_24dp" />
-
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -40,7 +31,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="@dimen/margin120"
-            android:fontFamily="@string/font_family_thin"
             android:text="@string/title_home"
             android:textColor="@color/colorWhiteText"
             android:textSize="@dimen/text_title" />
@@ -54,7 +44,6 @@
             android:width="@dimen/width_button220"
             android:height="@dimen/height_button80"
             android:background="@drawable/custom_button_black"
-            android:fontFamily="@string/font_family_thin"
             android:text="@string/create"
             android:textColor="@color/colorWhiteText"
             android:textSize="@dimen/text_size_very_higher" />
@@ -67,7 +56,6 @@
             android:width="@dimen/width_button220"
             android:height="@dimen/height_button80"
             android:background="@drawable/custom_button_black"
-            android:fontFamily="@string/font_family_thin"
             android:text="@string/join"
             android:textColor="@color/colorWhiteText"
             android:textSize="@dimen/text_size_very_higher" />
