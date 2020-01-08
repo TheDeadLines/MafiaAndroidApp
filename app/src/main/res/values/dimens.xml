@@ -10,6 +10,7 @@
     <dimen name="margin120">120dp</dimen>
     <dimen name="margin180">180dp</dimen>
     <dimen name="padding5">5dp</dimen>
+    <dimen name="padding8">8dp</dimen>
     <dimen name="padding35">35dp</dimen>
     <dimen name="text_size_standard">12sp</dimen>
     <dimen name="text_size_middle">16sp</dimen>

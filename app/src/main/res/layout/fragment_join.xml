@@ -4,17 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBlackBackground"
+    android:background="@drawable/background_border_white"
     android:orientation="vertical"
     tools:context=".ui.fragments.room.JoinFragment">
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/margin5"
-        android:background="@drawable/background_stroke_and_black"
-        android:scaleType="center" />
 
     <Button
         android:id="@+id/buttonBack"
@@ -24,7 +16,6 @@
         android:layout_marginStart="@dimen/margin45"
         android:layout_marginTop="@dimen/margin35"
         android:background="@null"
-        android:fontFamily="@string/font_family_thin"
         android:text="@string/button_back"
         android:textColor="@color/colorWhiteText"
         android:textSize="@dimen/text_size_very_higher" />
@@ -36,7 +27,6 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/margin50"
-        android:fontFamily="@string/font_family_thin"
         android:gravity="center"
         android:text="@string/select_room"
         android:textColor="@color/colorWhiteText"

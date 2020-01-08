@@ -18,7 +18,6 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="@dimen/margin45"
             android:layout_marginTop="@dimen/margin20"
-            android:fontFamily="@string/font_family_thin"
             android:gravity="top"
             android:text="@string/number_stub"
             android:textColor="@color/colorWhiteText"
@@ -32,7 +31,6 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="@dimen/margin120"
             android:layout_toEndOf="@id/number_room"
-            android:fontFamily="@string/font_family_thin"
             android:text="@string/room_stub"
             android:textColor="@color/colorWhiteText"
             android:textSize="@dimen/text_size_higher"
@@ -46,7 +44,6 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="@dimen/margin120"
             android:layout_marginTop="@dimen/margin35"
-            android:fontFamily="@string/font_family_thin"
             android:text="@string/players_stub"
             android:textColor="@color/colorWhiteText"
             android:textSize="@dimen/text_size_middle" />

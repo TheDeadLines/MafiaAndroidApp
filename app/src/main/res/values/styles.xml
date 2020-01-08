@@ -8,8 +8,4 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="AppTheme.Picker" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:textColorPrimary">@color/colorWhiteText</item>
-        <item name="android:fontFamily">@string/font_family_thin</item>
-    </style>
 </resources>
