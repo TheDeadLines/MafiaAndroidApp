@@ -4,6 +4,7 @@
     <dimen name="margin16">16dp</dimen>
     <dimen name="margin48">48dp</dimen>
     <dimen name="margin104">104dp</dimen>
+    <dimen name="margin144">144dp</dimen>
     <dimen name="padding8">8dp</dimen>
     <dimen name="padding16">16dp</dimen>
     <dimen name="padding32">32dp</dimen>

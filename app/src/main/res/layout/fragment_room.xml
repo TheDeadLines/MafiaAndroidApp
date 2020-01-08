@@ -3,43 +3,55 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_border_white"
     android:orientation="vertical"
     tools:context=".ui.fragments.home.HomeFragment">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/standard_margin"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="@dimen/margin16"
         android:text="@string/group_members"
-        android:textSize="@dimen/text_size_standard"/>
+        android:textAlignment="center"
+        android:textSize="@dimen/text_size_higher" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/host_players_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/standard_margin" />
+        android:layout_marginTop="@dimen/standard_margin"
+        android:padding="@dimen/padding32" />
 
-    <LinearLayout
+    <Button
+        android:id="@+id/start_game_button"
+        style="?android:attr/borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/standard_margin"
-        android:orientation="vertical">
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/margin144"
+        android:width="@dimen/width_button200"
+        android:height="@dimen/height_button72"
+        android:background="@drawable/custom_button_black"
+        android:text="@string/start"
+        android:textSize="@dimen/text_size_higher" />
 
-        <Button
-            android:id="@+id/start_game_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/start" />
-        <Button
-            android:id="@+id/cancel_game_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/cancel" />
-
-
-    </LinearLayout>
-
-
+    <Button
+        android:id="@+id/cancel_game_button"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/margin48"
+        android:width="@dimen/width_button200"
+        android:height="@dimen/height_button72"
+        android:background="@drawable/custom_button_black"
+        android:text="@string/cancel"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/text_size_higher" />
 </RelativeLayout>
+
