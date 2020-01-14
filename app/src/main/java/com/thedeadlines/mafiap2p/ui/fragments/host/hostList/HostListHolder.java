@@ -10,9 +10,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.thedeadlines.mafiap2p.R;
 
+import org.w3c.dom.Text;
+
 public class HostListHolder extends RecyclerView.ViewHolder {
     private TextView playerOrderNumber;
-    private ImageView playerRole;
+    private TextView playerRole;
     private TextView playerName;
     private LinearLayout listRoot;
 
@@ -29,7 +31,7 @@ public class HostListHolder extends RecyclerView.ViewHolder {
         return playerOrderNumber;
     }
 
-    public ImageView getPlayerRole() {
+    public TextView getPlayerRole() {
         return playerRole;
     }
 

@@ -12,6 +12,7 @@
     <string name="button_leave">Leave</string>
     <string name="player_card_description">Player card</string>
     <string name="button_hide_card">Hide card</string>
+    <string name="button_show_card">Show card</string>
     <string name="button_back">Back</string>
     <string name="button_kick">Kick</string>
     <string name="button_start_timer">Start timer</string>
@@ -32,4 +33,5 @@
     <string name="wrong_players">Wrong players number!</string>
     <string name="group_members">Group members:</string>
     <string name="cancel">Cancel</string>
+    <string name="card_back">Hidden</string>
 </resources>

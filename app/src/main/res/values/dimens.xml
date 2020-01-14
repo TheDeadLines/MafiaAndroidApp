@@ -1,16 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="margin5">5dp</dimen>
-    <dimen name="margin15">15dp</dimen>
-    <dimen name="margin45">45dp</dimen>
-    <dimen name="margin100">100dp</dimen>
-    <dimen name="padding5">5dp</dimen>
-    <dimen name="padding35">35dp</dimen>
+    <dimen name="margin8">8dp</dimen>
+    <dimen name="margin16">16dp</dimen>
+    <dimen name="margin32">32dp</dimen>
+    <dimen name="margin48">48dp</dimen>
+    <dimen name="margin104">104dp</dimen>
+    <dimen name="margin144">144dp</dimen>
+    <dimen name="padding8">8dp</dimen>
+    <dimen name="padding16">16dp</dimen>
+    <dimen name="padding32">32dp</dimen>
     <dimen name="text_size_standard">12sp</dimen>
     <dimen name="text_size_middle">16sp</dimen>
     <dimen name="text_size_higher">24sp</dimen>
-    <dimen name="host_list_item_height">100dp</dimen>
+    <dimen name="text_size_very_higher">32sp</dimen>
+    <dimen name="text_size_highest">44sp</dimen>
+    <dimen name="host_list_item_height">144dp</dimen>
     <dimen name="standard_margin">48dp</dimen>
     <dimen name="margin_small">8dp</dimen>
     <dimen name="room_item_margin">120dp</dimen>
+    <dimen name="player_card_width">300dp</dimen>
+    <dimen name="width_stroke1">1dp</dimen>
+    <dimen name="width_stroke2">2dp</dimen>
+    <dimen name="radius2">2dp</dimen>
+    <dimen name="width_button220">220dp</dimen>
+    <dimen name="height_button80">80dp</dimen>
+    <dimen name="width_button200">200dp</dimen>
+    <dimen name="height_button72">72dp</dimen>
 </resources>

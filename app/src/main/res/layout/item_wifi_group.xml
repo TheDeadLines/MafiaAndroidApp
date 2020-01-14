@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -9,13 +10,14 @@
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/text_size_standard" />
+        android:textSize="@dimen/text_size_middle"
+        tools:text="tv_name" />
 
     <TextView
         android:id="@+id/tv_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin15"
-        android:textSize="@dimen/text_size_standard" />
-
+        android:layout_marginTop="@dimen/margin16"
+        android:textSize="@dimen/text_size_standard"
+        tools:text="tv_status" />
 </LinearLayout>

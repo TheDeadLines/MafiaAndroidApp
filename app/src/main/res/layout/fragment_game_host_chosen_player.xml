@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_border_white"
     android:orientation="vertical"
     tools:context=".ui.fragments.player.GamePlayerFragment">
 
@@ -12,34 +13,45 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
-        android:layout_marginStart="@dimen/margin15"
-        android:layout_marginTop="@dimen/margin15"
+        android:layout_marginStart="@dimen/margin16"
+        android:layout_marginTop="@dimen/margin16"
         android:background="@android:color/transparent"
         android:text="@string/button_back"
-        android:textSize="@dimen/text_size_middle"/>
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/text_size_higher" />
 
-    <ImageView
-        android:id="@+id/player_role"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_gravity="center"
         android:layout_weight="1"
-        android:contentDescription="@string/player_card_description"
-        tools:src="@tools:sample/backgrounds/scenic" />
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/player_role"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:contentDescription="@string/player_card_description"
+            android:text="@string/player_card_description"
+            android:textAlignment="center"
+
+            android:textSize="@dimen/text_size_highest" />
+    </LinearLayout>
+
 
     <LinearLayout
         android:id="@+id/linear_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin45"
+        android:layout_marginBottom="@dimen/margin48"
         android:gravity="center">
 
         <TextView
             android:id="@+id/player_order_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="@dimen/padding8"
             android:textAlignment="center"
-            android:padding="@dimen/padding5"
             android:textSize="@dimen/text_size_middle"
             tools:text="1" />
 
@@ -47,7 +59,7 @@
             android:id="@+id/player_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/padding5"
+            android:padding="@dimen/padding8"
             android:textSize="@dimen/text_size_middle"
             tools:text="Player Name" />
     </LinearLayout>
@@ -59,7 +71,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@android:color/transparent"
+        android:layout_marginBottom="@dimen/margin16"
+        android:width="@dimen/width_button200"
+        android:height="@dimen/height_button72"
+        android:background="@drawable/custom_button_black"
         android:text="@string/button_start_timer"
         android:textSize="@dimen/text_size_higher" />
 
@@ -69,8 +84,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="@dimen/margin15"
-        android:background="@android:color/transparent"
+        android:layout_marginBottom="@dimen/margin48"
+        android:width="@dimen/width_button200"
+        android:height="@dimen/height_button72"
+        android:background="@drawable/custom_button_black"
         android:text="@string/button_kick"
         android:textSize="@dimen/text_size_higher" />
 </LinearLayout>

@@ -22,7 +22,7 @@ class DataGenerator {
     private DataGenerator() {
         list = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
-            HostListElement e = new HostListElement(i, "simple name" + 1, "role" + 1);
+            HostListElement e = new HostListElement(i, "simple name" + 1, "Mafia");
             list.add(e);
         }
     }
