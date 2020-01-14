@@ -16,11 +16,11 @@
         android:layout_gravity="end"
         android:layout_marginTop="@dimen/margin16"
         android:layout_marginEnd="@dimen/margin16"
-        android:layout_weight="0.1"
+        android:layout_weight="0"
         android:background="@android:color/transparent"
         android:text="@string/button_leave"
         android:textColor="@color/colorAccent"
-        android:textSize="@dimen/text_size_middle" />
+        android:textSize="@dimen/text_size_higher" />
 
 
     <LinearLayout

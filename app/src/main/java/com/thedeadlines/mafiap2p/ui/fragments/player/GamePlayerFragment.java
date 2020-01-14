@@ -100,10 +100,6 @@ public class GamePlayerFragment extends Fragment implements Handler.Callback {
             bindCurrentState();
         }
 
-        if (cardName != null) {
-            mCardName.setText(cardName);
-        }
-
 //        ((ViewGroup) view.findViewById(R.id.game_player_root)).getLayoutTransition()
 //                    .enableTransitionType(LayoutTransition.CHANGING);
     }
