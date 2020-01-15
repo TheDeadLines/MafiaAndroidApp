@@ -38,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="@dimen/margin32"
+            android:layout_marginBottom="@dimen/margin16"
             android:width="@dimen/width_button200"
             android:height="@dimen/height_button72"
             android:background="@drawable/custom_button_black"
