@@ -29,4 +29,11 @@
     <string name="room">Комната</string>
     <string name="room_stub">Комната 1</string>
     <string name="host_image_description">Изображение ведущего</string>
+    <string name="mafia">Мафия</string>
+    <string name="create_room">Создать комнату</string>
+    <string name="citizen">Мирный</string>
+    <string name="card_back">Спрятано</string>
+    <string name="button_show_card">Показать карту</string>
+    <string name="button_leave">Покинуть игру</string>
+    <string name="button_kick">Удалить игрока</string>
 </resources>

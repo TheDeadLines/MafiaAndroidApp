@@ -16,7 +16,7 @@
     <string name="button_show_card">Show card</string>
     <string name="button_back">Back</string>
     <string name="button_kick">Kick</string>
-    <string name="button_start_timer">Start timer</string>
+    <string name="button_start_timer" translatable="false">Start timer</string>
     <string name="button_host_open_list">></string>
     <string name="host_image_description">Host image</string>
     <string name="don">Don</string>
@@ -24,7 +24,7 @@
     <string name="doctor">Doctor</string>
     <string name="maniac">Maniac</string>
     <string name="madam">Madam</string>
-    <string name="stub">stub</string>
+    <string name="stub" translatable="false">stub</string>
     <string name="mafia_counter">Mafia</string>
     <string name="player_counter">Player</string>
     <string name="select_room">Select room</string>
