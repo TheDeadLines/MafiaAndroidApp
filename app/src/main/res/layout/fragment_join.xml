@@ -18,7 +18,7 @@
         android:background="@null"
         android:text="@string/button_back"
         android:textColor="@color/colorAccent"
-        android:textSize="@dimen/text_size_very_higher" />
+        android:textSize="@dimen/text_size_higher" />
 
     <TextView
         android:id="@+id/textSelectRoom"
