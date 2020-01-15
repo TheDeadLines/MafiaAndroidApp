@@ -7,4 +7,5 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlackBackground">#141414</color>
     <color name="colorPressedButton">#FF464646</color>
+    <color name="colorWhiteText">#FFFFFF</color>
 </resources>

@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">MafiaP2P</string>
     <string name="title_home">Mafia</string>
-    <string name="create">Create Room</string>
-    <string name="join">Join</string>
+    <string name="create">CREATE</string>
+    <string name="create_room">CREATE ROOM</string>
+    <string name="join">JOIN</string>
     <string name="start">Start</string>
     <string name="room">Room</string>
     <string name="game_host">Game Host</string>
