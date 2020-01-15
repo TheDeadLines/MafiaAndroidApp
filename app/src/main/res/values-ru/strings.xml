@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MafiaP2P</string>
+    <string name="button_back">Назад</string>
+    <string name="button_hide_card">Спрятать карту</string>
+    <string name="button_host_open_list">></string>
+    <string name="cancel">Отмена</string>
+    <string name="create">Создать комнату</string>
+    <string name="doctor">Доктор</string>
+    <string name="don">Дон</string>
+    <string name="finish_game">Закончить игру</string>
+    <string name="game_host">Ведущий</string>
+    <string name="group_members">Участники:</string>
+    <string name="join">Присоединиться</string>
+    <string name="madam">Мадам</string>
+    <string name="mafia_counter">Мафия</string>
+    <string name="maniac">Маньяк</string>
+    <string name="number_stub">01</string>
+    <string name="wrong_players">Неверное число игроков!</string>
+    <string name="title_home">Мафия</string>
+    <string name="start">Начать</string>
+    <string name="sheriff">Шериф</string>
+    <string name="settings">Настройки</string>
+    <string name="select_room">Выбор комнаты</string>
+    <string name="player_counter">Игрок</string>
+    <string name="player_card_description">Карта игрока</string>
+    <string name="player_role">Роль игрока</string>
+    <string name="players_stub">игроков: 3</string>
+    <string name="room">Комната</string>
+    <string name="room_stub">Комната 1</string>
+    <string name="host_image_description">Изображение ведущего</string>
+</resources>
