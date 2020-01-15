@@ -1,6 +1,8 @@
 package com.thedeadlines.mafiap2p.ui.fragments.room;
 
 
+import android.content.Context;
+import android.net.wifi.WifiManager;
 import android.net.wifi.p2p.WifiP2pDevice;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.os.Bundle;
@@ -24,10 +26,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.thedeadlines.mafiap2p.AppConstants;
 import com.thedeadlines.mafiap2p.R;
 import com.thedeadlines.mafiap2p.common.WifiDirectManager;
+import com.thedeadlines.mafiap2p.game.Card;
 import com.thedeadlines.mafiap2p.game.protocol.AccessTypes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class JoinFragment extends Fragment implements Handler.Callback {
 
@@ -141,14 +145,17 @@ public class JoinFragment extends Fragment implements Handler.Callback {
     @Override
     public boolean handleMessage(@NonNull Message msg) {
         Log.d(TAG, "Message caught " + msg.what);
-        switch (msg.what) {
-            case AccessTypes
-                    .BROADCAST:
+        if (msg.what == AccessTypes.BROADCAST) {
+            Card received = (Card) msg.obj;
+            String myMac = (((WifiManager) Objects.requireNonNull(getContext().getApplicationContext().getSystemService(Context.WIFI_SERVICE))))
+                    .getConnectionInfo()
+                    .getMacAddress();
+            if (received.getWhichId().equals(myMac)) {
                 Toast.makeText(getContext(), "Received start game message", Toast.LENGTH_SHORT).show();
                 Bundle bundle = new Bundle();
-                bundle.putString(AppConstants.CARD, "YOU ARE MAFIA");
+                bundle.putSerializable(AppConstants.CARD, received);
                 mNavController.navigate(R.id.action_joinFragment_to_gamePlayerFragment, bundle);
-                break;
+            }
         }
         return false;
     }

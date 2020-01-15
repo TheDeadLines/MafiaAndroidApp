@@ -13,8 +13,13 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.thedeadlines.mafiap2p.R;
+import com.thedeadlines.mafiap2p.common.MessageShaper;
+import com.thedeadlines.mafiap2p.common.WifiDirectManager;
+import com.thedeadlines.mafiap2p.game.Card;
+import com.thedeadlines.mafiap2p.game.protocol.AccessTypes;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -87,6 +92,14 @@ public class PeersAdapter extends RecyclerView.Adapter<PeersAdapter.ViewHolder> 
 
     public boolean isEmpty() {
         return mDevices.isEmpty();
+    }
+
+    public void sendMessages(WifiDirectManager mWifiDirectManager) {
+        Collections.shuffle(RoomRoles.getInstance().getRoleNames());
+        for (int i = 0; i < mDevices.size(); i++) {
+            Card card = new Card(mDevices.get(i).deviceAddress, RoomRoles.getInstance().getRoleNames().get(i), null);
+            mWifiDirectManager.sendMessage(MessageShaper.recycle(AccessTypes.BROADCAST, AccessTypes.START_GAME, card));
+        }
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

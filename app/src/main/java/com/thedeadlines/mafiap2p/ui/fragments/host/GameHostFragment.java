@@ -21,7 +21,6 @@ import com.thedeadlines.mafiap2p.R;
 import com.thedeadlines.mafiap2p.common.MessageShaper;
 import com.thedeadlines.mafiap2p.common.WifiDirectManager;
 import com.thedeadlines.mafiap2p.game.protocol.AccessTypes;
-import com.thedeadlines.mafiap2p.game.protocol.ContentTypes;
 import com.thedeadlines.mafiap2p.ui.fragments.host.hostList.HostListAdapter;
 import com.thedeadlines.mafiap2p.ui.fragments.host.hostList.OnItemClickListener;
 
@@ -79,7 +78,7 @@ public class GameHostFragment extends Fragment {
 
         mFinishGameButton = view.findViewById(R.id.finish_game_button);
         mFinishGameButton.setOnClickListener(view12 -> {
-            mWifiDirectManager.sendMessage(MessageShaper.recycle(AccessTypes.START_GAME, ContentTypes.DEFAULT, "start"));
+            mWifiDirectManager.sendMessage(MessageShaper.recycle(AccessTypes.FINISH_GAME, AccessTypes.FINISH_GAME, AccessTypes.FINISH_GAME));
 
             NavController controller = Navigation.findNavController(view12);
             controller.navigate(R.id.action_gameHostFragment_to_homeFragment);

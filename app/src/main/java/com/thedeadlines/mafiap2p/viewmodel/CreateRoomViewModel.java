@@ -9,10 +9,12 @@ import androidx.lifecycle.MediatorLiveData;
 
 import com.thedeadlines.mafiap2p.App;
 import com.thedeadlines.mafiap2p.AppConstants;
+import com.thedeadlines.mafiap2p.R;
 import com.thedeadlines.mafiap2p.data.GameRepository;
 import com.thedeadlines.mafiap2p.data.RolesRepository;
 import com.thedeadlines.mafiap2p.data.db.game.GameEntity;
 import com.thedeadlines.mafiap2p.data.db.role.RoleEntity;
+import com.thedeadlines.mafiap2p.ui.fragments.room.RoomRoles;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -79,6 +81,19 @@ public class CreateRoomViewModel extends AndroidViewModel {
         Integer mafiaPlayers = mMafiaPlayers.getValue();
         if (totalPlayers != null && mafiaPlayers != null) {
             List<RoleEntity> checkedRoles = getCheckedRoles();
+            RoomRoles.getInstance().getRoleDrawables().clear();
+            RoomRoles.getInstance().getRoleNames().clear();
+            for (int i = 0; i < mafiaPlayers; i++) {
+                RoomRoles.getInstance().getRoleNames().add(getApplication().getApplicationContext().getString(R.string.mafia));
+            }
+
+            for (int i = 0; i < totalPlayers - mafiaPlayers - checkedRoles.size(); i++) {
+                RoomRoles.getInstance().getRoleNames().add(getApplication().getApplicationContext().getString(R.string.citizen));
+            }
+
+            for (int i = 0; i < checkedRoles.size(); i++) {
+                RoomRoles.getInstance().getRoleNames().add(checkedRoles.get(i).name);
+            }
 
             GameEntity game = new GameEntity(AppConstants.MY_PLAYER_DATABASE_ID,
                     new Date(), mafiaPlayers, totalPlayers);

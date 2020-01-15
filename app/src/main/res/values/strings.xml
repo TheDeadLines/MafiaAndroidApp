@@ -32,4 +32,6 @@
     <string name="wrong_players">Wrong players number!</string>
     <string name="group_members">Group members:</string>
     <string name="cancel">Cancel</string>
+    <string name="mafia">Mafia</string>
+    <string name="citizen">Citizen</string>
 </resources>

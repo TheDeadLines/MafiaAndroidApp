@@ -10,4 +10,6 @@ public class AccessTypes {
     public static final int SLUT = 4;
     public static final int SHERIFF = 5;
     public static final int DOCTOR = 6;
+    public static final String GAME_STARTED = "start";
+    public static final String GAME_FINISHED = "finished";
 }

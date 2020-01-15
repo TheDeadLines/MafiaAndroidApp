@@ -18,10 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.thedeadlines.mafiap2p.R;
-import com.thedeadlines.mafiap2p.common.MessageShaper;
 import com.thedeadlines.mafiap2p.common.WifiDirectManager;
-import com.thedeadlines.mafiap2p.game.protocol.AccessTypes;
-import com.thedeadlines.mafiap2p.game.protocol.ContentTypes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +52,7 @@ public class RoomFragment extends Fragment {
                 Log.d(TAG, "NO DEVICES FOUND");
             } else {
                 for (WifiP2pDevice device : prs) {
-                    Log.i(TAG, "Found device: " + device.deviceName);
+                    Log.d(TAG, "Found device: " + device.deviceName);
                 }
             }
         });
@@ -81,7 +78,8 @@ public class RoomFragment extends Fragment {
             mWifiDirectManager.formGroup();
             mWifiDirectManager.updateJoinListener(null);
             Log.d(TAG, "start game message sending");
-            mWifiDirectManager.sendMessage(MessageShaper.recycle(AccessTypes.START_GAME, ContentTypes.DEFAULT, "start"));
+            mPeersAdapter.sendMessages(mWifiDirectManager);
+
             NavController controller = Navigation.findNavController(view1);
             controller.navigate(R.id.action_roomFragment_to_gameHostFragment);
             mWifiDirectManager.stopDiscovery();
@@ -99,6 +97,7 @@ public class RoomFragment extends Fragment {
     public PeersAdapter getPeersAdapter(@Nullable final View.OnClickListener listener) {
         return new PeersAdapter(listener);
     }
+
 
     @Override
     public void onResume() {

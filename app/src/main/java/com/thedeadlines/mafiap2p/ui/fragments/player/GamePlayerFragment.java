@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +21,7 @@ import androidx.navigation.Navigation;
 import com.thedeadlines.mafiap2p.AppConstants;
 import com.thedeadlines.mafiap2p.R;
 import com.thedeadlines.mafiap2p.common.WifiDirectManager;
+import com.thedeadlines.mafiap2p.game.Card;
 import com.thedeadlines.mafiap2p.game.protocol.AccessTypes;
 
 /**
@@ -33,8 +35,10 @@ public class GamePlayerFragment extends Fragment implements Handler.Callback {
     private static final String SHOWN_CARD_TEXT = "Hide card";
     private static final String HIDDEN_CARD_TEXT = "Show card";
 
-    private String cardName;
+    private Card receivedCard;
     private TextView mCardName;
+    private ImageView mCardImage;
+
     private Button mLeaveGameButton;
     private Button mToggleCardButton;
     private int currentState;
@@ -51,7 +55,7 @@ public class GamePlayerFragment extends Fragment implements Handler.Callback {
         mWifiDirectManager = WifiDirectManager.getInstance(getContext());
         mWifiDirectManager.updateHandler(new Handler(this));
         if (getArguments() != null) {
-            cardName = getArguments().getString(AppConstants.CARD);
+            receivedCard = (Card) getArguments().getSerializable(AppConstants.CARD);
         }
     }
 
@@ -75,6 +79,8 @@ public class GamePlayerFragment extends Fragment implements Handler.Callback {
         mToggleCardButton = view.findViewById(R.id.toggle_card_button);
         mToggleCardButton.setOnClickListener(view12 -> toggleCurrentState());
         mCardName = view.findViewById(R.id.player_card);
+        mCardImage = view.findViewById(R.id.player_card_image);
+
         if (savedInstanceState != null) {
             currentState = savedInstanceState.getInt(CURRENT_STATE);
             bindCurrentState();
@@ -83,10 +89,10 @@ public class GamePlayerFragment extends Fragment implements Handler.Callback {
             bindCurrentState();
         }
 
-        if (cardName != null) {
-            mCardName.setText(cardName);
+        if (receivedCard != null) {
+            mCardName.setText(receivedCard.getName());
+            mCardImage.setImageDrawable(receivedCard.getImage());
         }
-
     }
 
     @Override
@@ -114,9 +120,13 @@ public class GamePlayerFragment extends Fragment implements Handler.Callback {
         switch (currentState) {
             case HIDDEN_CARD_STATE:
                 mToggleCardButton.setText(HIDDEN_CARD_TEXT);
+                mCardImage.setVisibility(View.INVISIBLE);
+                mCardName.setVisibility(View.INVISIBLE);
                 break;
             case SHOWN_CARD_STATE:
                 mToggleCardButton.setText(SHOWN_CARD_TEXT);
+                mCardImage.setVisibility(View.VISIBLE);
+                mCardName.setVisibility(View.VISIBLE);
                 break;
             default:
                 break;
@@ -126,8 +136,7 @@ public class GamePlayerFragment extends Fragment implements Handler.Callback {
     @Override
     public boolean handleMessage(@NonNull Message msg) {
         switch (msg.what) {
-            case AccessTypes
-                    .BROADCAST:
+            case AccessTypes.FINISH_GAME:
                 Toast.makeText(getContext(), "FINISH GAME MESSAGE", Toast.LENGTH_SHORT).show();
                 mNavController.navigate(R.id.action_gamePlayerFragment_to_homeFragment);
                 break;

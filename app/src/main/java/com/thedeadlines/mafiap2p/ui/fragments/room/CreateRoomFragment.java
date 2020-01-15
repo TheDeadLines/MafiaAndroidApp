@@ -114,6 +114,7 @@ public class CreateRoomFragment extends Fragment {
         mCreateRoomButton.setOnClickListener(view1 -> {
             if (simpleValidation()) {
                 mCreateRoomViewModel.createGame();
+
                 NavController controller = Navigation.findNavController(view1);
                 controller.navigate(R.id.action_createRoomFragment_to_roomFragment);
             } else {
