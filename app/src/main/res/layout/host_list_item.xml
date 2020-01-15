@@ -1,37 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
+    android:id="@+id/host_list_item_root"
     android:layout_width="match_parent"
     android:layout_height="@dimen/host_list_item_height"
-    android:id="@+id/host_list_item_root"
-    android:layout_marginBottom="@dimen/margin5">
+    android:layout_margin="@dimen/margin8"
+    android:background="@drawable/background_border_white_no_padding"
+    android:orientation="vertical"
+    android:padding="@dimen/padding8">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="1"
-        android:textAlignment="center"
         android:id="@+id/player_order_number_inner"
-        android:textSize="@dimen/text_size_standard"
-        android:layout_marginStart="@dimen/margin5"
-        android:layout_marginTop="@dimen/margin5"/>
-
-    <ImageView
-        tools:src="@tools:sample/backgrounds/scenic"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:contentDescription="@string/player_role"
-        android:layout_gravity="center"
-        android:id="@+id/player_role_inner"
-        android:layout_weight="1"/>
-
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin8"
+        android:layout_marginTop="@dimen/margin8"
+        android:layout_weight="1"
+        android:textAlignment="center"
+        android:textSize="@dimen/text_size_middle"
+        tools:text="1" />
+
+    <TextView
+        android:id="@+id/player_role_inner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin8"
+        android:layout_marginBottom="@dimen/margin8"
+        android:layout_weight="1"
+        android:contentDescription="@string/player_card_description"
+        android:text="@string/player_role"
+        android:textAlignment="center"
+        android:textSize="@dimen/text_size_higher"
+        tools:src="@tools:sample/backgrounds/scenic" />
+
+    <TextView
         android:id="@+id/player_name_inner"
-        tools:text="Player Name"
-        android:textSize="@dimen/text_size_standard"
-        android:layout_gravity="center" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:textSize="@dimen/text_size_middle"
+        tools:text="Player Name" />
 
 </LinearLayout>

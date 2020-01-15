@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/game_player_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_border_white"
     android:orientation="vertical"
     tools:context=".ui.fragments.player.GamePlayerFragment">
 
@@ -12,15 +14,36 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:layout_marginTop="@dimen/margin15"
-        android:layout_marginEnd="@dimen/margin15"
-        android:layout_weight="1"
+        android:layout_marginTop="@dimen/margin16"
+        android:layout_marginEnd="@dimen/margin16"
+        android:layout_weight="0"
         android:background="@android:color/transparent"
-        android:text="@string/button_leave" />
+        android:text="@string/button_leave"
+        android:textColor="@color/colorAccent"
+        android:textSize="@dimen/text_size_higher" />
 
 
-    <TextView
-        android:id="@+id/player_card"
+    <LinearLayout
+        android:id="@+id/player_card_root"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/player_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:contentDescription="@string/player_card_description"
+            android:text="@string/card_back"
+            android:textAlignment="center"
+            android:textSize="@dimen/text_size_highest" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="10" />
@@ -30,19 +53,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/player_role" />
-
-    <Button
-        android:id="@+id/toggle_card_button"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="@dimen/margin45"
-        android:layout_weight="1"
-        android:background="@android:color/transparent"
-        android:paddingStart="@dimen/padding35"
-        android:paddingEnd="@dimen/padding35"
-        android:text="@string/button_hide_card"
-        android:textSize="@dimen/text_size_higher" />
+        android:layout_marginBottom="@dimen/margin48"
+        android:layout_weight="0.1"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/toggle_card_button"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:width="@dimen/width_button200"
+            android:height="@dimen/height_button72"
+            android:background="@drawable/custom_button_black"
+            android:text="@string/button_show_card"
+            android:textSize="@dimen/text_size_higher" />
+    </LinearLayout>
 
 </LinearLayout>

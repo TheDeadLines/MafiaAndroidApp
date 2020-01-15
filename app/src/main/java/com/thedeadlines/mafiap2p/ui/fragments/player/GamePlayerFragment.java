@@ -1,6 +1,10 @@
 package com.thedeadlines.mafiap2p.ui.fragments.player;
 
 
+import android.animation.LayoutTransition;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.TransitionDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -106,10 +110,14 @@ public class GamePlayerFragment extends Fragment implements Handler.Callback {
             case HIDDEN_CARD_STATE:
                 currentState = SHOWN_CARD_STATE;
                 mToggleCardButton.setText(SHOWN_CARD_TEXT);
+                mCardImage.setVisibility(View.INVISIBLE);
+                mCardName.setVisibility(View.INVISIBLE);
                 break;
             case SHOWN_CARD_STATE:
                 currentState = HIDDEN_CARD_STATE;
                 mToggleCardButton.setText(HIDDEN_CARD_TEXT);
+                mCardImage.setVisibility(View.VISIBLE);
+                mCardName.setVisibility(View.VISIBLE);
                 break;
             default:
                 break;

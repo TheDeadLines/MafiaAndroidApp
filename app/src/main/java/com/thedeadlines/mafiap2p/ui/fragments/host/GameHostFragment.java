@@ -7,7 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -42,8 +44,8 @@ public class GameHostFragment extends Fragment {
 
 
     private Button mFinishGameButton;
-    private Button mToggleListButton;
-    private ImageView mHostImage;
+    private ImageButton mToggleListButton;
+    private TextView mHostImage;
     private RecyclerView mRecyclerView;
     private int currentState;
 
@@ -132,13 +134,13 @@ public class GameHostFragment extends Fragment {
                 currentState = SHOWN_LIST_STATE;
                 mHostImage.setVisibility(View.GONE);
                 mRecyclerView.setVisibility(View.VISIBLE);
-                mToggleListButton.setText(SHOWN_LIST_TEXT);
+                mToggleListButton.setRotation(90);
                 break;
             case SHOWN_LIST_STATE:
                 currentState = HIDDEN_LIST_STATE;
                 mHostImage.setVisibility(View.VISIBLE);
                 mRecyclerView.setVisibility(View.GONE);
-                mToggleListButton.setText(HIDDEN_LIST_TEXT);
+                mToggleListButton.setRotation(0);
                 break;
             default:
                 break;
@@ -150,12 +152,12 @@ public class GameHostFragment extends Fragment {
             case HIDDEN_LIST_STATE:
                 mHostImage.setVisibility(View.VISIBLE);
                 mRecyclerView.setVisibility(View.GONE);
-                mToggleListButton.setText(HIDDEN_LIST_TEXT);
+                mToggleListButton.setRotation(0);
                 break;
             case SHOWN_LIST_STATE:
                 mHostImage.setVisibility(View.GONE);
                 mRecyclerView.setVisibility(View.VISIBLE);
-                mToggleListButton.setText(SHOWN_LIST_TEXT);
+                mToggleListButton.setRotation(90);
                 break;
             default:
                 break;

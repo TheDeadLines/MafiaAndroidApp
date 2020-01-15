@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">MafiaP2P</string>
     <string name="title_home">Mafia</string>
-    <string name="create">Create Room</string>
-    <string name="join">Join</string>
+    <string name="create">CREATE</string>
+    <string name="create_room">CREATE ROOM</string>
+    <string name="join">JOIN</string>
     <string name="start">Start</string>
     <string name="room">Room</string>
     <string name="game_host">Game Host</string>
@@ -12,6 +13,7 @@
     <string name="button_leave">Leave</string>
     <string name="player_card_description">Player card</string>
     <string name="button_hide_card">Hide card</string>
+    <string name="button_show_card">Show card</string>
     <string name="button_back">Back</string>
     <string name="button_kick">Kick</string>
     <string name="button_start_timer">Start timer</string>
@@ -32,6 +34,7 @@
     <string name="wrong_players">Wrong players number!</string>
     <string name="group_members">Group members:</string>
     <string name="cancel">Cancel</string>
+    <string name="card_back">Hidden</string>
     <string name="mafia">Mafia</string>
     <string name="citizen">Citizen</string>
 </resources>

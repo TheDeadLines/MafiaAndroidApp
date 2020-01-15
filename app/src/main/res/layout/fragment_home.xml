@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_border_white"
     android:orientation="vertical"
     tools:context=".ui.fragments.home.HomeFragment">
 
@@ -11,41 +12,53 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginTop="@dimen/margin48"
+        android:layout_marginEnd="@dimen/margin48"
         android:background="@null"
         android:contentDescription="@string/settings"
-        android:src="@drawable/ic_settings_black_24dp" />
-
-    <TextView
-        android:id="@+id/title_mafia"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:gravity="center"
-        android:text="@string/title_home"
-        android:textSize="48sp" />
+        android:src="@drawable/ic_settings_white_48dp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="48dp"
+        android:layout_centerVertical="true"
         android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title_mafia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/margin104"
+            android:text="@string/title_home"
+            android:textColor="@color/colorWhiteText"
+            android:textSize="@dimen/text_title" />
 
         <Button
             android:id="@+id/create_room_button"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/create" />
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/margin32"
+            android:width="@dimen/width_button220"
+            android:height="@dimen/height_button80"
+            android:background="@drawable/custom_button_black"
+            android:text="@string/create"
+            android:textColor="@color/colorWhiteText"
+            android:textSize="@dimen/text_size_very_higher" />
 
         <Button
             android:id="@+id/join_room_button"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/join" />
+            android:layout_gravity="center"
+            android:width="@dimen/width_button220"
+            android:height="@dimen/height_button80"
+            android:background="@drawable/custom_button_black"
+            android:text="@string/join"
+            android:textColor="@color/colorWhiteText"
+            android:textSize="@dimen/text_size_very_higher" />
 
     </LinearLayout>
 
