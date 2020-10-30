@@ -3,6 +3,7 @@
     android:id="@+id/role_root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/colorBlackBackground"
     android:orientation="vertical">
 
     <Switch
@@ -13,5 +14,6 @@
         android:layout_marginTop="@dimen/margin_small"
         android:layout_marginEnd="@dimen/standard_margin"
         android:layout_marginBottom="@dimen/margin_small"
-        android:text="@string/stub" />
+        android:text="@string/stub"
+        android:textColor="@color/colorWhiteText" />
 </LinearLayout>

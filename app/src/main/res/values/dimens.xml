@@ -2,15 +2,25 @@
 <resources>
     <dimen name="margin5">5dp</dimen>
     <dimen name="margin15">15dp</dimen>
+    <dimen name="margin20">20dp</dimen>
+    <dimen name="margin35">35dp</dimen>
     <dimen name="margin45">45dp</dimen>
+    <dimen name="margin50">50dp</dimen>
     <dimen name="margin100">100dp</dimen>
+    <dimen name="margin120">120dp</dimen>
+    <dimen name="margin180">180dp</dimen>
     <dimen name="padding5">5dp</dimen>
+    <dimen name="padding8">8dp</dimen>
     <dimen name="padding35">35dp</dimen>
     <dimen name="text_size_standard">12sp</dimen>
     <dimen name="text_size_middle">16sp</dimen>
     <dimen name="text_size_higher">24sp</dimen>
+    <dimen name="text_size_very_higher">32sp</dimen>
+    <dimen name="text_title">48sp</dimen>
     <dimen name="host_list_item_height">100dp</dimen>
     <dimen name="standard_margin">48dp</dimen>
     <dimen name="margin_small">8dp</dimen>
-    <dimen name="room_item_margin">120dp</dimen>
+    <dimen name="width_stroke2">2dp</dimen>
+    <dimen name="width_button220">220dp</dimen>
+    <dimen name="height_button80">80dp</dimen>
 </resources>
